@@ -1,0 +1,23 @@
+#comment-form-container {
+  background-color: lightgreen;
+  width: 100%;
+  height: 80px;
+  margin-top: 20px; }
+
+#comment-form-container form {
+  display: flex;
+  width: 100%;
+  height: 100%; }
+
+#comment-input {
+  outline: none;
+  box-sizing: border-box;
+  padding: 7px;
+  resize: none;
+  width: 80%;
+  height: 100%; }
+
+#submit-comment-btn {
+  width: 20%;
+  height: 100%;
+  font-size: 14px; }

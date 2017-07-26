@@ -1,0 +1,90 @@
+#app {
+  padding-top: 70px; }
+
+#layout {
+  min-width: 100vw;
+  min-height: 100vh;
+  margin-top: -70px;
+  padding: 0 10vw;
+  padding-top: 70px; }
+
+.position-relative {
+  position: relative; }
+
+.position-absolute {
+  position: absolute; }
+
+.fit-img {
+  width: 100%;
+  height: 100%; }
+
+.center {
+  margin: 0 auto; }
+
+.full-screen {
+  min-width: 100vw;
+  min-height: 100vh;
+  margin-top: -70px;
+  padding-top: 70px; }
+
+.full {
+  width: 100%;
+  height: 100%; }
+
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.border-box-sizing {
+  box-sizing: border-box; }
+
+.content-half {
+  width: 50vw;
+  height: 50vh; }
+
+.display-none {
+  display: none; }
+
+.z1 {
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.dark-veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); }
+
+.margin-top-3 {
+  margin-top: 3px; }
+
+.margin-top-4 {
+  margin-top: 4px; }
+
+.margin-bottom-15 {
+  margin-bottom: 15px; }
+
+.margin-bottom-40 {
+  margin-bottom: 40px; }
+
+.transition-2s-ease-in {
+  transition: all .2s ease-in; }
+
+@media screen and (min-width: 1100px) {
+  .no-desktop {
+    display: none; } }
+
+.inactive {
+  transition: all .2s ease-in;
+  cursor: default !important;
+  box-shadow: none !important; }

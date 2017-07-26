@@ -38,4 +38,3 @@ bundle.js.map
 # Custom
 .DS_Store
 ./src/stylesheets/sass/loaders.css
-*.css
