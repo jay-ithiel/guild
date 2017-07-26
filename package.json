@@ -3,15 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "blockstack": "^0.9.1",
+    "blockstack-storage": "^0.2.8",
+    "cloudinary": "^1.9.0",
+    "css-loader": "^0.28.4",
+    "history": "^4.6.3",
+    "jquery": "^3.2.1",
+    "loaders.css": "^0.1.2",
+    "lodash": "^4.17.4",
+    "node-sass": "^4.5.3",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-icons": "^2.2.5",
+    "react-loaders": "^2.5.0",
+    "react-redux": "^5.0.5",
+    "react-router": "^4.1.2",
+    "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "ts-loader": "^2.3.2",
+    "typescript": "^2.4.2"
   },
   "devDependencies": {
     "react-scripts": "1.0.10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts-with-sass start",
+    "build": "react-scripts-with-sass build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

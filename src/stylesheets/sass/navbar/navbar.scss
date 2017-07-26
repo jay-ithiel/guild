@@ -1,0 +1,35 @@
+@import 'logo.scss';
+@import 'hamburger_menu.scss';
+
+#navbar {
+    height: 70px;
+    width: 100vw;
+    background-color: #43bd7e;
+    box-shadow: 2px 4px 7px -2px #aaa;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-sizing: border-box;
+    padding: 0 25px;
+
+    z-index: 1000;
+}
+
+#navdiv {
+    min-width: 190px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#user-nav-menu {
+    display: flex;
+    align-items: center;
+}

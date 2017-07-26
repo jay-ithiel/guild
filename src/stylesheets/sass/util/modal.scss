@@ -1,0 +1,19 @@
+.modal {
+    z-index: 10000;
+}
+
+.close-modal {
+    position: absolute;
+    top: 7px;
+    right: 17px;
+    color: #aaa;
+    font-size: 35px;
+    font-weight: 100;
+    cursor: pointer;
+    transition: all .2s ease-in;
+}
+
+.close-modal:hover {
+    color: #000;
+    transition: all .2s ease-in;
+}

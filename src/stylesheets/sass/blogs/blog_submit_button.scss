@@ -1,0 +1,37 @@
+$primary-color: #fff;
+@import '../loaders.css/src/animations/ball-clip-rotate.scss';
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+  height: 100%;
+}
+
+#blog-submit {
+    height: 50px;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 2px;
+    border-radius: 3px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all .2s ease-in;
+    background-color: #43bd7e;
+    cursor: pointer;
+}
+
+#blog-submit:hover {
+    box-shadow: 0 4px 10px -2px #777;
+    transition: all .15s ease-in;
+}
+
+.blog-submit-inactive {
+    border: 1px solid #ccc !important;
+    color: $primary-color !important;
+    background-color: #ccc !important;
+}

@@ -19,3 +19,23 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dependency directories
+node_modules
+bundle.js
+bundle.js.map
+
+# Custom
+.DS_Store
+./src/stylesheets/sass/loaders.css
+*.css

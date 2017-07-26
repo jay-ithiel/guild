@@ -1,0 +1,24 @@
+@import './about_user.scss';
+
+.signin-bg {
+    background-color: #fff;
+}
+
+#signin-guild-logo {
+    width: 100px;
+}
+
+#signin-guild-head {
+    font-size: 55px;
+    font-weight: 200;
+    letter-spacing: 2px;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+#signin-guild-span {
+    font-size: 13px;
+    font-weight: 100;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
