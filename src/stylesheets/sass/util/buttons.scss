@@ -1,87 +1,108 @@
 .btn {
-    background-color: transparent;
-    cursor: pointer;
-    border: none;
-    outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 .shadow-button {
-    box-shadow: 0 0 20px #777;
+  box-shadow: 0 0 20px #777;
 }
 
 .primary-btn-light {
-    padding: 10px 20px;
-    border: 1px solid #aaa;
-    border-radius: 2px;
-    background-color: #fefefe;
+  padding: 10px 20px;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  background-color: #fefefe;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    transition: all .15s ease-in;
+  transition: all .15s ease-in;
 
-    font-size: 21px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    color: #222;
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #222;
 }
 
 .primary-btn-light:hover {
-    color: #fff;
-    background-color: #aaa;
+  color: #fff;
+  background-color: #aaa;
+}
+
+.transparent-btn {
+  padding: 13px 23px;
+  background-color: rgba(0,0,0,0);
+  border: 1px solid #fff;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all .15s ease-in;
+
+  font-size: 17px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.transparent-btn:hover {
+  background-color: rgba(255,255,255,0.3);
 }
 
 .primary-btn {
-    padding: 15px 25px;
-    border-radius: 2px;
-    background-color: #43bd7e;
+  padding: 15px 25px;
+  border-radius: 2px;
+  background-color: #43bd7e;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    transition: all .15s ease-in;
+  transition: all .15s ease-in;
 
-    font-size: 20px;
-    font-weight: 100;
-    letter-spacing: 2px;
-    color: #fff;
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 2px;
+  color: #fff;
 }
 
 .primary-btn:hover {
-    box-shadow: 0 4px 10px -2px #777;
-    transition: all .15s ease-in;
+  box-shadow: 0 4px 10px -2px #777;
+  transition: all .15s ease-in;
 }
 
 .option-btn {
-    height: 45px;
-    width: 47%;
-    max-width: 200px;
-    min-width: 75px;
+  height: 45px;
+  width: 47%;
+  max-width: 200px;
+  min-width: 75px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    transition: all .2s ease-in;
+  transition: all .2s ease-in;
 }
 
 .confirm-btn {
-    background-color: #43bd7e;
-    color: #fff;
+  background-color: #43bd7e;
+  color: #fff;
 }
 
 .confirm-btn:hover {
-    background-color: #219b6c;
+  background-color: #219b6c;
 }
 
 .cancel-btn {
-    background-color: #fff;
-    border: 1px solid #bbb;
+  background-color: #fff;
+  border: 1px solid #bbb;
 }
 
 .cancel-btn:hover {
-    background-color: #bbb;
-    color: #fff;
+  background-color: #bbb;
+  color: #fff;
 }
