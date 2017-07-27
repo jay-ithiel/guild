@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', event => {
     if (isUserSignedIn()) {
         store.dispatch(receiveCurrentUser( loadUserData() ));
     } else if (isSignInPending()) {
-        handlePendingSignIn( window.location );
+        handlePendingSignIn().then(userData => {
+            window.location = window.location.origin;
+        });
     }
 
     ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
