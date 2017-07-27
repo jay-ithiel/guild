@@ -70,33 +70,33 @@
 }
 
 .margin-top-3 {
-    margin-top: 3px;
+  margin-top: 3px;
 }
 
 .margin-top-4 {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
 .margin-bottom-15 {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .margin-bottom-40 {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .transition-2s-ease-in {
-    transition: all .2s ease-in;
+  transition: all .2s ease-in;
 }
 
 @media screen and (min-width: 1100px) {
-    .no-desktop {
-        display: none;
-    }
+  .no-desktop {
+    display: none;
+  }
 }
 
 .inactive {
-    transition: all .2s ease-in;
-    cursor: default !important;
-    box-shadow: none !important;
+  transition: all .2s ease-in;
+  cursor: default !important;
+  box-shadow: none !important;
 }
