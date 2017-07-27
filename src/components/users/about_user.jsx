@@ -23,7 +23,7 @@ const AboutUser = props => {
                 <h4 id='about-user-name'>
                     {/* { user.givenName } { user.familyName } */}
                     {/* user.name */}
-                    Lorem Ipsum
+                    { currentUser.givenName } { currentUser.familyName }
                 </h4>
                 <p id='about-user-bio'>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
