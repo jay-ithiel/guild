@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './components/App';
 import Root from './components/Root';
 import registerServiceWorker from './util/registerServiceWorker';
 import configureStore from './store/store';
@@ -12,6 +11,11 @@ import {
     handlePendingSignIn
 } from 'blockstack';
 require('./env.js');
+
+const $ = window.$;
+const cloudinary = window.cloudinary; // eslint-disable-line
+global.cloudinary = cloudinary;
+
 
 document.addEventListener('DOMContentLoaded', event => {
     window.cloudinary_options = {
@@ -31,6 +35,4 @@ document.addEventListener('DOMContentLoaded', event => {
 
     ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
     registerServiceWorker();
-
-    window.store = store;
 });
