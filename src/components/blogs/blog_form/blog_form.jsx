@@ -46,8 +46,7 @@ class BlogForm extends React.Component {
             let blog = nextProps.blogs[
                 parseInt(this.props.history.location.pathname.substring(12), 10)
             ];
-
-            debugger;
+debugger;
             this.setState({
                 id: blog.id,
                 title: blog.title,
