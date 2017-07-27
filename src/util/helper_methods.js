@@ -13,5 +13,5 @@ export const isBlogAuthor = (blog, user) => {
 };
 
 export const isBlogToDelete = (id, targetId) => {
-    return parseInt(id) === targetId;
+    return parseInt(id, 10) === targetId;
 }

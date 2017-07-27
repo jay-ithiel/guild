@@ -11,11 +11,12 @@ import {
     loadUserData,
     handlePendingSignIn
 } from 'blockstack';
+require('./env.js');
 
 document.addEventListener('DOMContentLoaded', event => {
     window.cloudinary_options = {
-        cloud_name: process.env['CLOUD_NAME'],
-        upload_preset: process.env['UPLOAD_PRESET']
+        cloud_name: 'ddgtwtbre',
+        upload_preset: 'k7gkxhh0'
     };
 
     let store = configureStore();
@@ -30,4 +31,6 @@ document.addEventListener('DOMContentLoaded', event => {
 
     ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
     registerServiceWorker();
+
+    window.store = store;
 });

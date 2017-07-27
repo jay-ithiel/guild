@@ -1,6 +1,3 @@
-// import Tagging from './tagging';
-import Comment from './comment';
-
 class Blog {
     public id: number;
     public title: string;
@@ -32,14 +29,6 @@ class Blog {
         this.authorImageUrl = authorImageUrl;
         this.createdAt = `${new Date()}`;
         this.updatedAt = this.createdAt;
-    }
-
-    public addComment(comment: Comment) {
-        this.comments.push(comment)
-    }
-
-    public getComments(): Comment[] {
-        return this.comments;
     }
 }
 

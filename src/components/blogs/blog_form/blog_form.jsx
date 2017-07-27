@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
-import Blog from '../../../models/blog.ts';
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
 import $ from 'jquery';
@@ -22,15 +21,19 @@ class BlogForm extends React.Component {
             isSubmitButtonActive: true
         };
 
-        this.actionType = props.history.location.pathname === '/blogs/new/' ? 'Publish' : 'Update';
+        this.actionType = props.history.location.pathname === '/blogs/new' ? 'Publish' : 'Update';
         this.setBlogToEdit = this.setBlogToEdit.bind(this);
         this.hasErrors = this.hasErrors.bind(this);
         this.addImage = this.addImage.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleMissingUserInfo = this.handleMissingUserInfo.bind(this);
     }
 
     componentDidMount() {
         if (!isUserSignedIn()) { this.props.history.push('/signin'); }
+        if (this.props.currentUser) {
+            this.handleMissingUserInfo();
+        }
         if (Object.keys(this.props.blogs).length > 0) { this.setBlogToEdit(); }
     }
 
@@ -41,7 +44,7 @@ class BlogForm extends React.Component {
     setBlogToEdit(nextProps = this.props) {
         if (this.state.id === null && this.actionType === 'Update') {
             let blog = nextProps.blogs[
-                parseInt( this.props.history.location.pathname.substring(12) )
+                parseInt(this.props.history.location.pathname.substring(12), 10)
             ];
 
             this.setState({
@@ -96,37 +99,36 @@ class BlogForm extends React.Component {
             $('#blog-body-label').removeClass('outline-red');
         }
 
-        if (this.props.currentUser.profile.image) {
-            this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
-        } else {
-            this.state.authorImageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
-        }
-
         return hasErrors;
     }
 
     handleMissingUserInfo() {
         // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
+        let author = this.props.currentUser;
+
+        this.setState({
+            authorId: author.username
+        });
+
+        if (author.profile.image) {
+            this.setState({
+                authorImageUrl: author.profile.image[0].contentUrl
+            });
+        } else {
+            this.setState({
+                authorImageUrl: 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png'
+            });
+        }
     }
 
     processForm() {
         let blog = this.state;
         if (this.actionType === 'Publish') {
-            this.state.id = this.props.blogIndex + 1;
-            // blog = this.state;
-
-            blog = new Blog(
-                this.state.id,
-                this.state.title,
-                this.state.blogIntro,
-                this.state.body,
-                this.state.imageUrl,
-                this.props.currentUser.username,
-                this.state.authorImageUrl
-            );
+            blog.id = this.props.blogIndex + 1;
         }
 
         this.props.blogs[blog.id] = blog;
+        debugger;
         this.props.saveBlogs(this.props.blogs);
         this.setState({ isSubmitButtonActive: false });
     }

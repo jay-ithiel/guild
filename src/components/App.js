@@ -12,15 +12,10 @@ import SignInPage from './session/signin_page';
 import BlogForm from './blogs/blog_form/blog_form_container';
 import Blog from './blogs/blog';
 import Blogs from './blogs/blogs';
-import Profile from './users/profile';
 
 import { requestBlogs } from '../actions/blog_actions';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.requestBlogs();
     }

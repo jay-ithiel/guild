@@ -1,11 +1,11 @@
 import React from 'react';
 import Camera from 'react-icons/lib/fa/camera';
-import cloudinary from 'cloudinary';
+import Cloudinary from 'cloudinary';
 
 const ImageUploadButton = props => {
     const upload = e => {
-        e.preventDefault();
-        cloudinary.openUploadWidget(
+        debugger;
+        Cloudinary.openUploadWidget(
             window.cloudinary_options, (error, images) => {
                 if (error) {
                     // Something went wrong
