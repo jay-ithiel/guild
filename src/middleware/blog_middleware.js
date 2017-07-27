@@ -19,7 +19,7 @@ const BlogMiddleware = ({ getState, dispatch }) => next => action => {
             return next(action);
 
         case REQUEST_BLOGS:
-            fetchBlogs(dispatch);
+            fetchBlogs(dispatch); // eslint-disable-line
             return next(action);
 
         case REQUEST_USER_BLOGS:

@@ -139,6 +139,8 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
+          /\.sass$/,
+          /\.scss$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
@@ -213,6 +215,11 @@ module.exports = {
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
+      {
+        test: /\.scss$/,
+        include: paths.appSrc,
+        loaders: ["style-loader", "css-loader", "sass-loader"]
+      },
     ],
   },
   plugins: [

@@ -61,7 +61,11 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
-    "eslint-plugin-import": "^2.2.0"
+    "css-loader": "^0.28.4",
+    "eslint-plugin-import": "^2.2.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2"
   },
   "scripts": {
     "start": "node scripts/start.js",

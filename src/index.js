@@ -12,7 +12,6 @@ import {
 } from 'blockstack';
 require('./env.js');
 
-const $ = window.$;
 const cloudinary = window.cloudinary; // eslint-disable-line
 global.cloudinary = cloudinary;
 

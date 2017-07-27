@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, withRouter, Route } from 'react-router';
 
-// Loads dependencies to compile SASS to CSS
-// require("!style-loader!css-loader!sass-loader!../../stylesheets/sass/all.scss");
-import '../stylesheets/sass/all.css';
+import '../stylesheets/sass/all.scss';
 
 import Navbar from './navbar/navbar';
 import Home from './home/home';

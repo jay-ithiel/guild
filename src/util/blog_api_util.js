@@ -16,7 +16,7 @@ export const saveBlogs = (blogs, dispatch) => {
 export const fetchBlogs = dispatch => {
     var blogs = {}, blogIndex = 0;
 
-    getFile(STORAGE_FILE).then(blogItems => {
+    getFile(STORAGE_FILE).then(blogItems => { // eslint-disable-line
         blogItems = JSON.parse(blogItems || '[]');
 
         Object.keys(blogItems).forEach((id, index) => {
