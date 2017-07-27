@@ -1,6 +1,6 @@
 {
     "name": "Guild",
-    "start_url": "localhost:3000",
+    "start_url": "./index.html",
     "description": "A blogging app powered by Blockstack",
     "icons": [{
         "src": "https://res.cloudinary.com/ddgtwtbre/image/upload/v1500522919/app-icon-guild_2x_x27mfn.png",
