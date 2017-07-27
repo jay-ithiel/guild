@@ -52,7 +52,7 @@ module.exports = {
         headers: {
             'Access-Control-Allow-Origin': '*'
         }
-    }
+    },
 
   // Don't attempt to continue if there are any errors.
   bail: true,
