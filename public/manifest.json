@@ -6,5 +6,6 @@
         "src": "https://res.cloudinary.com/ddgtwtbre/image/upload/v1500522919/app-icon-guild_2x_x27mfn.png",
         "sizes": "192x192",
         "type": "image/png"
-    }]
+    }],
+    "permissions": ["<all_urls>"]
 }
