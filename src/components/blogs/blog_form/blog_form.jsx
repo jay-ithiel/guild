@@ -46,7 +46,7 @@ class BlogForm extends React.Component {
             let blog = nextProps.blogs[
                 parseInt(this.props.history.location.pathname.substring(12), 10)
             ];
-debugger;
+
             this.setState({
                 id: blog.id,
                 title: blog.title,
@@ -128,7 +128,6 @@ debugger;
         }
 
         this.props.blogs[blog.id] = blog;
-        debugger;
         this.props.saveBlogs(this.props.blogs);
         this.setState({ isSubmitButtonActive: false });
     }

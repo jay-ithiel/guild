@@ -4,7 +4,6 @@ import cloudinary from 'cloudinary';
 
 const ImageUploadButton = props => {
     const upload = e => {
-        debugger;
         cloudinary.openUploadWidget(
             window.cloudinary_options, (error, images) => {
                 if (error) {
