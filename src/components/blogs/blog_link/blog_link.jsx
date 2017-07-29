@@ -10,7 +10,7 @@ const BlogLink = ({ blog, isUserBlogs }) => (
     <Link className='blog-link-info position-relative' to={`/blogs/${blog.id}`}>
       <AboutBlog authorId={ blog.authorId }
         authorImageUrl={ blog.authorImageUrl }
-        date={ parseDateTime(blog.updatedAt) }
+        date={ parseDateTime(blog.createdAt) }
       />
 
       {

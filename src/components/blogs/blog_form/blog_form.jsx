@@ -108,11 +108,13 @@ class BlogForm extends React.Component {
 
   processForm() {
     let blog = this.state;
+    this.state.createdAt = `${new Date()}`;
     if (this.actionType === 'Publish') {
       blog.id = this.props.blogIndex + 1;
     }
 
     this.props.blogs[blog.id] = blog;
+    debugger;
     this.props.saveBlogs(this.props.blogs);
     this.setState({ isSubmitButtonActive: false });
   }
