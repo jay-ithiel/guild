@@ -4,11 +4,11 @@ var Loader = require('react-loaders').Loader;
 const SubmitBlogButton = ({ actionType, isActive }) => {
   return isActive ? (
     <button id='blog-submit' className='btn skinny'>
-      {actionType} Blog
+      <p className='center'>{actionType} Blog</p>
     </button>
   ) : (
     <button id='blog-submit' className='btn skinny inactive blog-submit-inactive'>
-      <Loader type="ball-clip-rotate" active/>
+      <p><Loader className='center' type="ball-clip-rotate" active/></p>
     </button>
   )
 };

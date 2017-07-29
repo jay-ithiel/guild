@@ -6,92 +6,89 @@ import ImageUploadButton from './image_upload_button';
 import $ from 'jquery';
 
 class BlogForm extends React.Component {
-constructor(props) {
-  super(props);
+  constructor(props) {
+    super(props);
 
-  this.state = {
-  id: null,
-  title: '',
-  blogIntro: '',
-  body: '',
-  imageUrl: '',
-  authorId: '',
-  authorImageUrl: '',
-  updatedAt: '',
-  isSubmitButtonActive: true
-  };
+    this.state = {
+      id: null,
+      title: '',
+      blogIntro: '',
+      body: '',
+      imageUrl: '',
+      authorId: '',
+      authorImageUrl: '',
+      updatedAt: '',
+      isSubmitButtonActive: true
+    };
 
-  this.actionType = props.history.location.pathname === '/blogs/new' ? 'Publish' : 'Update';
-  this.setBlogToEdit = this.setBlogToEdit.bind(this);
-  this.hasErrors = this.hasErrors.bind(this);
-  this.addImage = this.addImage.bind(this);
-  this.handleChange = this.handleChange.bind(this);
-  this.handleMissingUserInfo = this.handleMissingUserInfo.bind(this);
-}
-
-componentDidMount() {
-  if (!isUserSignedIn()) { this.props.history.push('/signin'); }
-  if (this.props.currentUser) {
-  this.handleMissingUserInfo();
-  }
-  if (Object.keys(this.props.blogs).length > 0) { this.setBlogToEdit(); }
-}
-
-componentWillReceiveProps(nextProps) {
-  this.setBlogToEdit(nextProps);
-}
-
-setBlogToEdit(nextProps = this.props) {
-  if (this.state.id === null && this.actionType === 'Update') {
-  let blog = nextProps.blogs[
-    parseInt(this.props.history.location.pathname.substring(12), 10)
-  ];
-
-  this.setState({
-    id: blog.id,
-    title: blog.title,
-    blogIntro: blog.blogIntro,
-    body: blog.body,
-    imageUrl: blog.imageUrl,
-    authorId: blog.authorId,
-    authorImageUrl: blog.authorImageUrl,
-    updatedAt: blog.updatedAt
-  });
-  }
-}
-
-addImage(imageUrl) {
-  this.setState({ imageUrl: imageUrl });
-}
-
-hasErrors() {
-  // Refactor this function
-  let hasErrors = false;
-
-  if (this.state.title.length <= 0) {
-  hasErrors = true;
-  $('#blog-title-error').fadeIn();
-  $('#blog-title-label').addClass('outline-red');
-  }
-  else {
-  $('#blog-title-error').fadeOut();
-  $('#blog-title-label').removeClass('outline-red');
+    this.actionType = props.history.location.pathname === '/blogs/new' ? 'Publish' : 'Update';
+    this.setBlogToEdit = this.setBlogToEdit.bind(this);
+    this.hasErrors = this.hasErrors.bind(this);
+    this.addImage = this.addImage.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleMissingUserInfo = this.handleMissingUserInfo.bind(this);
   }
 
-  if (this.state.body.length <= 0) {
-  hasErrors = true;
-  $('#blog-body-error').fadeIn();
-  $('#blog-body-label').addClass('outline-red');
-  } else {
-  $('#blog-body-error').fadeOut();
-  $('#blog-body-label').removeClass('outline-red');
+  componentDidMount() {
+    if (!isUserSignedIn()) { this.props.history.push('/signin'); }
+    if (this.props.currentUser) { this.handleMissingUserInfo(); }
+    if (Object.keys(this.props.blogs).length > 0) { this.setBlogToEdit(); }
   }
 
-  return hasErrors;
-}
+  componentWillReceiveProps(nextProps) {
+    this.setBlogToEdit(nextProps);
+  }
 
-handleMissingUserInfo() {
-  // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
+  setBlogToEdit(nextProps = this.props) {
+    if (this.state.id === null && this.actionType === 'Update') {
+      let blog = nextProps.blogs[
+        parseInt(this.props.history.location.pathname.substring(12), 10)
+      ];
+
+      this.setState({
+        id: blog.id,
+        title: blog.title,
+        blogIntro: blog.blogIntro,
+        body: blog.body,
+        imageUrl: blog.imageUrl,
+        authorId: blog.authorId,
+        authorImageUrl: blog.authorImageUrl,
+        updatedAt: blog.updatedAt
+      });
+    }
+  }
+
+  addImage(imageUrl) {
+    this.setState({ imageUrl: imageUrl });
+  }
+
+  hasErrors() {
+    // Refactor this function
+    let hasErrors = false;
+
+    if (this.state.title.length <= 0) {
+      hasErrors = true;
+      $('#blog-title-error').fadeIn();
+      $('#blog-title-label').addClass('outline-red');
+    } else {
+      $('#blog-title-error').fadeOut();
+      $('#blog-title-label').removeClass('outline-red');
+    }
+
+    if (this.state.body.length <= 0) {
+      hasErrors = true;
+      $('#blog-body-error').fadeIn();
+      $('#blog-body-label').addClass('outline-red');
+    } else {
+      $('#blog-body-error').fadeOut();
+      $('#blog-body-label').removeClass('outline-red');
+    }
+
+    return hasErrors;
+  }
+
+  handleMissingUserInfo() {
+    // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
     let author = this.props.currentUser;
 
     this.setState({

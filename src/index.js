@@ -10,6 +10,7 @@ import {
     loadUserData,
     handlePendingSignIn
 } from 'blockstack';
+import * as blockstack from 'blockstack';
 require('./env.js');
 
 const cloudinary = window.cloudinary; // eslint-disable-line
@@ -34,4 +35,8 @@ document.addEventListener('DOMContentLoaded', event => {
 
     ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
     registerServiceWorker();
+
+    // DEVELOP ONLY!! REMOVE BEFORE PRODUCTION
+    window.store = store;
+    window.blockstack = blockstack;
 });
