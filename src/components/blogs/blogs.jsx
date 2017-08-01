@@ -8,7 +8,7 @@ import BlogLink from './blog_link/blog_link';
 import SignInPage from '../session/signin_page';
 import LoadingScreen from '../home/loading_screen';
 
-var Loader = require('react-loaders').Loader;
+// var Loader = require('react-loaders').Loader;
 
 class Blogs extends React.Component {
   constructor(props) {
