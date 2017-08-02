@@ -147,6 +147,7 @@ class BlogForm extends React.Component {
           <div id='blog-uploaded-img' key={ Math.random() }
             style={{ backgroundImage: `url(${this.state.imageUrl})` }}>
           </div>
+          
           <ImageUploadButton
             color={'white-important'}
             key={Math.random()}
@@ -165,6 +166,7 @@ class BlogForm extends React.Component {
             onClick={ this.toggleActiveLabel('title') }>
 
             <h7 className='hidden-label' id='hidden-label-title'>Title</h7>
+
             <span id='blog-title-error' className='error-message'>
               Title cannot be blank
             </span>
@@ -184,10 +186,11 @@ class BlogForm extends React.Component {
             onClick={ this.toggleActiveLabel('body') }>
 
             <h7 className='hidden-label' id='hidden-label-body'>Body</h7>
+
             <span id='blog-body-error' className='error-message'>
               Blog body cannot be blank
             </span>
-
+              
             <BlogBodyEditor
               editorState={ this.state.body }
               updateEditorState={ this.updateEditorState }
