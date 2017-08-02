@@ -122,6 +122,7 @@ class BlogForm extends React.Component {
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
 
     this.props.blogs[blog.id] = blog;
+    debugger;
     this.props.saveBlogs(this.props.blogs);
   }
 

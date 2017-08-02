@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', event => {
   ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
   registerServiceWorker();
 
+  // DEVELOP ONLY!! REMOVE BEFORE PRODUCTION
   window.store = store;
   window.blockstack = blockstack;
 });
