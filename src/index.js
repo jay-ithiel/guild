@@ -5,10 +5,10 @@ import registerServiceWorker from './util/registerServiceWorker';
 import configureStore from './store/store';
 import { receiveCurrentUser } from './actions/session_actions';
 import {
-    isSignInPending,
-    isUserSignedIn,
-    loadUserData,
-    handlePendingSignIn
+  isSignInPending,
+  isUserSignedIn,
+  loadUserData,
+  handlePendingSignIn
 } from 'blockstack';
 import * as blockstack from 'blockstack';
 require('./env.js');
@@ -18,25 +18,25 @@ global.cloudinary = cloudinary;
 
 
 document.addEventListener('DOMContentLoaded', event => {
-    window.cloudinary_options = {
-        cloud_name: 'ddgtwtbre',
-        upload_preset: 'k7gkxhh0'
-    };
+  window.cloudinary_options = {
+    cloud_name: 'ddgtwtbre',
+    upload_preset: 'k7gkxhh0'
+  };
 
-    let store = configureStore();
+  let store = configureStore();
 
-    if (isUserSignedIn()) {
-        store.dispatch(receiveCurrentUser( loadUserData() ));
-    } else if (isSignInPending()) {
-        handlePendingSignIn().then(userData => {
-            window.location = window.location.origin;
-        });
-    }
+  if (isUserSignedIn()) {
+    store.dispatch(receiveCurrentUser( loadUserData() ));
+  } else if (isSignInPending()) {
+    handlePendingSignIn().then(userData => {
+      window.location = window.location.origin;
+    });
+  }
 
-    ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
-    registerServiceWorker();
+  ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
+  registerServiceWorker();
 
-    // DEVELOP ONLY!! REMOVE BEFORE PRODUCTION
-    window.store = store;
-    window.blockstack = blockstack;
+  // DEVELOP ONLY!! REMOVE BEFORE PRODUCTION
+  window.store = store;
+  window.blockstack = blockstack;
 });

@@ -3,6 +3,8 @@ import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
+import { EditorState, convertToRaw } from 'draft-js';
+import BlogBodyEditor from '../../editor/editor';
 import $ from 'jquery';
 
 class BlogForm extends React.Component {
@@ -13,14 +15,15 @@ class BlogForm extends React.Component {
       id: null,
       title: '',
       blogIntro: '',
-      body: '',
+      body: EditorState.createEmpty(),
       imageUrl: '',
       authorId: '',
       authorImageUrl: '',
       updatedAt: '',
-      isSubmitButtonActive: true
+      isSubmitButtonActive: true,
     };
 
+    this.updateEditorState = editorState => this.setState({ body: editorState });
     this.actionType = props.history.location.pathname === '/blogs/new' ? 'Publish' : 'Update';
     this.setBlogToEdit = this.setBlogToEdit.bind(this);
     this.hasErrors = this.hasErrors.bind(this);
@@ -62,8 +65,33 @@ class BlogForm extends React.Component {
     this.setState({ imageUrl: imageUrl });
   }
 
+  handleChange(field) {
+    return e => this.setState({ [field]: e.target.value });
+  }
+
+  toggleActiveLabel(inputName) {
+    return e => {
+      $('.hidden-label').fadeOut();
+      $(`#hidden-label-${inputName}`).fadeIn();
+    }
+  }
+
+  handleMissingUserInfo() {
+    // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
+    let author = this.props.currentUser;
+    let avatarUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
+
+    this.setState({ authorId: author.username });
+
+    if (author.profile.image) {
+      this.setState({ authorImageUrl: author.profile.image[0].contentUrl });
+    } else {
+      this.setState({ authorImageUrl: avatarUrl });
+    }
+  }
+
   hasErrors() {
-    // Refactor this function
+    // Refactor this function to use react state
     let hasErrors = false;
 
     if (this.state.title.length <= 0) {
@@ -87,36 +115,15 @@ class BlogForm extends React.Component {
     return hasErrors;
   }
 
-  handleMissingUserInfo() {
-    // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
-    let author = this.props.currentUser;
-
-    this.setState({
-      authorId: author.username
-    });
-
-    if (author.profile.image) {
-      this.setState({
-        authorImageUrl: author.profile.image[0].contentUrl
-      });
-    } else {
-      this.setState({
-        authorImageUrl: 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png'
-      });
-    }
-  }
-
   processForm() {
     let blog = this.state;
-    this.state.createdAt = `${new Date()}`;
-    if (this.actionType === 'Publish') {
-      blog.id = this.props.blogIndex + 1;
-    }
+    this.setState({ isSubmitButtonActive: false });
+    blog.body = convertToRaw(blog.body.getCurrentContent());
+    if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
 
     this.props.blogs[blog.id] = blog;
     debugger;
     this.props.saveBlogs(this.props.blogs);
-    this.setState({ isSubmitButtonActive: false });
   }
 
   handleSubmit(e) {
@@ -125,23 +132,15 @@ class BlogForm extends React.Component {
     if (!this.hasErrors()) { this.processForm() }
   }
 
-  handleChange(field) {
-    return e => this.setState({ [field]: e.target.value });
-  }
-
-  toggleActiveLabel(inputName) {
-    return e => {
-      $('.hidden-label').fadeOut();
-      $(`#hidden-label-${inputName}`).fadeIn();
-    }
-  }
-
   render() {
     let imageSection = [];
 
     if (this.state.imageUrl.length === 0) {
       imageSection.push(
-        <ImageUploadButton key={ Math.random() } addImage={ this.addImage }/>
+        <ImageUploadButton
+          key={ Math.random() }
+          addImage={ this.addImage }
+        />
       );
     } else {
       imageSection.push(
@@ -149,7 +148,12 @@ class BlogForm extends React.Component {
           <div id='blog-uploaded-img' key={ Math.random() }
             style={{ backgroundImage: `url(${this.state.imageUrl})` }}>
           </div>
-          <ImageUploadButton color={'white-important'} key={ Math.random() } addImage={ this.addImage }/>
+          
+          <ImageUploadButton
+            color={'white-important'}
+            key={Math.random()}
+            addImage={this.addImage}
+          />
         </div>
       );
     }
@@ -158,60 +162,65 @@ class BlogForm extends React.Component {
       <div id='blog-form-container'>
         <form id='blog-form' onSubmit={ this.handleSubmit.bind(this) }>
 
-          <label id='blog-title-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('title') }>
-            <h7 className='hidden-label' id='hidden-label-title'>
-              Title
-            </h7>
+          <label id='blog-title-label'
+            className='blog-form-label position-relative'
+            onClick={ this.toggleActiveLabel('title') }>
+
+            <h7 className='hidden-label' id='hidden-label-title'>Title</h7>
+
             <span id='blog-title-error' className='error-message'>
               Title cannot be blank
             </span>
 
             <input type='text'
-            id='blog-title-input'
-            className='blog-input black'
-            onChange={ this.handleChange('title') }
-            value={ this.state.title }
-            placeholder='Title'
-            maxLength='50'/>
+              id='blog-title-input'
+              className='blog-input black'
+              onChange={ this.handleChange('title') }
+              value={ this.state.title }
+              placeholder='Title'
+              maxLength='50'
+            />
           </label>
 
-          <label id='blog-body-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('body') }>
-            <h7 className='hidden-label' id='hidden-label-body'>
-              Body
-            </h7>
+          <label id='blog-body-label'
+            className='blog-form-label position-relative'
+            onClick={ this.toggleActiveLabel('body') }>
+
+            <h7 className='hidden-label' id='hidden-label-body'>Body</h7>
+
             <span id='blog-body-error' className='error-message'>
               Blog body cannot be blank
             </span>
+              
+            <BlogBodyEditor
+              editorState={ this.state.body }
+              updateEditorState={ this.updateEditorState }
+            />
+          </label>
 
-            <textarea type='text'
-              id='blog-body-input'
+          <label id='blog-intro-label'
+            className='blog-form-label position-relative'
+            onClick={ this.toggleActiveLabel('intro') }>
+
+            <h7 className='hidden-label' id='hidden-label-intro'>Intro</h7>
+
+            <input
+              type='text'
+              id='blog-intro-input'
               className='blog-input black'
-              onChange={ this.handleChange('body') }
-              value={ this.state.body }
-              placeholder='Write your blog here...'/>
+              onChange={ this.handleChange('blogIntro') }
+              value={ this.state.blogIntro }
+              placeholder='Introduction (Summarize your blog in 1 or 2  sentences)'
+              maxLength='50'
+            />
           </label>
 
-          <label id='blog-intro-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('intro') }>
-            <h7 className='hidden-label' id='hidden-label-intro'>
-              Intro
-            </h7>
+          <div className='add-img-btn-box'>{ imageSection }</div>
 
-            <input type='text'
-            id='blog-intro-input'
-            className='blog-input black'
-            onChange={ this.handleChange('blogIntro') }
-            value={ this.state.blogIntro }
-            placeholder='Introduction (Summarize your blog in 1 or 2 sentences).'
-            maxLength='50'/>
-          </label>
-
-
-          <div className='add-img-btn-box'>
-            { imageSection }
-          </div>
-
-
-          <SubmitBlogButton actionType={this.actionType} isActive={this.state.isSubmitButtonActive}/>
+          <SubmitBlogButton
+            actionType={ this.actionType }
+            isActive={ this.state.isSubmitButtonActive }
+          />
         </form>
       </div>
     );
