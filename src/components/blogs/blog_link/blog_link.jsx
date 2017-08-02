@@ -24,7 +24,9 @@ const BlogLink = ({ blog, isUserBlogs }) => (
             <h4 id='blog-link-title'>{ blog.title }</h4>
 
             <div id='blog-link-body-intro'>
-                { blog.blogIntro ? blog.blogIntro : characterLimit(blog.body) }...
+                {/* blog.body is not a string anymore, but an object so it won't display */}
+                {/* blog.blogIntro ? blog.blogIntro : characterLimit(blog.body) */}
+                { blog.blogIntro }...
             </div>
 
             {

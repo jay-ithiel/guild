@@ -3,61 +3,61 @@
 
 // Default small screen layout
 #blog-link {
-    width: 100vw;
-    max-width: 640px;
-    height: auto;
+  width: 100vw;
+  max-width: 640px;
+  height: auto;
 
-    background-color: #fff;
-    box-shadow: 0 0 4px #ccc;
+  background-color: #fff;
+  box-shadow: 0 0 4px #ccc;
 
-    border-radius: 3px;
-    margin-top: 30px;
-    padding: 15px 20px;
-    padding-bottom: 35px;
+  border-radius: 3px;
+  margin-top: 30px;
+  padding: 15px 20px;
+  padding-bottom: 35px;
 }
 
 .blog-link-img-box {
-    height: 30vw;
-    max-height: 179.39px;
-    width: 100%;
+  height: 30vw;
+  max-height: 179.39px;
+  width: 100%;
 
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #blog-link-title {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    font-size: 28px;
-    font-weight: 700;
-    color: #333;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
 }
 
 #blog-link-body-intro {
-    font-size: 25px;
-    font-weight: 100;
-    color: #777;
-    margin-bottom: 20px;
+  font-size: 25px;
+  font-weight: 100;
+  color: #777;
+  margin-bottom: 20px;
 }
 
 #blog-link-actions {
-    width: 75px;
-    padding-right: 10px;
-    float: right;
+  width: 75px;
+  padding-right: 10px;
+  float: right;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #blog-link-action {
-    height: 23px;
-    width: 23px;
-    z-index: 10;
-    color: #aaa;
+  height: 23px;
+  width: 23px;
+  z-index: 10;
+  color: #aaa;
 }
 
 #blog-link-action:hover {
-    color: #000;
+  color: #000;
 }
