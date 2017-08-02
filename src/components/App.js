@@ -14,42 +14,42 @@ import Blogs from './blogs/blogs';
 import { requestBlogs } from '../actions/blog_actions';
 
 class App extends React.Component {
-    componentDidMount() {
-        this.props.requestBlogs();
-    }
+  componentDidMount() {
+    this.props.requestBlogs();
+  }
 
-    render() {
-        return (
-            <div id='app'>
-                <Navbar />
+  render() {
+    return (
+      <div id='app'>
+        <Navbar />
 
-                <Switch>
-                    <Route exact path='/' component={Home}></Route>
-                    <Route path='/signin' component={SignInPage}></Route>
-                    <Route exact path='/blogs/new'  component={BlogForm}></Route>
-                    <Route exact path='/blogs/edit/:id' component={BlogForm}></Route>
-                    <Route exact path='/blogs/user' component={Blogs}></Route>
-                    <Route exact path='/blogs/:id' component={Blog}></Route>
-                    {/* <Route exact path='/users/:username' component={Profile}></Route> */}
-                </Switch>
-            </div>
-        );
-    }
+        <Switch>
+          <Route exact path='/' component={Home}></Route>
+          <Route path='/signin' component={SignInPage}></Route>
+          <Route exact path='/blogs/new'  component={BlogForm}></Route>
+          <Route exact path='/blogs/edit/:id' component={BlogForm}></Route>
+          <Route exact path='/blogs/user' component={Blogs}></Route>
+          <Route exact path='/blogs/:id' component={Blog}></Route>
+          {/* <Route exact path='/users/:username' component={Profile}></Route> */}
+        </Switch>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-    currentUser: state.session.currentUser,
-    blogs: state.blogs.index,
-    blogIndex: state.blogs.blogIndex
+  currentUser: state.session.currentUser,
+  blogs: state.blogs.index,
+  blogIndex: state.blogs.blogIndex
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestBlogs: () => dispatch(requestBlogs())
+  requestBlogs: () => dispatch(requestBlogs())
 });
 
 export default withRouter(connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App));
 
 
