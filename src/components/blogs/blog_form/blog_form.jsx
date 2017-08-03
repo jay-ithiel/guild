@@ -122,7 +122,6 @@ class BlogForm extends React.Component {
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
 
     this.props.blogs[blog.id] = blog;
-    debugger;
     this.props.saveBlogs(this.props.blogs);
   }
 
@@ -148,7 +147,7 @@ class BlogForm extends React.Component {
           <div id='blog-uploaded-img' key={ Math.random() }
             style={{ backgroundImage: `url(${this.state.imageUrl})` }}>
           </div>
-          
+
           <ImageUploadButton
             color={'white-important'}
             key={Math.random()}
@@ -191,7 +190,7 @@ class BlogForm extends React.Component {
             <span id='blog-body-error' className='error-message'>
               Blog body cannot be blank
             </span>
-              
+
             <BlogBodyEditor
               editorState={ this.state.body }
               updateEditorState={ this.updateEditorState }
