@@ -22,7 +22,7 @@ class Blog extends React.Component {
   }
 
   setBlog(nextProps = this.props) {
-    let id = nextProps.history.location.pathname.substring(7)[0];
+    let id = nextProps.history.location.pathname.substring(12)[0];
     let blog = nextProps.blogs[id];
     if (blog) { this.setState({ blog: blog }); }
   }

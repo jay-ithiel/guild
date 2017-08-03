@@ -15,7 +15,7 @@ const HamburgerDropdown = props => (
 
         <ul id='hamburger-dropdown'>
             <li onClick={ close }>
-                <Link className='full flex align-center' to={`/blogs/user`}>
+                <Link className='full flex align-center' to={`/blogs/${props.currentUser.username}`}>
                     My Blogs
                 </Link>
             </li>

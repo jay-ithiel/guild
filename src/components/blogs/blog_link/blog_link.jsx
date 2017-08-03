@@ -7,7 +7,7 @@ import AboutBlog from './about_blog';
 
 const BlogLink = ({ blog, isUserBlogs }) => (
     <section id='blog-link' className='position-relative' >
-        <Link className='blog-link-info position-relative' to={`/blogs/${blog.id}`}>
+        <Link className='blog-link-info position-relative' to={`/blogs/show/${blog.id}`}>
             <AboutBlog authorId={ blog.authorId }
                 authorImageUrl={ blog.authorImageUrl }
                 date={ parseDateTime(blog.updatedAt) }

@@ -28,8 +28,8 @@ class App extends React.Component {
           <Route path='/signin' component={SignInPage}></Route>
           <Route exact path='/blogs/new'  component={BlogForm}></Route>
           <Route exact path='/blogs/edit/:id' component={BlogForm}></Route>
-          <Route exact path='/blogs/user' component={Blogs}></Route>
-          <Route exact path='/blogs/:id' component={Blog}></Route>
+          <Route exact path='/blogs/show/:id' component={Blog}></Route>
+          <Route exact path='/blogs/:username' component={Blogs}></Route>
           {/* <Route exact path='/users/:username' component={Profile}></Route> */}
         </Switch>
       </div>
