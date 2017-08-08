@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Comment from '../../js_models/comment.js';
 import { saveBlogs } from '../../actions/blog_actions';
+import SubmitCommentButton from './submit_comment_button';
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class CommentForm extends React.Component {
       id: null,
       body: '',
       blogId: '',
-      authorId: ''
+      authorId: '',
+      isActive: true
     };
   }
 
@@ -25,6 +27,7 @@ class CommentForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({ isActive: false })
     let comment = new Comment(this.state);
     this.props.blog.comments[comment.id] = comment;
     this.props.saveBlogs(this.props.blogs);
@@ -41,9 +44,7 @@ class CommentForm extends React.Component {
             placeholder='Your comment here...'
           />
 
-          <button id='submit-comment-btn' className='btn primary-btn'>
-            Post Comment
-          </button>
+          <SubmitCommentButton actionType='Post' isActive={this.state.isActive}/>
         </form>
       </div>
     );
