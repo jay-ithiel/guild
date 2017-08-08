@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import AboutUser from '../users/about_user';
 import BodyDisplay from '../editor/editor';
 import { convertFromRaw, EditorState } from 'draft-js';
+import CommentForm from '../comments/comment_form';
+import Comments from '../comments/comments';
 
 class Blog extends React.Component {
   constructor(props) {
@@ -60,6 +62,9 @@ class Blog extends React.Component {
             />
           </div>
         </div>
+
+        <CommentForm blog={blog}/>
+        <Comments comments={blog.comments} blog={blog}/>
       </section>
     );
   }
