@@ -1,17 +1,38 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { parseDateTime } from '../../util/helper_methods.js';
 
-const Comment = props => (
-  <div className='comment'>
-    <div className='comment-head'>
-      <h4 className='comment-author'>
-        {props.comment.author_name}
-      </h4>
-    </div>
+const Comment = props => {
+  let currentUser = props.currentUser.profile;
+  const user = {
+    name: `${currentUser.givenName} ${currentUser.familyName}`,
+    imageUrl: currentUser.image ? currentUser.image[0].contentUrl : ''
+  };
 
-    <p className='comment-body'>
-      {props.comment.body}
-    </p>
-  </div>
-);
+  debugger;
 
-export default Comment;
+  return (
+    <li id='comment' className='comment-box'>
+      <div className='comment-head'>
+        <div id='about-user-img'
+          style={{ backgroundImage: `url(${user.imageUrl})` }}>
+        </div>
+
+        <div id='about-blog-info'>
+          <span>{props.comment.authorId}</span>
+          <span>{parseDateTime(props.comment.createdAt)}</span>
+        </div>
+      </div>
+
+      <p className='comment-body'>
+        {props.comment.body}
+      </p>
+    </li>
+  );
+};
+
+const mapStateToProps = state => ({
+  currentUser: state.session.currentUser
+});
+
+export default connect(mapStateToProps, null)(Comment);

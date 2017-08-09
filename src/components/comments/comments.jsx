@@ -13,13 +13,13 @@ class Comments extends React.Component {
     let commentLis = Object.keys(this.props.comments);
     if (commentLis.length === 0) {
       return (
-      <h4 className='text-align-center'>Be the first to make a comment!</h4>
+        <h4 className='text-align-center'>Be the first to make a comment!</h4>
       );
     } else {
       return commentLis.map((id, i) => (
-      <li key={i}>
-        <Comment blog={ this.props.blog } comment={ this.props.comments[id] } />
-      </li>
+        <li key={i}>
+          <Comment blog={ this.props.blog } comment={ this.props.comments[id] }/>
+        </li>
       ));
     }
   }
@@ -28,13 +28,11 @@ class Comments extends React.Component {
     let commentLis = this.mapComments();
 
     return (
-      <div>
-        <div className=''>
-          <h3 className='header'>COMMENTS</h3>
-          <ul className='comments'>
+      <div id='comments-container'>
+        <h3 className='header'>COMMENTS</h3>
+        <ul id='comments'>
           { commentLis }
-          </ul>
-        </div>
+        </ul>
       </div>
     );
   }

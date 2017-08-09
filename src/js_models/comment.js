@@ -9,6 +9,7 @@ class Comment {
     this.body = body;
     this.blogId = blogId;
     this.authorId = authorId;
+    this.createdAt = `${new Date()}`;
   }
 }
 

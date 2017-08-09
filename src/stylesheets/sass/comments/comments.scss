@@ -1,1 +1,18 @@
 @import './comment_form.scss';
+
+#comments-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#comments {
+  padding: 0;
+}
+
+#comment {
+  margin: 30px 0;
+}
+
+.comment-body {
+  margin-top: 10px;
+}

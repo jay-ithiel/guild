@@ -20,14 +20,6 @@ class Blog {
     this.createdAt = `${new Date()}`;
     this.updatedAt = updatedAt ? updatedAt : this.createdAt;
   }
-
-  addComment(comment) {
-    this.comments[comment.id] = comment;
-  }
-
-  deleteComment(commentId) {
-    delete this.comments[commentId];
-  }
 }
 
 export default Blog
