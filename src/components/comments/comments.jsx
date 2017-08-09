@@ -13,7 +13,9 @@ class Comments extends React.Component {
     let commentLis = Object.keys(this.props.comments);
     if (commentLis.length === 0) {
       return (
-        <h4 className='text-align-center'>Be the first to make a comment!</h4>
+        <h4 className='text-align-center skinny letter-space-1 medium'>
+          Be the first to make a comment!
+        </h4>
       );
     } else {
       return commentLis.map((id, i) => (
@@ -30,9 +32,7 @@ class Comments extends React.Component {
     return (
       <div id='comments-container'>
         <h3 className='header'>COMMENTS</h3>
-        <ul id='comments'>
-          { commentLis }
-        </ul>
+        <ul id='comments'>{commentLis}</ul>
       </div>
     );
   }

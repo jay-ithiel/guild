@@ -2,28 +2,12 @@
   width: 100%;
   max-width: 900px;
   height: auto;
-
   margin: 60px auto;
-}
-
-.comment-box {
-  display: flex;
-  flex-direction: column;
-
-  width: 600px;
-  height: 100%;
-
-  margin: 0 auto;
-  padding: 15px;
-
-  background-color: #fff;
-  box-shadow: 0 0 4px #ccc;
 }
 
 #comment-input {
   width: 100%;
-  // max-width: 400px;
-  height: 150px;
+  height: 100px;
 
   font-size: 16px;
 

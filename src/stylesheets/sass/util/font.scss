@@ -1,110 +1,114 @@
 .title {
-    font-size: 30px;
-    font-weight: 700;
-    letter-spacing: 2px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 .title-2 {
-    font-size: 15px;
-    letter-spacing: 1px;
+  font-size: 15px;
+  letter-spacing: 1px;
 }
 
 .regular {
-    font-size: 15px;
-    font-weight: 100;
-    line-height: 19px;
-    letter-spacing: 1px;
+  font-size: 15px;
+  font-weight: 100;
+  line-height: 19px;
+  letter-spacing: 1px;
 }
 
 .text-align-center {
-    text-align: center;
+  text-align: center;
 }
 
 .letter-space-2 {
-    letter-spacing: 2px;
+  letter-spacing: 2px;
 }
 
 .letter-space-1 {
-    letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 
 .small {
-    font-size: 13px;
+  font-size: 13px;
+}
+
+.medium {
+  font-size: 17px;
 }
 
 .skinny {
-    font-weight: 100;
+  font-weight: 100;
 }
 
 .thin {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .bold {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .dk-green {
-    color: #00ab6c;
+  color: #00ab6c;
 }
 
 .primary-green {
-    color: #43bd7e;
+  color: #43bd7e;
 }
 
 .green {
-    color: #0be370;
+  color: #0be370;
 }
 
 .li-green {
-    color: #14fc7d;
+  color: #14fc7d;
 }
 
 .white {
-    color: #fff;
+  color: #fff;
 }
 
 .lightgrey {
-    color: lightgrey;
+  color: lightgrey;
 }
 
 .lightgrey-important {
-    color: lightgrey !important;
+  color: lightgrey !important;
 }
 
 .grey {
-    color: grey;
+  color: grey;
 }
 
 .black {
-    color: #000;
+  color: #000;
 }
 
 .white-important {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 .error-message {
-    font-size: 13px;
-    font-weight: 100;
-    color: #ff0000;
-    padding: 3px;
-    display: none;
+  font-size: 13px;
+  font-weight: 100;
+  color: #ff0000;
+  padding: 3px;
+  display: none;
 }
 
 .outline-red {
-    border: 1px solid red !important;
-    border-radius: 2px;
+  border: 1px solid red !important;
+  border-radius: 2px;
 }
 
 .dark-hover:hover {
-    color: #000;
+  color: #000;
 }
 
 .bold-hover:hover {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .underline-hover:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

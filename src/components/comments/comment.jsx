@@ -9,8 +9,6 @@ const Comment = props => {
     imageUrl: currentUser.image ? currentUser.image[0].contentUrl : ''
   };
 
-  debugger;
-
   return (
     <li id='comment' className='comment-box'>
       <div className='comment-head'>

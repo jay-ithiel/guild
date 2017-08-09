@@ -41,7 +41,7 @@ class CommentForm extends React.Component {
             id='comment-input'
             onChange={ this.handleChange('body') }
             value={ this.state.body }
-            placeholder='Your comment here...'
+            placeholder='Write a comment...'
           />
 
           <SubmitCommentButton actionType='Post' isActive={this.state.isActive}/>

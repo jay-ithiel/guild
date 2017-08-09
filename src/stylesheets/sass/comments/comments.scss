@@ -13,6 +13,26 @@
   margin: 30px 0;
 }
 
+.comment-box {
+  display: flex;
+  flex-direction: column;
+
+  width: 600px;
+  height: 100%;
+
+  margin: 0 auto;
+  padding: 15px;
+
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 0 4px #ccc;
+}
+
 .comment-body {
   margin-top: 10px;
+
+  font-size: 17px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  line-height: 20px;
 }
