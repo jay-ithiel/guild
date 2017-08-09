@@ -9,11 +9,16 @@ var STORAGE_FILE = 'blogs.json';
 
 export const saveBlogs = (blogs, dispatch) => {
   putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
-    // if (isBlogSaved) { window.location = '/blogs/user'; }
     let user = loadUserData();
     if (isBlogSaved) { window.location = `/blogs/${user.username}`}
   });
 }
+
+export const saveBlogsComments = (blogs, blogId) => {
+  putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+    if (isBlogSaved) { window.location = `/blogs/show/${blogId}`}
+  });
+};
 
 export const fetchBlogs = dispatch => {
   var blogs = {}, blogIndex = 0;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Comment from '../../js_models/comment.js';
-import { saveBlogs } from '../../actions/blog_actions';
+import { saveBlogsComments } from '../../actions/blog_actions';
 import SubmitCommentButton from './submit_comment_button';
 
 class CommentForm extends React.Component {
@@ -30,7 +30,7 @@ class CommentForm extends React.Component {
     this.setState({ isActive: false })
     let comment = new Comment(this.state);
     this.props.blog.comments[comment.id] = comment;
-    this.props.saveBlogs(this.props.blogs);
+    this.props.saveBlogsComments(this.props.blogs, this.props.blog.id);
   }
 
   render() {
@@ -58,7 +58,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveBlogs: blogs => dispatch(saveBlogs(blogs))
+  saveBlogsComments: (blogs, blogId) => dispatch(saveBlogsComments(blogs, blogId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);
