@@ -6358,7 +6358,7 @@ tryit@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tryit/-/tryit-1.0.3.tgz#393be730a9446fd1ead6da59a014308f36c289cb"
 
-ts-loader@^2.3.2:
+ts-loader@^2.2.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-2.3.2.tgz#b71b9f0d0062c791a654d462140718f9f7817665"
   dependencies:
@@ -6404,7 +6404,7 @@ typeforce@^1.6.2:
   dependencies:
     inherits "^2.0.1"
 
-typescript@^2.4.2:
+typescript@^2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
 

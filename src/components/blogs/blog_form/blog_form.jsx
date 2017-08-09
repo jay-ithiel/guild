@@ -7,6 +7,9 @@ import { EditorState, convertToRaw } from 'draft-js';
 import BlogBodyEditor from '../../editor/editor';
 import $ from 'jquery';
 
+import Blog from '../../../js_models/blog.js';
+window.Blog = Blog;
+
 class BlogForm extends React.Component {
   constructor(props) {
     super(props);
@@ -121,7 +124,7 @@ class BlogForm extends React.Component {
     blog.body = convertToRaw(blog.body.getCurrentContent());
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
 
-    this.props.blogs[blog.id] = blog;
+    this.props.blogs[blog.id] = new Blog(blog);
     this.props.saveBlogs(this.props.blogs);
   }
 
