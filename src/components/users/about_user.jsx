@@ -11,6 +11,8 @@ const AboutUser = props => {
     imageUrl: props.authorImageUrl
   };
 
+  debugger;
+
   return !user ? <div></div> : (
     <div id='about-user' className='flex'>
       <div>
@@ -21,8 +23,6 @@ const AboutUser = props => {
 
       <div>
         <h4 id='about-user-name'>
-          {/* { user.givenName } { user.familyName } */}
-          {/* user.name */}
           { currentUser.givenName } { currentUser.familyName }
         </h4>
         <p id='about-user-bio'>

@@ -11,6 +11,7 @@ import {
   handlePendingSignIn
 } from 'blockstack';
 import * as blockstack from 'blockstack';
+global.blockstack = blockstack;
 require('./env.js');
 
 const cloudinary = window.cloudinary; // eslint-disable-line

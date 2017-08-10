@@ -70,11 +70,11 @@ class Blogs extends React.Component {
         {
           this.state.isUserBlogs ? (
             <h4 className='blogs-section-head'>
-              { `You haven't written any blogs yet.` } <a className='primary-green underline-hover' href='/blogs/new'>Write a blog!</a>
+              { `You haven't written any blogs yet.` } <a className='primary-green underline-hover' href='/blogs/new'>Write a story!</a>
             </h4>
           ) : (
             <h4 className='blogs-section-head'>
-              No blogs have been written yet. Be the first to <a className='primary-green underline-hover' href='blogs/new'>write a blog!</a>
+              No blogs have been written yet. Be the first to <a className='primary-green underline-hover' href='blogs/new'>write a story!</a>
             </h4>
           )
         }
