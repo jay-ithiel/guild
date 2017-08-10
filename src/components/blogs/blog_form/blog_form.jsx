@@ -7,7 +7,7 @@ import { EditorState, convertToRaw } from 'draft-js';
 import BlogBodyEditor from '../../editor/editor';
 import $ from 'jquery';
 
-import Blog from '../../../js_models/blog.js';
+import Blog from '../../../models/blog.js';
 window.Blog = Blog;
 
 class BlogForm extends React.Component {

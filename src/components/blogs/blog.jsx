@@ -47,7 +47,6 @@ class Blog extends React.Component {
           }
 
           <div id='blog-body' className='blog-show-section'>
-            {/* blog.body */}
             <BodyDisplay readOnly={true}
               editorState={ EditorState.createWithContent(convertFromRaw(blog.body)) }
               updateEditorState={ () => null }

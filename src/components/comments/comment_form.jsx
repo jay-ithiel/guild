@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Comment from '../../js_models/comment.js';
+import Comment from '../../models/comment.js';
 import { saveBlogsComments } from '../../actions/blog_actions';
 import SubmitCommentButton from './submit_comment_button';
 
