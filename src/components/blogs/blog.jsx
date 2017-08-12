@@ -53,10 +53,14 @@ class Blog extends React.Component {
               updateEditorState={ () => null }
             />
 
-          <BlogLikesForm blog={blog}
-            doesUserLikeBlog={blog.likes[this.props.currentUser.username] ? true : false}/>
+            {
+              !blog.likes ? <div></div> : (
+                <BlogLikesForm blog={blog}
+                  doesUserLikeBlog={blog.likes[this.props.currentUser.username] ? true : false}
+                />
+              )
+            }
           </div>
-
 
           <div className='blog-show-section'>
             <AboutUser

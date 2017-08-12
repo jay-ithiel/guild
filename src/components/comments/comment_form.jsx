@@ -51,7 +51,6 @@ class CommentForm extends React.Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
   blogs: state.blogs.index,

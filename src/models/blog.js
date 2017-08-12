@@ -22,6 +22,7 @@ class Blog {
 
     this.comments = {};
     this.likes = {};
+    this.tags = {};
   }
 }
 
