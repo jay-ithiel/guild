@@ -3,12 +3,10 @@ import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
-import { EditorState, convertToRaw } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import BlogBodyEditor from '../../editor/editor';
 import $ from 'jquery';
-
-import Blog from '../../../js_models/blog.js';
-window.Blog = Blog;
+import Blog from '../../../models/blog.js';
 
 class BlogForm extends React.Component {
   constructor(props) {
@@ -106,7 +104,8 @@ class BlogForm extends React.Component {
       $('#blog-title-label').removeClass('outline-red');
     }
 
-    if (this.state.body.length <= 0) {
+    // if (this.state.body.length <= 0) {
+    if (!this.state.body.getCurrentContent().hasText()) {
       hasErrors = true;
       $('#blog-body-error').fadeIn();
       $('#blog-body-label').addClass('outline-red');
@@ -121,6 +120,10 @@ class BlogForm extends React.Component {
   processForm() {
     let blog = this.state;
     this.setState({ isSubmitButtonActive: false });
+
+    // If blog.body.getCurrentContent does not exist, blog.body is converted from raw state to EditorState
+    if (!blog.body.getCurrentContent) { blog.body = convertFromRaw(blog.body) }
+
     blog.body = convertToRaw(blog.body.getCurrentContent());
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
 

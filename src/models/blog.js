@@ -8,7 +8,7 @@ class Blog {
     authorId,
     authorImageUrl,
     updatedAt,
-  }) {
+  }){
     this.id = id;
     this.title = title;
     this.blogIntro = blogIntro;
@@ -16,9 +16,13 @@ class Blog {
     this.imageUrl = imageUrl;
     this.authorId = authorId;
     this.authorImageUrl = authorImageUrl;
-    this.comments = {};
+
     this.createdAt = `${new Date()}`;
     this.updatedAt = updatedAt ? updatedAt : this.createdAt;
+
+    this.comments = {};
+    this.likes = {};
+    this.tags = {};
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Comment from '../../js_models/comment.js';
+import Comment from '../../models/comment.js';
 import { saveBlogsComments } from '../../actions/blog_actions';
 import SubmitCommentButton from './submit_comment_button';
 
@@ -8,11 +8,14 @@ class CommentForm extends React.Component {
   constructor(props) {
     super(props);
 
+    let user = props.currentUser.profile;
+
     this.state = {
       id: null,
       body: '',
-      blogId: '',
-      authorId: '',
+      blogId: props.blog.id,
+      authorId: props.currentUser.username,
+      authorName: `${user.givenName} ${user.familyName}`,
       isActive: true
     };
   }
@@ -50,7 +53,6 @@ class CommentForm extends React.Component {
     );
   }
 }
-
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,

@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 import { parseDateTime, characterLimit } from '../../../util/helper_methods.js';
 
 import BlogLinkActions from './blog_link_actions';
 import AboutBlog from './about_blog';
+import BlogLikesForm from '../../likes/blog_likes_form';
 
-const BlogLink = ({ blog, isUserBlogs }) => (
+const BlogLink = ({ blog, isUserBlogs, currentUser }) => (
   <section id='blog-link' className='position-relative' >
     <Link className='blog-link-info position-relative' to={`/blogs/show/${blog.id}`}>
       <AboutBlog authorId={ blog.authorId }
@@ -25,13 +28,12 @@ const BlogLink = ({ blog, isUserBlogs }) => (
 
       <div id='blog-link-body-intro'>
         {/* blog.body is not a string anymore, but an object so it won't display */}
-        {/* blog.blogIntro ? blog.blogIntro : characterLimit(blog.body) */}
-        { blog.blogIntro }...
+        { blog.blogIntro }
       </div>
 
       {
         isUserBlogs ? <div></div> : (
-          <span className='skinny small letter-space-1 grey dark-hover transition-2s-ease-in'>
+          <span className='skinny small letter-space-1 grey dark-hover margin-bottom--10 transition-2s-ease-in'>
             Read more...
           </span>
         )
@@ -39,7 +41,19 @@ const BlogLink = ({ blog, isUserBlogs }) => (
     </Link>
 
     <BlogLinkActions blog={ blog } isUserBlogs={ isUserBlogs }/>
+
+    {
+      !blog.likes ? <div></div> : (
+        <BlogLikesForm blog={blog}
+          doesUserLikeBlog={blog.likes[currentUser.username] ? true : false}
+        />
+      )
+    }
   </section>
 );
 
-export default BlogLink;
+const mapStateToProps = state => ({
+  currentUser: state.session.currentUser
+});
+
+export default connect(mapStateToProps, null)(BlogLink);

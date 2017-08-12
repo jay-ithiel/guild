@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AboutUser from '../users/about_user';
 import BodyDisplay from '../editor/editor';
 import { convertFromRaw, EditorState } from 'draft-js';
+import BlogLikesForm from '../likes/blog_likes_form';
 import CommentForm from '../comments/comment_form';
 import Comments from '../comments/comments';
 
@@ -47,11 +48,18 @@ class Blog extends React.Component {
           }
 
           <div id='blog-body' className='blog-show-section'>
-            {/* blog.body */}
             <BodyDisplay readOnly={true}
               editorState={ EditorState.createWithContent(convertFromRaw(blog.body)) }
               updateEditorState={ () => null }
             />
+
+            {
+              !blog.likes ? <div></div> : (
+                <BlogLikesForm blog={blog}
+                  doesUserLikeBlog={blog.likes[this.props.currentUser.username] ? true : false}
+                />
+              )
+            }
           </div>
 
           <div className='blog-show-section'>
@@ -71,6 +79,7 @@ class Blog extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  currentUser: state.session.currentUser,
   blogs: state.blogs.index
 });
 

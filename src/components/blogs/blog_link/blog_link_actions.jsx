@@ -63,7 +63,8 @@ class BlogLinkActions extends React.Component {
           handleDelete={ this.handleDelete }
           showModal={ this.state.showModal }
           isDeleteButtonActive={ this.state.isDeleteButtonActive }
-          hideModal={ this.hideModal }/>
+          hideModal={ this.hideModal }
+        />
       </div>
     );
   }

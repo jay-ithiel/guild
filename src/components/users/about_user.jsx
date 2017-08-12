@@ -11,8 +11,6 @@ const AboutUser = props => {
     imageUrl: props.authorImageUrl
   };
 
-  debugger;
-
   return !user ? <div></div> : (
     <div id='about-user' className='flex'>
       <div>

@@ -4,11 +4,13 @@ import {
   DELETE_BLOG,
   SAVE_BLOGS,
   SAVE_BLOGS_COMMENTS,
+  SAVE_BLOGS_LIKES,
 } from '../actions/blog_actions';
 
 import {
   saveBlogs,
   saveBlogsComments,
+  saveBlogsLikes,
   fetchBlogs,
   fetchUserBlogs,
   deleteBlog,
@@ -22,6 +24,10 @@ const BlogMiddleware = ({ getState, dispatch }) => next => action => {
 
     case SAVE_BLOGS_COMMENTS:
       saveBlogsComments(action.blogs, action.blogId);
+      return next(action);
+
+    case SAVE_BLOGS_LIKES:
+      saveBlogsLikes(action.blogs);
       return next(action);
 
     case REQUEST_BLOGS:

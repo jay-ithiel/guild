@@ -28,6 +28,12 @@
   box-shadow: 0 0 4px #ccc;
 }
 
+.comment-head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .comment-body {
   margin-top: 10px;
 
