@@ -9,7 +9,13 @@ export const saveBlogsComments = (blogs, blogId) => ({
   type: SAVE_BLOGS_COMMENTS,
   blogs,
   blogId
-})
+});
+
+export const SAVE_BLOGS_LIKES = 'SAVE_BLOGS_LIKES';
+export const saveBlogsLikes = blogs => ({
+  type: SAVE_BLOGS_LIKES,
+  blogs
+});
 
 export const REQUEST_BLOGS = 'REQUEST_BLOGS';
 export const requestBlogs = tags => ({

@@ -20,6 +20,12 @@ export const saveBlogsComments = (blogs, blogId) => {
   });
 };
 
+export const saveBlogsLikes = blogs => {
+  putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+    // if (isBlogSaved) { window.location = `/blogs/show/${blogId}`}
+  });
+};
+
 export const fetchBlogs = dispatch => {
   var blogs = {}, blogIndex = 0;
 
