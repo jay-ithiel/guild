@@ -1,11 +1,11 @@
 export const SIGNIN = 'SIGNIN';
 export const signin = () => ({
-    type: SIGNIN
+  type: SIGNIN
 });
 
 export const SIGNOUT = 'SIGNOUT';
 export const signout = () => ({
-    type: SIGNOUT
+  type: SIGNOUT
 });
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';

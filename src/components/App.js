@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, withRouter, Route } from 'react-router';
-
+import { isUserSignedIn, loadUserData } from 'blockstack';
 import '../stylesheets/sass/all.scss';
 
 import Navbar from './navbar/navbar';
@@ -12,10 +12,25 @@ import Blog from './blogs/blog';
 import Blogs from './blogs/blogs';
 
 import { requestBlogs } from '../actions/blog_actions';
+import { createUser, requestUsers } from '../actions/user_actions';
 
 class App extends React.Component {
   componentDidMount() {
     this.props.requestBlogs();
+    this.props.requestUsers();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let user = loadUserData();
+    if (isUserSignedIn() && !nextProps.users[user.username]) {
+      let newUser = {
+        username: user.username,
+        firstName: user.profile.givenName,
+        lastName: user.profile.familyName,
+        imageUrl: user.profile.image[0].contentUrl
+      }
+      this.props.createUser(newUser, nextProps.users);
+    }
   }
 
   render() {
@@ -39,12 +54,15 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
+  users: state.users.index,
   blogs: state.blogs.index,
-  blogIndex: state.blogs.blogIndex
+  blogIndex: state.blogs.blogIndex,
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestBlogs: () => dispatch(requestBlogs())
+  requestBlogs: () => dispatch(requestBlogs()),
+  requestUsers: () => dispatch(requestUsers()),
+  createUser: (newUser, users) => dispatch(createUser(newUser, users)),
 });
 
 export default withRouter(connect(

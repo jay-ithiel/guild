@@ -18,7 +18,13 @@ const Comment = props => {
 
         <div id='about-blog-info'>
           <span className='small-med thin margin-bottom--5'>
-            {props.comment.authorName} - {props.comment.authorId}</span>
+            {
+              props.comment.authorName ?
+                `${props.comment.authorName} - ${props.comment.authorId}`
+              :
+                `${props.comment.authorId}`
+            }
+          </span>
           <span>{parseDateTime(props.comment.createdAt)}</span>
         </div>
       </div>
