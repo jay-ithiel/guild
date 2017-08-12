@@ -8,11 +8,14 @@ class CommentForm extends React.Component {
   constructor(props) {
     super(props);
 
+    let user = props.currentUser.profile;
+
     this.state = {
       id: null,
       body: '',
-      blogId: '',
-      authorId: '',
+      blogId: props.blog.id,
+      authorId: props.currentUser.username,
+      authorName: `${user.givenName} ${user.familyName}`,
       isActive: true
     };
   }

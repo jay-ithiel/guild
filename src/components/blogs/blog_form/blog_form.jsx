@@ -6,11 +6,7 @@ import ImageUploadButton from './image_upload_button';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import BlogBodyEditor from '../../editor/editor';
 import $ from 'jquery';
-
 import Blog from '../../../models/blog.js';
-window.Blog = Blog;
-window.convertToRaw = convertToRaw;
-window.convertFromRaw = convertFromRaw;
 
 class BlogForm extends React.Component {
   constructor(props) {
