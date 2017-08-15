@@ -29,6 +29,15 @@ class Blogs extends React.Component {
     this.requestBlogs();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.blogs) { this.requestBlogs(); }
+    if (this.state.isUserBlogs) {
+      this.setState({ blogs: nextProps.userBlogs });
+    } else {
+      this.setState({ blogs: nextProps.blogs });
+    }
+  }
+
   requestBlogs() {
     if (this.state.isUserBlogs) {
       this.props.requestUserBlogs(this.props.currentUser);
@@ -37,21 +46,12 @@ class Blogs extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.state.blogs) { this.requestBlogs(); }
-
-    if (this.state.isUserBlogs) {
-      this.setState({ blogs: nextProps.userBlogs });
-    } else {
-      this.setState({ blogs: nextProps.blogs });
-    }
-  }
-
   mapBlogLinks() {
     return Object.keys(this.state.blogs).reverse().map((blogId, index) => (
       <BlogLink key={index}
         blog={ this.state.blogs[blogId] }
-        isUserBlogs={ this.state.isUserBlogs }/>
+        isUserBlogs={ this.state.isUserBlogs }
+      />
     ));
   }
 
@@ -91,7 +91,8 @@ class Blogs extends React.Component {
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
   blogs: state.blogs.index,
-  userBlogs: state.blogs.userBlogs
+  userBlogs: state.blogs.userBlogs,
+  users: state.users.index
 });
 
 const mapDispatchToProps = dispatch => ({

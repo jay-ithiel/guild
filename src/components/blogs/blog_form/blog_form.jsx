@@ -129,6 +129,13 @@ class BlogForm extends React.Component {
 
     this.props.blogs[blog.id] = new Blog(blog);
     this.props.saveBlogs(this.props.blogs);
+
+    // check value of this.props.currentUser.authoredBlogs
+    debugger;
+    this.props.currentUser.authoredBlogs[blog.id] = this.props.blogs[blog.id];
+    debugger;
+    this.props.saveUsers(this.props.users);
+    // set currentUser.authoredBlogs[blog.id] = blog and dispatch saveUsers
   }
 
   handleSubmit(e) {

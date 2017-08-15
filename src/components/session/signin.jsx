@@ -2,13 +2,12 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { signin } from '../../actions/session_actions';
+import { createUser } from '../../actions/user_actions';
 import { isUserSignedIn } from 'blockstack';
 
 class SignIn extends React.Component {
   componentDidMount() {
-    if (isUserSignedIn()) {
-      this.props.history.push('/');
-    }
+    if (isUserSignedIn()) this.props.history.push('/');
   }
 
   render() {

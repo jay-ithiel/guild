@@ -32,8 +32,6 @@ export const fetchUsers = dispatch => {
       users[username] = userItems[username];
     });
 
-    debugger;
-
     dispatch(receiveUsers(users));
   });
 }

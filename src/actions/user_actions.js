@@ -27,6 +27,12 @@ export const receiveUser = user => ({
   user
 });
 
+export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
+export const receiveCurrentUser = currentUser => ({
+  type: RECEIVE_CURRENT_USER,
+  currentUser
+});
+
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const receiveUsers = users => ({
   type: RECEIVE_USERS,
