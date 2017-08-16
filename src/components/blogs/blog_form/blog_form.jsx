@@ -126,16 +126,15 @@ class BlogForm extends React.Component {
 
     blog.body = convertToRaw(blog.body.getCurrentContent());
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
-
-    this.props.blogs[blog.id] = new Blog(blog);
+    blog = new Blog(blog);
+    
+    // Add new Blog to blogs state and save Blogs
+    this.props.blogs[blog.id] = blog;
     this.props.saveBlogs(this.props.blogs);
 
-    // check value of this.props.currentUser.authoredBlogs
-    debugger;
-    this.props.currentUser.authoredBlogs[blog.id] = this.props.blogs[blog.id];
-    debugger;
+    // Add new Blog to currentUser's authoredBlogs and save Users
+    this.props.currentUser.authoredBlogs[blog.id] = blog;
     this.props.saveUsers(this.props.users);
-    // set currentUser.authoredBlogs[blog.id] = blog and dispatch saveUsers
   }
 
   handleSubmit(e) {

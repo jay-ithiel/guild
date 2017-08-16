@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Comment from '../../models/comment.js';
+
 import { saveBlogsComments } from '../../actions/blog_actions';
+import { saveUsers } from '../../actions/user_actions';
+
 import SubmitCommentButton from './submit_comment_button';
 
 class CommentForm extends React.Component {
@@ -15,7 +18,6 @@ class CommentForm extends React.Component {
       body: '',
       blogId: props.blog.id,
       authorId: props.currentUser.username,
-      authorName: `${user.givenName} ${user.familyName}`,
       isActive: true
     };
   }
@@ -32,8 +34,14 @@ class CommentForm extends React.Component {
     e.preventDefault();
     this.setState({ isActive: false })
     let comment = new Comment(this.state);
+
+    // Add new Comment to blogs state and save Comments
     this.props.blog.comments[comment.id] = comment;
     this.props.saveBlogsComments(this.props.blogs, this.props.blog.id);
+
+    // Add new Comment to currentUser's authoredComments and save Users
+    this.props.currentUser.authoredComments[comment.id] = comment;
+    this.props.saveUsers(this.props.users);
   }
 
   render() {
@@ -57,10 +65,12 @@ class CommentForm extends React.Component {
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
   blogs: state.blogs.index,
+  users: state.users.index,
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveBlogsComments: (blogs, blogId) => dispatch(saveBlogsComments(blogs, blogId))
+  saveBlogsComments: (blogs, blogId) => dispatch(saveBlogsComments(blogs, blogId)),
+  saveUsers: users => dispatch(saveUsers(users)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);

@@ -5,9 +5,7 @@ import {
   saveBlogs,
   requestBlogs
 } from '../../../actions/blog_actions';
-import {
-  saveUsers
-} from '../../../actions/user_actions';
+import { saveUsers } from '../../../actions/user_actions';
 
 const mapStateToProps = state => ({
   isUserSignedIn: blockstack.isUserSignedIn(),
@@ -24,7 +22,4 @@ const mapDispatchToProps = dispatch => ({
   saveUsers: users => dispatch(saveUsers(users))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BlogForm);
+export default connect( mapStateToProps, mapDispatchToProps)(BlogForm);
