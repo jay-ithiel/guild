@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import BlogLikes from '../../models/blogLikes.js';
 import { saveBlogsLikes } from '../../actions/blog_actions';
+import { saveUsers } from '../../actions/user_actions';
 import Heart from 'react-icons/lib/fa/heart';
 import HeartO from 'react-icons/lib/fa/heart-o';
 
@@ -35,12 +36,21 @@ class BlogLikesForm extends React.Component {
     const currentUser = this.props.currentUser;
     this.props.blog.likes[currentUser.username] = true;
     this.props.saveBlogLikes(this.props.blogs);
+
+    // Add new Like to currentUser's likedBlogs and save Users
+    this.props.currentUser.likedBlogs[this.props.blog.id] = true;
+    debugger;
+    this.props.saveUsers(this.props.users);
   }
 
   deleteLike() {
     const currentUser = this.props.currentUser;
     this.props.blog.likes[currentUser.username] = false;
     this.props.saveBlogLikes(this.props.blogs);
+
+    // Remove new Like to currentUser's likedBlogs and save Users
+    this.props.currentUser.likedBlogs[this.props.blog.id] = false;
+    this.props.saveUsers(this.props.users);
   }
 
   render() {
@@ -60,11 +70,13 @@ class BlogLikesForm extends React.Component {
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
-  blogs: state.blogs.index
+  blogs: state.blogs.index,
+  users: state.users.index,
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveBlogLikes: blogs => dispatch(saveBlogsLikes(blogs))
+  saveBlogLikes: blogs => dispatch(saveBlogsLikes(blogs)),
+  saveUsers: users => dispatch(saveUsers(users)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogLikesForm);

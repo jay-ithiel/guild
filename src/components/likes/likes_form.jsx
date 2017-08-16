@@ -13,8 +13,7 @@ class CommentLikesForm extends React.Component {
       id: null,
       userId: null,
       commentId:
-    }
-
+    };
   }
 }
 
