@@ -32,7 +32,6 @@ class App extends React.Component {
 
     if (isUserSignedIn() && Object.keys(nextProps.users).length > 0) {
       if (nextProps.users[user.username]) {
-        console.log('receiving currentUser');
         this.props.receiveCurrentUser(nextProps.users[user.username]);
       } else {
         debugger;

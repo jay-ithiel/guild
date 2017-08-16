@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
 import { deleteBlog } from '../../../actions/blog_actions';
+import { saveUsers } from '../../../actions/user_actions';
 
 import TrashSVG from 'react-icons/lib/fa/trash';
 import EditSVG from 'react-icons/lib/fa/edit';
@@ -36,6 +38,10 @@ class BlogLinkActions extends React.Component {
   handleDelete() {
     this.props.deleteBlog(this.props.blog.id);
     this.setState({ isDeleteButtonActive: false });
+
+    // Delete blog from currentUser's authoredBlogs
+    delete this.props.currentUser.authoredBlogs[this.props.blog.id];
+    this.props.saveUsers(this.props.users);
   }
 
   showModal() {
@@ -70,8 +76,14 @@ class BlogLinkActions extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  deleteBlog: id => dispatch(deleteBlog(id))
+const mapStateToProps = state => ({
+  currentUser: state.session.currentUser,
+  users: state.users.index
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(BlogLinkActions));
+const mapDispatchToProps = dispatch => ({
+  deleteBlog: id => dispatch(deleteBlog(id)),
+  saveUsers: users => dispatch(saveUsers(users))
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BlogLinkActions));

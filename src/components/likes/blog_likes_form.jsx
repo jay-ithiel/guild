@@ -39,7 +39,6 @@ class BlogLikesForm extends React.Component {
 
     // Add new Like to currentUser's likedBlogs and save Users
     this.props.currentUser.likedBlogs[this.props.blog.id] = true;
-    debugger;
     this.props.saveUsers(this.props.users);
   }
 

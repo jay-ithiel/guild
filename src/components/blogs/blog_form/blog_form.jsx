@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { isUserSignedIn } from 'blockstack';
+import { isUserSignedIn, loadUserData } from 'blockstack';
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
@@ -18,7 +18,7 @@ class BlogForm extends React.Component {
       blogIntro: '',
       body: EditorState.createEmpty(),
       imageUrl: '',
-      authorId: '',
+      authorId: loadUserData().username,
       authorImageUrl: '',
       updatedAt: '',
       isSubmitButtonActive: true,
@@ -77,13 +77,14 @@ class BlogForm extends React.Component {
     }
   }
 
-  handleMissingUserInfo() {
+  handleMissingUserInfo(author = this.props.currentUser) {
     // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
-    let author = this.props.currentUser;
+    // let author = this.props.currentUser;
+    // if (!author) { author = this.props.currentUser; }
     let avatarUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
 
     this.setState({ authorId: author.username });
-    
+
     if (author.profile.image) {
       this.setState({ authorImageUrl: author.profile.image[0].contentUrl });
     } else {
@@ -127,6 +128,8 @@ class BlogForm extends React.Component {
     blog.body = convertToRaw(blog.body.getCurrentContent());
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
     blog = new Blog(blog);
+
+    debugger;
 
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
