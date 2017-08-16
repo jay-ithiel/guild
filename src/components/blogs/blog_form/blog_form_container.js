@@ -9,7 +9,7 @@ import { saveUsers } from '../../../actions/user_actions';
 
 const mapStateToProps = state => ({
   isUserSignedIn: blockstack.isUserSignedIn(),
-  currentUser: state.session.currentUser,
+  currentUser: state.users.currentUser,
   blogs: state.blogs.index,
   blogErrors: state.blogs.errors,
   blogIndex: state.blogs.blogIndex,

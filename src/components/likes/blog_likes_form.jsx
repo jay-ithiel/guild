@@ -68,7 +68,7 @@ class BlogLikesForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser,
+  currentUser: state.users.currentUser,
   blogs: state.blogs.index,
   users: state.users.index,
 });

@@ -41,7 +41,7 @@ const Comment = props => {
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser
+  currentUser: state.users.currentUser
 });
 
 export default connect(mapStateToProps, null)(Comment);

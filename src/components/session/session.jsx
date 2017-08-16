@@ -15,14 +15,16 @@ class Session extends React.Component {
   }
 
   handleSignIn() {
-    let blockstackUserInfo = loadUserData();
-    if (this.props.users) {
-
-    }
+    // redirect user to blockstack signIn
+    // once signed in, check if user has an account on Guild
+    // if user has an account on Guild do nothing
+    // if user doesnt have an account on Guild, create a new account
   }
 
   handleSignUp() {
-
+    // redirect user to blockstack signIn
+    // once signed in, check if user has an account on Guild
+    // if user has an account on Guild
   }
 
   render() {
@@ -33,7 +35,7 @@ class Session extends React.Component {
         </button>
       </div>
     ) : (
-      <div id='signin' className='z-index--10 margin-top--10'>
+      <div id='signin' className='z-index--10'>
         <button id='session-btn' onClick={ this.handleSignUp.bind(this) } className='btn transparent-btn'>
           Sign Up With Blockstack
         </button>

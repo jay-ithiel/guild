@@ -36,7 +36,7 @@ const HamburgerDropdown = props => {
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser
+  currentUser: state.users.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({

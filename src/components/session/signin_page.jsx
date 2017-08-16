@@ -13,9 +13,13 @@ const SignInPage = () => (
     <span id='signin-guild-span' className='white z-index--10'>decentralized blogging</span>
 
     <SignIn/>
+
     {/*
-      <Session isSignIn={true}/>
-      <Session isSignIn={false}/>
+    <span id='session-question'>First time using Guild?</span>
+    <Session isSignIn={false}/>
+
+    <span id='session-question'>Already have a Guild account?</span>
+    <Session isSignIn={true}/>
     */}
   </section>
 );

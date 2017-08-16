@@ -23,28 +23,7 @@ window.loadUserData = loadUserData;
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.requestUsers();
     this.props.requestBlogs();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let user = loadUserData();
-
-    if (isUserSignedIn() && Object.keys(nextProps.users).length > 0) {
-      if (nextProps.users[user.username]) {
-        this.props.receiveCurrentUser(nextProps.users[user.username]);
-      } else {
-        debugger;
-        let newUser = {
-          username: user.username,
-          firstName: user.profile.givenName,
-          lastName: user.profile.familyName,
-          imageUrl: user.profile.image[0].contentUrl,
-          description: user.profile.description,
-        }
-        this.props.createUser(newUser, nextProps.users);
-      }
-    }
   }
 
   render() {
@@ -67,7 +46,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser,
+  currentUser: state.users.currentUser,
   users: state.users.index,
   blogs: state.blogs.index,
   blogIndex: state.blogs.blogIndex,

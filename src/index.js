@@ -3,24 +3,28 @@ import ReactDOM from 'react-dom';
 import Root from './components/Root';
 import registerServiceWorker from './util/registerServiceWorker';
 import configureStore from './store/store';
-import { receiveCurrentUser } from './actions/session_actions';
-import {
-  requestCurrentUser,
-  requestUsers
-} from './actions/user_actions';
 import {
   isSignInPending,
   isUserSignedIn,
   loadUserData,
   handlePendingSignIn
 } from 'blockstack';
+
+import { receiveCurrentUser } from './actions/session_actions';
+import { handleNewSession } from './util/user_api_util';
+import {
+  createUser,
+  requestCurrentUser,
+  requestUsers,
+  saveUsers,
+} from './actions/user_actions';
+
 import * as blockstack from 'blockstack';
 global.blockstack = blockstack;
 require('./env.js');
 
 const cloudinary = window.cloudinary; // eslint-disable-line
 global.cloudinary = cloudinary;
-
 
 document.addEventListener('DOMContentLoaded', event => {
   window.cloudinary_options = {
@@ -29,10 +33,10 @@ document.addEventListener('DOMContentLoaded', event => {
   };
 
   let store = configureStore();
-  // if (isUserSignedIn()) {
-  //   store.dispatch(receiveCurrentUser( loadUserData() ));
-  // } else if (isSignInPending()) {
-  if (isSignInPending()) {
+
+  if (isUserSignedIn()) {
+    handleNewSession(loadUserData(), store.dispatch);
+  } else if (isSignInPending()) {
     handlePendingSignIn().then(userData => {
       window.location = window.location.origin;
     });
@@ -42,6 +46,9 @@ document.addEventListener('DOMContentLoaded', event => {
   registerServiceWorker();
 
   // DEVELOP ONLY!! REMOVE BEFORE PRODUCTION
-  window.store = store;
-  window.blockstack = blockstack;
+  global.store = store;
+  global.blockstack = blockstack;
+  global.saveUsers = saveUsers;
+  global.requestUsers = requestUsers;
+  global.createUser = createUser;
 });
