@@ -9,29 +9,31 @@ const close = e => {
   $('#hamburger-dropdown-container').fadeOut();
 };
 
-const HamburgerDropdown = props => (
-  <div id='hamburger-dropdown-container'>
-    <span onClick={ close } className='modal no-desktop close-modal menu-modal'>x</span>
+const HamburgerDropdown = props => {
+  return !props.currentUser ? <div></div> : (
+    <div id='hamburger-dropdown-container'>
+      <span onClick={ close } className='modal no-desktop close-modal menu-modal'>x</span>
 
-    <ul id='hamburger-dropdown'>
-      <li onClick={ close }>
-        <Link className='full flex align-center' to={`/blogs/${props.currentUser.username}`}>
-          My Blogs
-        </Link>
-      </li>
-
-      {/*
+      <ul id='hamburger-dropdown'>
         <li onClick={ close }>
-          <Link className='full flex align-center' to={`/users/${props.currentUser.username}`}>
-            Profile
+          <Link className='full flex align-center' to={`/blogs/${props.currentUser.username}`}>
+            My Blogs
           </Link>
         </li>
-      */}
 
-      <li onClick={ props.signout }>Log Out</li>
-    </ul>
-  </div>
-);
+        {/*
+          <li onClick={ close }>
+            <Link className='full flex align-center' to={`/users/${props.currentUser.username}`}>
+              Profile
+            </Link>
+          </li>
+        */}
+
+        <li onClick={ props.signout }>Log Out</li>
+      </ul>
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser

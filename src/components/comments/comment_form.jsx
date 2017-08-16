@@ -18,7 +18,8 @@ class CommentForm extends React.Component {
       body: '',
       blogId: props.blog.id,
       authorId: props.currentUser.username,
-      isActive: true
+      isActive: true,
+      placeholder: 'Write a comment...'
     };
   }
 
@@ -32,6 +33,13 @@ class CommentForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    // Bare bones error handler
+    if (this.state.body.length === 0) {
+      this.setState({ placeholder: 'Your comment cannot be blank.' });
+      return;
+    }
+
     this.setState({ isActive: false })
     let comment = new Comment(this.state);
 
@@ -52,7 +60,7 @@ class CommentForm extends React.Component {
             id='comment-input'
             onChange={ this.handleChange('body') }
             value={ this.state.body }
-            placeholder='Write a comment...'
+            placeholder={this.state.placeholder}
           />
 
           <SubmitCommentButton actionType='Post' isActive={this.state.isActive}/>

@@ -11,8 +11,15 @@ export const createUser = (newUser, users) => ({
   users
 });
 
-export const REQUEST_USER = id => ({
+export const REQUEST_USER = 'REQUEST_USER';
+export const requestUser = id => ({
   type: REQUEST_USER,
+  id
+});
+
+export const REQUEST_CURRENT_USER = 'REQUEST_CURRENT_USER';
+export const requestCurrentUser = id => ({
+  type: REQUEST_CURRENT_USER,
   id
 });
 

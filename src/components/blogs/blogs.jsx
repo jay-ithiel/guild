@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { isUserSignedIn, isSignInPending } from 'blockstack';
+import { isUserSignedIn, isSignInPending, loadUserData } from 'blockstack';
 import { requestBlogs, requestUserBlogs } from '../../actions/blog_actions';
 
 import BlogLink from './blog_link/blog_link';
@@ -40,7 +40,7 @@ class Blogs extends React.Component {
 
   requestBlogs() {
     if (this.state.isUserBlogs) {
-      this.props.requestUserBlogs(this.props.currentUser);
+      this.props.requestUserBlogs(loadUserData());
     } else {
       this.props.requestBlogs();
     }

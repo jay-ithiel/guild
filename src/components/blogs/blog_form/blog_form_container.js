@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => ({
   saveUsers: users => dispatch(saveUsers(users))
 });
 
-export default connect( mapStateToProps, mapDispatchToProps)(BlogForm);
+export default connect(mapStateToProps, mapDispatchToProps)(BlogForm);

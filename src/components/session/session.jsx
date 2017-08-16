@@ -16,7 +16,6 @@ class Session extends React.Component {
 
   handleSignIn() {
     let blockstackUserInfo = loadUserData();
-    debugger;
     if (this.props.users) {
 
     }

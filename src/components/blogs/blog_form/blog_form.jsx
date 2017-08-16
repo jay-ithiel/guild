@@ -83,7 +83,7 @@ class BlogForm extends React.Component {
     let avatarUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
 
     this.setState({ authorId: author.username });
-
+    
     if (author.profile.image) {
       this.setState({ authorImageUrl: author.profile.image[0].contentUrl });
     } else {
@@ -127,7 +127,7 @@ class BlogForm extends React.Component {
     blog.body = convertToRaw(blog.body.getCurrentContent());
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
     blog = new Blog(blog);
-    
+
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
     this.props.saveBlogs(this.props.blogs);

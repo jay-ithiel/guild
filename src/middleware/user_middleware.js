@@ -1,13 +1,14 @@
 import {
   CREATE_USER,
   SAVE_USERS,
+  REQUEST_CURRENT_USER,
   REQUEST_USERS,
 } from '../actions/user_actions';
 
 import {
   createUser,
   saveUsers,
-  fetchUsers
+  fetchUsers,
 } from '../util/user_api_util';
 
 const UserMiddleware = ({ getState, dispatch }) => next => action => {

@@ -4,7 +4,10 @@ import Root from './components/Root';
 import registerServiceWorker from './util/registerServiceWorker';
 import configureStore from './store/store';
 import { receiveCurrentUser } from './actions/session_actions';
-import { requestUsers } from './actions/user_actions';
+import {
+  requestCurrentUser,
+  requestUsers
+} from './actions/user_actions';
 import {
   isSignInPending,
   isUserSignedIn,
@@ -26,10 +29,10 @@ document.addEventListener('DOMContentLoaded', event => {
   };
 
   let store = configureStore();
-  if (isUserSignedIn()) {
-    store.dispatch(receiveCurrentUser( loadUserData() ));
-  } else if (isSignInPending()) {
-  // if (isSignInPending()) {
+  // if (isUserSignedIn()) {
+  //   store.dispatch(receiveCurrentUser( loadUserData() ));
+  // } else if (isSignInPending()) {
+  if (isSignInPending()) {
     handlePendingSignIn().then(userData => {
       window.location = window.location.origin;
     });
