@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import { parseDateTime, characterLimit } from '../../../util/helper_methods.js';
 
 import BlogLinkActions from './blog_link_actions';
-import AboutBlog from './about_blog';
+import AboutBlogAuthor from './about_blog_author';
 import BlogLikesForm from '../../likes/blog_likes_form';
 
 const BlogLink = ({ blog, isUserBlogs, currentUser }) => {
   return !currentUser ? <div></div> : (
     <section id='blog-link' className='position-relative' >
       <Link className='blog-link-info position-relative' to={`/blogs/show/${blog.id}`}>
-        <AboutBlog
+        <AboutBlogAuthor
           authorId={ blog.authorId }
           authorImageUrl={ blog.authorImageUrl }
           date={ parseDateTime(blog.updatedAt) }
