@@ -10,8 +10,7 @@ import {
   handlePendingSignIn
 } from 'blockstack';
 
-import { receiveCurrentUser } from './actions/session_actions';
-import { handleNewSession } from './util/user_api_util';
+import { createSessionOrUser } from './util/user_api_util';
 import {
   createUser,
   requestCurrentUser,
@@ -35,7 +34,7 @@ document.addEventListener('DOMContentLoaded', event => {
   let store = configureStore();
 
   if (isUserSignedIn()) {
-    handleNewSession(loadUserData(), store.dispatch);
+    createSessionOrUser(loadUserData(), store.dispatch);
   } else if (isSignInPending()) {
     handlePendingSignIn().then(userData => {
       window.location = window.location.origin;
@@ -51,4 +50,5 @@ document.addEventListener('DOMContentLoaded', event => {
   global.saveUsers = saveUsers;
   global.requestUsers = requestUsers;
   global.createUser = createUser;
+  global.createSessionOrUser = createSessionOrUser;
 });

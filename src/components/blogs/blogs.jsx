@@ -30,7 +30,8 @@ class Blogs extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.blogs) { this.requestBlogs(); }
+    if (!this.state.blogs) this.requestBlogs();
+
     if (this.state.isUserBlogs) {
       this.setState({ blogs: nextProps.userBlogs });
     } else {
@@ -48,7 +49,8 @@ class Blogs extends React.Component {
 
   mapBlogLinks() {
     return Object.keys(this.state.blogs).reverse().map((blogId, index) => (
-      <BlogLink key={index}
+      <BlogLink
+        key={index}
         blog={ this.state.blogs[blogId] }
         isUserBlogs={ this.state.isUserBlogs }
       />

@@ -12,14 +12,6 @@ import Blog from './blogs/blog';
 import Blogs from './blogs/blogs';
 
 import { requestBlogs } from '../actions/blog_actions';
-import {
-  createUser,
-  receiveCurrentUser,
-  requestUsers
-} from '../actions/user_actions';
-
-window.isUserSignedIn = isUserSignedIn;
-window.loadUserData = loadUserData;
 
 class App extends React.Component {
   componentDidMount() {
@@ -45,21 +37,11 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  currentUser: state.users.currentUser,
-  users: state.users.index,
-  blogs: state.blogs.index,
-  blogIndex: state.blogs.blogIndex,
-});
-
 const mapDispatchToProps = dispatch => ({
   requestBlogs: () => dispatch(requestBlogs()),
-  requestUsers: () => dispatch(requestUsers()),
-  receiveCurrentUser: currentUser => dispatch(receiveCurrentUser(currentUser)),
-  createUser: (newUser, users) => dispatch(createUser(newUser, users)),
 });
 
 export default withRouter(connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App));

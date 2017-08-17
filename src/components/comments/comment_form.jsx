@@ -24,7 +24,7 @@ class CommentForm extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ id: Object.keys(this.props.blog.comments).length+1 });
+    this.setState({ id: Object.keys(this.props.blog.comments).length + 1 });
   }
 
   handleChange(field) {
