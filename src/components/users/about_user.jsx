@@ -1,20 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// About User is not rendering correctly. Refactor
-
-const AboutUser = props => {
-  let currentUser = props.currentUser.profile ? props.currentUser.profile : props.currentUser;
-  const user = props.isAboutCurrentUser ? {
-    name: `${currentUser.givenName} ${currentUser.familyName}`,
-    imageUrl: currentUser.image ? currentUser.image[0].contentUrl : '',
-    description: currentUser.description
-  } : {
-    name: props.authorName,
-    imageUrl: props.authorImageUrl,
-    description: currentUser.description
-  };
-
+const AboutUser = ({ user }) => {
   return !user ? <div></div> : (
     <div id='about-user' className='flex'>
       <div>
@@ -25,13 +12,9 @@ const AboutUser = props => {
 
       <div>
         <h4 id='about-user-name'>
-          {/*
-            { currentUser.givenName } { currentUser.familyName }
-          */}
-          { user.name }
+          { user.username }
         </h4>
         <p id='about-user-bio'>
-          {/* props.currentUser.profile.description */}
           { user.description }
         </p>
       </div>
@@ -39,8 +22,4 @@ const AboutUser = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  currentUser: state.users.currentUser
-});
-
-export default connect(mapStateToProps, null)(AboutUser);
+export default AboutUser;

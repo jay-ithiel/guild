@@ -19,16 +19,19 @@ class AboutUsers extends React.Component {
   mapAboutUserLinks() {
     return Object.keys(this.state.users).map(username => (
       <AboutUser
-        currentUser={this.state.users[username]}
-        isAboutCurrentUser={false}
+        user={this.state.users[username]}
       />
     ));
   }
 
   render() {
+    debugger;
+    let aboutUserLinks = this.mapAboutUserLinks.bind(this)();
+    debugger;
     return (
       <div>
         About Users
+        { aboutUserLinks }
       </div>
     );
   }
