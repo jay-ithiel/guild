@@ -48,14 +48,16 @@ class Blog extends React.Component {
           }
 
           <div id='blog-body' className='blog-show-section'>
-            <BodyDisplay readOnly={true}
+            <BodyDisplay
+              readOnly={true}
               editorState={ EditorState.createWithContent(convertFromRaw(blog.body)) }
               updateEditorState={ () => null }
             />
 
             {
               !blog.likes ? <div></div> : (
-                <BlogLikesForm blog={blog}
+                <BlogLikesForm
+                  blog={blog}
                   doesUserLikeBlog={blog.likes[this.props.currentUser.username] ? true : false}
                 />
               )

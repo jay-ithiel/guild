@@ -13,7 +13,6 @@ import {
 import { createSessionOrUser } from './util/user_api_util';
 import {
   createUser,
-  requestCurrentUser,
   requestUsers,
   saveUsers,
 } from './actions/user_actions';

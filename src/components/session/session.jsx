@@ -3,13 +3,9 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { signin } from '../../actions/session_actions';
 import { createUser } from '../../actions/user_actions';
-import { isUserSignedIn, loadUserData } from 'blockstack';
+import { isUserSignedIn } from 'blockstack';
 
 class Session extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     if (isUserSignedIn()) this.props.history.push('/');
   }

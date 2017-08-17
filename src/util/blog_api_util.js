@@ -6,7 +6,6 @@ import {
 } from '../actions/blog_actions';
 
 var STORAGE_FILE = 'blogs.json';
-var BLOG_INDEX = 1;
 
 export const saveBlogs = (blogs, dispatch) => {
   putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+// About User is not rendering correctly. Refactor
+
 const AboutUser = props => {
   let currentUser = props.currentUser.profile ? props.currentUser.profile : props.currentUser;
   const user = props.isAboutCurrentUser ? {

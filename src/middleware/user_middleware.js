@@ -1,7 +1,6 @@
 import {
   CREATE_USER,
   SAVE_USERS,
-  REQUEST_CURRENT_USER,
   REQUEST_USERS,
 } from '../actions/user_actions';
 

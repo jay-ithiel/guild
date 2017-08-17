@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { signin } from '../../actions/session_actions';
-import { createUser } from '../../actions/user_actions';
 import { isUserSignedIn } from 'blockstack';
 
 class SignIn extends React.Component {
