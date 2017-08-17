@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import FollowInfo from './follow_info';
+
 import { saveUsers } from '../../actions/user_actions';
 
 class FollowUserForm extends React.Component {
@@ -25,8 +27,11 @@ class FollowUserForm extends React.Component {
   }
 
   render() {
+    const { currentUser, user } = this.props;
+
     return (
       <section id='likes-form-container'>
+        <FollowInfo user={user}/>
         {
           this.state.isCurrentUserFollowing ? (
             <button id='follow-btn' className='btn following--true' onClick={this._toggleFollow}>
