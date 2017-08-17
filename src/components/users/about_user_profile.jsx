@@ -10,13 +10,13 @@ const AboutUserProfile = props => {
   return !user ? <div></div> : (
     <section id='about-user-profile'>
       <div id='about-user-profile-info'>
-        <div className='flex-row'>
+        <div className='flex-row flex-between'>
           <div>
-            <h4>{user.firstName} {user.lastName}</h4>
-            <p>{user.description}</p>
+            <h4 className='title'>{user.firstName} {user.lastName}</h4>
+            <p className='regular grey margin-top--5'>{user.description}</p>
           </div>
 
-          <div id='about-user-img'
+          <div id='about-user-profile-img' className='img-large'
             style={{ backgroundImage: `url(${user.imageUrl})` }}>
           </div>
         </div>

@@ -9,7 +9,8 @@
   margin-bottom: 10px;
 
   background-color: #fff;
-  box-shadow: 0 4px 2px -2px #ccc;
+  box-shadow: 0 4px 4px -4px #ccc;
+
 }
 
 #about-user-profile-info {
@@ -20,4 +21,19 @@
 
   margin: 0 auto;
   padding: 25px 20px;
+}
+
+#about-user-profile-img {
+  min-height: 100px;
+  min-width: 100px;
+  height: 100px;
+  width: 100px;
+
+  margin-right: 15px;
+  border-radius: 50%;
+
+  background-color: #eee;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
