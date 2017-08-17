@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// import { Link } from 'react-router-dom';
 
 import FollowUserForm from '../likes/follow_user_form';
 
@@ -11,19 +12,21 @@ const AboutUser = props => {
 
   return !user ? <div></div> : (
     <div id='blog-link' className='position-relative'>
-      <div>
-        <div id='about-user-img'
-          style={{ backgroundImage: `url(${user.imageUrl})` }}>
+      <div className='flex'>
+        <div>
+          <div id='about-user-img'
+            style={{ backgroundImage: `url(${user.imageUrl})` }}>
+          </div>
         </div>
-      </div>
 
-      <div>
-        <h4 id='about-user-name'>
-          { user.username }
-        </h4>
-        <p id='about-user-bio'>
-          { user.description }
-        </p>
+        <div>
+          <h4 id='about-user-name'>
+            {user.firstName} {user.lastName} - <span className='small'>{user.username}</span>
+          </h4>
+          <p id='about-user-bio'>
+            { user.description }
+          </p>
+        </div>
       </div>
 
       {

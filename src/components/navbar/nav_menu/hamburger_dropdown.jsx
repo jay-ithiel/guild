@@ -21,19 +21,17 @@ const HamburgerDropdown = props => {
           </Link>
         </li>
 
+        <li onClick={ close }>
+          <Link className='full flex align-center' to={`/users/${props.currentUser.username}`}>
+            Profile
+          </Link>
+        </li>
+
         <li onClick={close}>
           <Link className='full flex align-center' to={`/users`}>
             Community
           </Link>
         </li>
-
-        {/*
-          <li onClick={ close }>
-            <Link className='full flex align-center' to={`/users/${props.currentUser.username}`}>
-              Profile
-            </Link>
-          </li>
-        */}
 
         <li onClick={ props.signout }>Log Out</li>
       </ul>

@@ -30,7 +30,7 @@ class FollowUserForm extends React.Component {
         {
           this.state.isCurrentUserFollowing ? (
             <button id='follow-btn' className='btn following--true' onClick={this._toggleFollow}>
-              <span>Unfollow</span>
+              <span>Following</span>
             </button>
           ) : (
             <button id='follow-btn' className='btn following--false' onClick={this._toggleFollow}>

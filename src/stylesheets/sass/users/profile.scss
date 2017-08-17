@@ -1,3 +1,23 @@
 #profile {
-    
+  background-color: #fcfcfc;
+}
+
+#about-user-profile {
+  height: auto;
+  width: 100vw;
+
+  margin-bottom: 10px;
+
+  background-color: #fff;
+  box-shadow: 0 4px 2px -2px #ccc;
+}
+
+#about-user-profile-info {
+  height: auto;
+  min-height: 218px;
+  width: 100%;
+  max-width: 640px;
+
+  margin: 0 auto;
+  padding: 25px 20px;
 }

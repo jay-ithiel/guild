@@ -16,7 +16,8 @@ class Blogs extends React.Component {
 
     this.state = {
       blogs: null,
-      isUserBlogs: props.history.location.pathname === '/' ? false : true
+      isUserBlogs: props.history.location.pathname === '/' ? false : true,
+      isProfileBlogs: props.isProfileBlogs,
     };
 
     this.mapBlogLinks = this.mapBlogLinks.bind(this);
@@ -34,6 +35,8 @@ class Blogs extends React.Component {
 
     if (this.state.isUserBlogs) {
       this.setState({ blogs: nextProps.userBlogs });
+    } else if (this.state.isProfileBlogs) {
+      this.setState({ blogs: this.props.user.auhoredBlogs });
     } else {
       this.setState({ blogs: nextProps.blogs });
     }
