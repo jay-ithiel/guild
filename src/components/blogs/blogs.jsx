@@ -28,16 +28,22 @@ class Blogs extends React.Component {
     // If there is no currentUser, user hasn't logged in yet so don't fetch blogs
     if (!this.props.currentUser) { return; }
     this.requestBlogs();
+
+    if (this.state.isProfileBlogs) {
+      this.setState({ blogs: this.props.user.authoredBlogs });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (!this.state.blogs) this.requestBlogs();
 
-    if (this.state.isUserBlogs) {
+    if (this.state.isProfileBlogs) {
+      this.setState({ blogs: this.props.user.authoredBlogs });
+    }
+    else if (this.state.isUserBlogs) {
       this.setState({ blogs: nextProps.userBlogs });
-    } else if (this.state.isProfileBlogs) {
-      this.setState({ blogs: this.props.user.auhoredBlogs });
-    } else {
+    }
+    else {
       this.setState({ blogs: nextProps.blogs });
     }
   }
@@ -73,7 +79,11 @@ class Blogs extends React.Component {
     return blogLinks.length === 0 ? (
       <ul id='blogs' className='border-box-sizing'>
         {
-          this.state.isUserBlogs ? (
+          this.state.isProfileBlogs ? (
+            <h4 className='blogs-section-head'>
+              { `${this.props.user.firstName} hasn't written any blogs yet.` }
+            </h4>
+          ) : this.state.isUserBlogs ? (
             <h4 className='blogs-section-head'>
               { `You haven't written any blogs yet.` } <a className='primary-green underline-hover' href='/blogs/new'>Write a story!</a>
             </h4>
