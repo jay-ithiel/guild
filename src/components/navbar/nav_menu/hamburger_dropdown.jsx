@@ -12,15 +12,21 @@ const close = e => {
 const HamburgerDropdown = props => {
   return !props.currentUser ? <div></div> : (
     <div id='hamburger-dropdown-container'>
-      <span onClick={ close } className='modal no-desktop close-modal menu-modal'>x</span>
+      <span onClick={close} className='modal no-desktop close-modal menu-modal'>x</span>
 
       <ul id='hamburger-dropdown'>
-        <li onClick={ close }>
+        <li onClick={close}>
           <Link className='full flex align-center' to={`/blogs/${props.currentUser.username}`}>
             My Blogs
           </Link>
         </li>
 
+        <li onClick={close}>
+          <Link className='full flex align-center' to={`/users`}>
+            Community
+          </Link>
+        </li>
+        
         {/*
           <li onClick={ close }>
             <Link className='full flex align-center' to={`/users/${props.currentUser.username}`}>
