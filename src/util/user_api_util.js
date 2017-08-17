@@ -35,7 +35,7 @@ export const createUser = ({ userData, users, dispatch }) => {
 
 export const saveUsers = (users, dispatch) => {
   putFile(STORAGE_FILE, JSON.stringify(users)).then(isSaveSuccessful => {
-    // handle success
+    fetchUsers(dispatch);
   });
 };
 

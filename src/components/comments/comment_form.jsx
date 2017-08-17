@@ -47,9 +47,12 @@ class CommentForm extends React.Component {
     this.props.blog.comments[comment.id] = comment;
     this.props.saveBlogsComments(this.props.blogs, this.props.blog.id);
 
+
+    // TODO Update Blog author's `authoredBlogs` state before dispatching saveUsers
     // Add new Comment to currentUser's authoredComments and save Users
     this.props.currentUser.authoredComments[comment.id] = comment;
     this.props.saveUsers(this.props.users);
+
   }
 
   render() {

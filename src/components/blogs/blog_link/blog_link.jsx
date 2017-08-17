@@ -46,7 +46,8 @@ const BlogLink = ({ blog, isUserBlogs, currentUser }) => {
 
       {
         !blog.likes ? <div></div> : (
-          <BlogLikesForm blog={blog}
+          <BlogLikesForm
+            blog={blog}
             doesUserLikeBlog={blog.likes[currentUser.username] ? true : false}
           />
         )

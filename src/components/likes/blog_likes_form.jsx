@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import BlogLikes from '../../models/blogLikes.js';
-import { saveBlogsLikes } from '../../actions/blog_actions';
-import { saveUsers } from '../../actions/user_actions';
 import Heart from 'react-icons/lib/fa/heart';
 import HeartO from 'react-icons/lib/fa/heart-o';
+
+import { saveBlogsLikes } from '../../actions/blog_actions';
+import { saveUsers } from '../../actions/user_actions';
+
 
 class BlogLikesForm extends React.Component {
   constructor(props) {

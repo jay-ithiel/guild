@@ -16,7 +16,6 @@ class AboutUsers extends React.Component {
   }
 
   componentDidMount() {
-    debugger;
     this.props.requestUsers();
   }
 
@@ -26,7 +25,7 @@ class AboutUsers extends React.Component {
 
   mapAboutUserLinks() {
     return Object.keys(this.state.users).map(username => (
-      <li id='about-user-link' className='with-container'>
+      <li className='list-style-type--none'>
         <AboutUser user={this.state.users[username]}/>
       </li>
     ));
@@ -36,7 +35,7 @@ class AboutUsers extends React.Component {
     let aboutUserLinks = this.mapAboutUserLinks.bind(this)();
 
     return (
-      <div>
+      <div id='blogs' className='border-box-sizing'>
         { aboutUserLinks }
       </div>
     );

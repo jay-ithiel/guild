@@ -110,9 +110,7 @@ class BlogForm extends React.Component {
     }
 
     if (!this.state.body.getCurrentContent) {
-      debugger;
       this.state.body = convertFromRaw(this.state.body);
-      debugger;
     }
     if (!this.state.body.getCurrentContent().hasText()) {
       hasErrors = true;
@@ -131,20 +129,11 @@ class BlogForm extends React.Component {
     this.setState({ isSubmitButtonActive: false });
 
     // If blog.body.getCurrentContent does not exist, blog.body is converted from raw state to EditorState
-    debugger;
-
-    if (!blog.body.getCurrentContent) {
-      debugger;
-      blog.body = convertFromRaw(blog.body);
-      debugger;
-    }
-
+    if (!blog.body.getCurrentContent) blog.body = convertFromRaw(blog.body);
     blog.body = convertToRaw(blog.body.getCurrentContent());
-    // blog.body = convertToRaw(blog.body);
+
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
     blog = new Blog(blog);
-
-    debugger;
 
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
