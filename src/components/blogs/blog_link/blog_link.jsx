@@ -7,6 +7,7 @@ import { parseDateTime, characterLimit } from '../../../util/helper_methods.js';
 import BlogLinkActions from './blog_link_actions';
 import AboutBlogAuthor from './about_blog_author';
 import BlogLikesForm from '../../likes/blog_likes_form';
+import BlogBookmarkForm from '../bookmarks/blog_bookmark_form';
 
 const BlogLink = ({ blog, isUserBlogs, currentUser }) => {
   return !currentUser ? <div></div> : (
@@ -52,6 +53,8 @@ const BlogLink = ({ blog, isUserBlogs, currentUser }) => {
           />
         )
       }
+
+      <BlogBookmarkForm blog={blog}/>
     </section>
   );
 };

@@ -45,7 +45,11 @@
 #blog-link-actions {
   width: 75px;
   padding-right: 10px;
-  float: right;
+  // float: right;
+
+  position: absolute;
+  bottom: 25px;
+  right: 6px;
 
   display: flex;
   justify-content: space-between;

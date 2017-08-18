@@ -16,6 +16,7 @@ import {
   requestUsers,
   saveUsers,
 } from './actions/user_actions';
+import { saveBlogs } from './actions/blog_actions';
 
 import * as blockstack from 'blockstack';
 global.blockstack = blockstack;
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', event => {
   global.store = store;
   global.blockstack = blockstack;
   global.saveUsers = saveUsers;
+  global.saveBlogs = saveBlogs;
   global.requestUsers = requestUsers;
   global.createUser = createUser;
   global.createSessionOrUser = createSessionOrUser;

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { isUserSignedIn, isSignInPending, loadUserData } from 'blockstack';
 import { requestBlogs, requestUserBlogs } from '../../actions/blog_actions';
 
+import Feed from '../feed/feed';
 import BlogLink from './blog_link/blog_link';
 import SignInPage from '../session/signin_page';
 import LoadingScreen from '../home/loading_screen';
@@ -96,6 +97,7 @@ class Blogs extends React.Component {
       </ul>
     ) : (
       <ul id='blogs' className='border-box-sizing'>
+        <Feed/>
         <h4 className='blogs-section-head'>{ blogsHead }</h4>
         { blogLinks }
       </ul>

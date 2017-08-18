@@ -10,8 +10,10 @@ class BlogBookmarkForm extends React.Component {
   constructor(props) {
     super(props);
 
+    const { currentUser, blog } = this.props;
+    
     this.state = {
-      didUserBookmarkBlog: false
+      didUserBookmarkBlog: currentUser.bookmarkedBlogs[blog.id] ? true : false
     };
 
     this._toggleBookmark = this._toggleBookmark.bind(this);
@@ -21,14 +23,10 @@ class BlogBookmarkForm extends React.Component {
     const { currentUser, blog } = this.props;
     let toggledBookmarkValue = !this.state.didUserBookmarkBlog;
 
-    // debugger;
-
-    // currentUser.bookmarkedBlogs[blog.id] = toggledBookmarkValue;
+    currentUser.bookmarkedBlogs[blog.id] = toggledBookmarkValue;
     this.setState({ didUserBookmarkBlog: toggledBookmarkValue });
 
-    // debugger;
-
-    // this.props.saveUsers(this.props.users);
+    this.props.saveUsers(this.props.users);
   }
 
   render() {
