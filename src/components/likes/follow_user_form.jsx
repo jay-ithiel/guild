@@ -19,9 +19,9 @@ class FollowUserForm extends React.Component {
   _toggleFollow() {
     const { currentUser, user } = this.props;
 
-    this.setState({ isCurrentUserFollowing: !this.state.isCurrentUserFollowing });
     user.followers[currentUser.username] = !this.state.isCurrentUserFollowing;
     currentUser.following[user.username] = !this.state.isCurrentUserFollowing;
+    this.setState({ isCurrentUserFollowing: !this.state.isCurrentUserFollowing });
 
     this.props.saveUsers(this.props.users);
   }

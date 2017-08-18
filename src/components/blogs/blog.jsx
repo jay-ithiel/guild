@@ -5,6 +5,7 @@ import AboutUser from '../users/about_user';
 import BodyDisplay from '../editor/editor';
 import { convertFromRaw, EditorState } from 'draft-js';
 import BlogLikesForm from '../likes/blog_likes_form';
+import BlogBookmarkForm from './bookmarks/blog_bookmark_form';
 import CommentForm from '../comments/comment_form';
 import Comments from '../comments/comments';
 
@@ -70,13 +71,13 @@ class Blog extends React.Component {
                 />
               )
             }
+
+            <BlogBookmarkForm blog={blog}/>
           </div>
 
           <div className='blog-show-section'>
 
-            <AboutUser
-              user={author}
-            />
+            <AboutUser user={author}/>
 
             {/*
             <AboutUser

@@ -13,7 +13,10 @@ class Feed extends React.Component {
       <section id='feed'>
         <h4 id='feed-category'>
           <p id='feed-category-title'>Feed Category</p>
-          <span className='small skinny letter-space-1 margin-left--10'>POPULAR</span>
+          {/*
+            <span className='small skinny letter-space-1 margin-left--10'>POPULAR</span>
+          */}
+          <span className='small skinny letter-space-1 margin-left--10'>THIS IS A STATIC FEED</span>
         </h4>
         <div id='feed-blogs'>
           <FeedBlog/>

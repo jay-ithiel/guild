@@ -17,6 +17,8 @@ class User {
     this.authoredBlogs = {};
     this.likedBlogs = {};
 
+    this.bookmarkedBlogs = {};
+
     this.authoredComments = {};
     this.likedComments = {};
 
