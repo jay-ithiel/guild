@@ -22,6 +22,6 @@ const UserReducer = (oldState = _defaultState, action) => {
     default:
       return oldState;
   }
-}
+};
 
 export default UserReducer;

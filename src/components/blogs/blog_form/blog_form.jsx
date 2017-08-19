@@ -6,8 +6,9 @@ import { isUserSignedIn, loadUserData } from 'blockstack';
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
 import BlogBodyEditor from '../../editor/editor';
-import Blog from '../../../models/blog.js';
+import TagForm from '../../tags/tag_form';
 
+import Blog from '../../../models/blog.js';
 import $ from 'jquery';
 import {
   EditorState,
@@ -234,6 +235,8 @@ class BlogForm extends React.Component {
           </label>
 
           <div className='add-img-btn-box'>{ imageSection }</div>
+
+          <TagForm blogid={ this.state.id }/>
 
           <SubmitBlogButton
             actionType={ this.actionType }

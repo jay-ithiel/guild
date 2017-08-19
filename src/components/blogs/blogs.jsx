@@ -76,7 +76,7 @@ class Blogs extends React.Component {
 
     let blogLinks = this.mapBlogLinks();
     let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
-
+    
     return blogLinks.length === 0 ? (
       <ul id='blogs' className='border-box-sizing'>
         {
@@ -97,7 +97,7 @@ class Blogs extends React.Component {
       </ul>
     ) : (
       <ul id='blogs' className='border-box-sizing'>
-        <Feed/>
+        { this.state.isUserBlogs || this.state.isProfileBlogs ? <div></div> : <Feed/> }
         <h4 className='blogs-section-head'>{ blogsHead }</h4>
         { blogLinks }
       </ul>

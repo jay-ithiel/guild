@@ -9,20 +9,14 @@ export const requestTags = () => ({
   type: REQUEST_TAGS
 });
 
-export const DELETE_TAG = 'DELETE_TAG';
-export const deleteTag = id => ({
-  type: DELETE_TAG,
-  id
-});
-
-export const REMOVE_TAG = 'REMOVE_TAG';
-export const removeTag = id => ({
-  type: REMOVE_TAG,
-  id
-});
-
 export const RECEIVE_TAGS = 'RECEIVE_TAGS';
 export const receiveTags = tags => ({
   type: RECEIVE_TAGS,
   tags
+});
+
+export const RECEIVE_TAG_ERRORS = 'RECEIVE_TAG_ERRORS';
+export const receiveTagErrors = errors => ({
+  type: RECEIVE_TAG_ERRORS,
+  errors
 });

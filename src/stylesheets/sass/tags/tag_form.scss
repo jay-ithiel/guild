@@ -1,0 +1,30 @@
+#tag-form {
+  height: 100px;
+  width: 100%;
+  background-color: lightgreen;
+}
+
+#add-tag-input {
+  outline: none;
+  border: none;
+}
+
+#tags-ul {
+  height: 50px;
+  width: 100%;
+  background-color: lightgrey;
+}
+
+#tag {
+  height: 50px;
+  min-width: 80px;
+  width: auto;
+
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+#tag-name {
+  color: #777;
+  font-size: 17px;
+}
