@@ -33,6 +33,7 @@ class BlogForm extends React.Component {
       authorId: loadUserData().username,
       authorImageUrl: '',
       updatedAt: '',
+      tags: {},
       isSubmitButtonActive: true,
     };
 
@@ -84,6 +85,11 @@ class BlogForm extends React.Component {
 
   addImage(imageUrl) {
     this.setState({ imageUrl: imageUrl });
+  }
+
+  setTags(tags) {
+    debugger;
+    this.setState({ tags: tags });
   }
 
   handleChange(field) {
@@ -201,22 +207,6 @@ class BlogForm extends React.Component {
             />
           </label>
 
-          <label id='blog-body-label'
-            className='blog-form-label position-relative'
-            onClick={ this.toggleActiveLabel('body') }>
-
-            <h7 className='hidden-label' id='hidden-label-body'>Body</h7>
-
-            <span id='blog-body-error' className='error-message'>
-              Blog body cannot be blank
-            </span>
-
-            <BlogBodyEditor
-              editorState={ this.state.body }
-              updateEditorState={ this.updateEditorState }
-            />
-          </label>
-
           <label id='blog-intro-label'
             className='blog-form-label position-relative'
             onClick={ this.toggleActiveLabel('intro') }>
@@ -234,9 +224,25 @@ class BlogForm extends React.Component {
             />
           </label>
 
+          <label id='blog-body-label'
+            className='blog-form-label position-relative'
+            onClick={ this.toggleActiveLabel('body') }>
+
+            <h7 className='hidden-label' id='hidden-label-body'>Body</h7>
+
+            <span id='blog-body-error' className='error-message'>
+              Blog body cannot be blank
+            </span>
+
+            <BlogBodyEditor
+              editorState={ this.state.body }
+              updateEditorState={ this.updateEditorState }
+            />
+          </label>
+
           <div className='add-img-btn-box'>{ imageSection }</div>
 
-          <TagForm blogid={ this.state.id }/>
+          <TagForm blogid={ this.state.id } setTags={ this.setTags.bind(this) }/>
 
           <SubmitBlogButton
             actionType={ this.actionType }

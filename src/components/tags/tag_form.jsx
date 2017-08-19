@@ -19,7 +19,7 @@ class TagForm extends React.Component {
 
     this.state = {
       newTagName: '',
-      blogTags: [],
+      blogTags: {},
       tags: null,
       blogs: null,
     };
@@ -37,6 +37,14 @@ class TagForm extends React.Component {
     debugger;
   }
 
+  removeTag(tagName) {
+    return e => {
+      let blogTags = this.state.blogTags;
+      delete blogTags[tagName];
+      this.setState({ blogTags: blogTags });
+    };
+  }
+
   handleChange(field) {
     return e => this.setState({ [field]: e.target.value });
   }
@@ -45,33 +53,33 @@ class TagForm extends React.Component {
     e.preventDefault();
     e.stopPropagation();
 
+    let blogTags = this.state.blogTags;
+    blogTags[this.state.newTagName] = true;
+
     this.setState({
-      blogTags: [this.state.blogTags + [this.state.newTagName]],
+      blogTags: blogTags,
       newTagName: '',
     });
+
+    debugger;
+    this.props.setTags(blogTags);
   }
 
   mapBlogTags() {
-    debugger;
-    return this.state.blogTags.map((tagName, key) => (
-      <Tag key={key} tagName={tagName}/>
+    return Object.keys(this.state.blogTags).map((tagName, key) => (
+      <Tag key={key} tagName={tagName} removeTag={this.removeTag.bind(this)}/>
     ));
   }
 
   render() {
-    let blogTagLis = [];
-    if (this.state.blogTags.length > 0) {
-      blogTagLis = this.mapBlogTags.bind(this)();
-    }
-
-    debugger;
+    let blogTagLis = this.mapBlogTags.bind(this)();
 
     return (
       <section id='tag-form'>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          {/*
-            <ul id='tags-ul'>{ blogTagLis }</ul>
-          */}
+        <form className='flex' onSubmit={this.handleSubmit.bind(this)}>
+          <ul id='tags-ul'>
+            { blogTagLis }
+          </ul>
 
           <input
             type='text'
