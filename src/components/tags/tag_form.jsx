@@ -27,14 +27,8 @@ class TagForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    // debugger;
-    // this.props.requestTags();
-    // this.props.requestBlogs();
-  }
-
   componentWillReceiveProps(nextProps) {
-    debugger;
+    this.setState({ blogTags: nextProps.blogTags });
   }
 
   removeTag(tagName) {
@@ -61,7 +55,6 @@ class TagForm extends React.Component {
       newTagName: '',
     });
 
-    debugger;
     this.props.setTags(blogTags);
   }
 

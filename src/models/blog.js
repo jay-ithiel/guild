@@ -8,6 +8,7 @@ class Blog {
     authorId,
     authorImageUrl,
     updatedAt,
+    tags,
   }){
     this.id = id;
     this.title = title;
@@ -22,8 +23,8 @@ class Blog {
 
     this.comments = {};
     this.likes = {};
-    this.tags = {};
+    this.tags = tags;
   }
 }
 
-export default Blog
+export default Blog;

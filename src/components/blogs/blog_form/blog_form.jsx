@@ -72,7 +72,8 @@ class BlogForm extends React.Component {
         imageUrl: blogToEdit.imageUrl,
         authorId: blogToEdit.authorId,
         authorImageUrl: blogToEdit.authorImageUrl,
-        updatedAt: blogToEdit.updatedAt
+        updatedAt: blogToEdit.updatedAt,
+        tags: blogToEdit.tags,
       });
     }
   }
@@ -88,7 +89,6 @@ class BlogForm extends React.Component {
   }
 
   setTags(tags) {
-    debugger;
     this.setState({ tags: tags });
   }
 
@@ -141,6 +141,8 @@ class BlogForm extends React.Component {
 
     if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
     blog = new Blog(blog);
+
+    debugger;
 
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
@@ -242,7 +244,11 @@ class BlogForm extends React.Component {
 
           <div className='add-img-btn-box'>{ imageSection }</div>
 
-          <TagForm blogid={ this.state.id } setTags={ this.setTags.bind(this) }/>
+          <TagForm
+            blogId={ this.state.id }
+            blogTags={ this.state.tags }
+            setTags={ this.setTags.bind(this) }
+          />
 
           <SubmitBlogButton
             actionType={ this.actionType }
