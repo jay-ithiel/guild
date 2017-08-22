@@ -1,7 +1,8 @@
 export const SAVE_TAGS = 'SAVE_TAGS';
-export const saveTags = tags => ({
+export const saveTags = ({ blogTags, existingTags }) => ({
   type: SAVE_TAGS,
-  tags
+  blogTags,
+  existingTags
 });
 
 export const REQUEST_TAGS = 'REQUEST_TAGS';

@@ -13,10 +13,12 @@ import Profile from './users/profile';
 import AboutUsers from './users/about_users';
 
 import { requestBlogs } from '../actions/blog_actions';
+import { requestTags } from '../actions/tag_actions';
 
 class App extends React.Component {
   componentDidMount() {
     this.props.requestBlogs();
+    this.props.requestTags();
   }
 
   render() {
@@ -41,6 +43,7 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   requestBlogs: () => dispatch(requestBlogs()),
+  requestTags: () => dispatch(requestTags()),
 });
 
 export default withRouter(connect(

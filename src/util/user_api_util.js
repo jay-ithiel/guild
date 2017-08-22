@@ -3,14 +3,10 @@ import {
   receiveUsers,
 } from '../actions/user_actions';
 import User from '../models/user.js';
-window.User = User;
-global.getFile = getFile;
-global.putFile = putFile;
 
 var STORAGE_FILE = 'users.json';
 
 export const createUser = ({ userData, users, dispatch }) => {
-  // let userImage = userData.profile.image[0].contentUrl || null;
   let userImage;
   if (!userData.profile.image) {
     userImage = null;

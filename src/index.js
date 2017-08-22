@@ -16,6 +16,9 @@ import {
   requestUsers,
   saveUsers,
 } from './actions/user_actions';
+import {
+  requestTags
+} from './actions/tag_actions';
 import { saveBlogs } from './actions/blog_actions';
 
 import * as blockstack from 'blockstack';
@@ -52,4 +55,5 @@ document.addEventListener('DOMContentLoaded', event => {
   global.requestUsers = requestUsers;
   global.createUser = createUser;
   global.createSessionOrUser = createSessionOrUser;
+  global.requestTags = requestTags;
 });

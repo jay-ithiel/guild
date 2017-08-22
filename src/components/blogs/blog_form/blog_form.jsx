@@ -49,13 +49,18 @@ class BlogForm extends React.Component {
     if (!isUserSignedIn()) { this.props.history.push('/signin'); }
     if (Object.keys(this.props.blogs).length > 0) {
       this.setStateToEdit();
-      this.setState({ id: Object.keys(this.props.blogs).length + 1 });
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setStateToEdit(nextProps);
     this.setState({ authorImageUrl: nextProps.currentUser.imageUrl });
+    if (this.actionType === 'Publish') {
+      let blogKeys = Object.keys(nextProps.blogs);
+      let lastBlogId = parseInt(blogKeys[blogKeys.length-1]);
+      if (!lastBlogId) lastBlogId = 0;
+      this.setState({ id: lastBlogId + 1 });
+    }
   }
 
   setStateToEdit(nextProps = this.props) {
@@ -79,8 +84,16 @@ class BlogForm extends React.Component {
   }
 
   _parseBlogBodyToEditor(blog) {
-    let blogBodyContentState = convertFromRaw(blog.body);
+    let blogBodyContentState;
+
+    if (blog.body instanceof EditorState) {
+      blogBodyContentState = blog.body.getCurrentContent();
+    } else {
+      blogBodyContentState = convertFromRaw(blog.body);
+    }
+
     blog.body = EditorState.createWithContent(blogBodyContentState);
+
     return blog;
   }
 
@@ -116,9 +129,8 @@ class BlogForm extends React.Component {
       $('#blog-title-label').removeClass('outline-red');
     }
 
-    if (!this.state.body.getCurrentContent) {
-      this.state.body = convertFromRaw(this.state.body);
-    }
+    if (!this.state.body.getCurrentContent) this.state.body = convertFromRaw(this.state.body);
+
     if (!this.state.body.getCurrentContent().hasText()) {
       hasErrors = true;
       $('#blog-body-error').fadeIn();
@@ -139,10 +151,8 @@ class BlogForm extends React.Component {
     if (!blog.body.getCurrentContent) blog.body = convertFromRaw(blog.body);
     blog.body = convertToRaw(blog.body.getCurrentContent());
 
-    if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
+    // Should only make a new blog if this.actionType === 'publish'
     blog = new Blog(blog);
-
-    debugger;
 
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
@@ -151,6 +161,12 @@ class BlogForm extends React.Component {
     // Add new Blog to currentUser's authoredBlogs and save Users
     this.props.currentUser.authoredBlogs[blog.id] = blog;
     this.props.saveUsers(this.props.users);
+
+    // Create Tags for blogTags if Tag doesn't exist else add blog to Tag.blogs
+    this.props.saveTags({
+      blogTags: blog.tags,
+      existingTags: this.props.tags
+    });
   }
 
   handleSubmit(e) {
@@ -226,6 +242,8 @@ class BlogForm extends React.Component {
             />
           </label>
 
+          <div className='add-img-btn-box'>{ imageSection }</div>
+
           <label id='blog-body-label'
             className='blog-form-label position-relative'
             onClick={ this.toggleActiveLabel('body') }>
@@ -241,8 +259,6 @@ class BlogForm extends React.Component {
               updateEditorState={ this.updateEditorState }
             />
           </label>
-
-          <div className='add-img-btn-box'>{ imageSection }</div>
 
           <TagForm
             blogId={ this.state.id }

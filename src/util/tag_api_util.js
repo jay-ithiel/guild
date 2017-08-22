@@ -1,26 +1,41 @@
-import { getFile, putFile, loadUserData } from 'blockstack';
-
+import { getFile, putFile } from 'blockstack';
+import Tag from '../models/tag.js';
 import { receiveTags } from '../actions/tag_actions';
-
 import {
   receiveBlogs
 } from '../actions/blog_actions';
 
 var STORAGE_FILE = 'tags.json';
 
-export const saveTags = (tags, success, error) => {
-  debugger;
-  putFile(STORAGE_FILE, JSON.stringify(tags)).then(isTagSaved => {
-    // handle success
-    debugger;
-    isTagSaved ? success(tags) : error();
+export const saveTags = ({ blogTags, existingTags, success, error }) => {
+  let tagKeys = Object.keys(blogTags);
+  let lastTagId = Object.keys(existingTags).length - 1;
+  let tag, tagName, blogId;
+
+  for (let i = 0; i < tagKeys.length; i++) {
+    tagName = tagKeys[i];
+    blogId = blogTags[tagName].blogId;
+
+    if (existingTags[tagName]) {
+      existingTags[tagName].blogs[blogId] = true;
+    } else {
+      tag = new Tag({
+        id: lastTagId + 1,
+        name: tagName,
+        blogs: { [blogId]: true }
+      });
+
+      existingTags[tag.name] = tag;
+    }
+  }
+
+  putFile(STORAGE_FILE, JSON.stringify(existingTags)).then(isTagSaved => {
+    isTagSaved ? success(existingTags) : error();
   });
 };
 
 export const fetchTags = (success, error) => {
   var tags = {};
-
-  debugger;
 
   getFile(STORAGE_FILE).then(tagItems => { // eslint-disable-line
     tagItems = JSON.parse(tagItems || '[]');
@@ -29,8 +44,6 @@ export const fetchTags = (success, error) => {
       tags[tagId] = tagItems[tagId];
     });
 
-    debugger;
-
-    // dispatch(receiveTags(tags));
+    success(tags);
   });
 };

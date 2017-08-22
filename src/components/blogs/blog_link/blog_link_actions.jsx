@@ -39,8 +39,14 @@ class BlogLinkActions extends React.Component {
     this.props.deleteBlog(this.props.blog.id);
     this.setState({ isDeleteButtonActive: false });
 
-    // Delete blog from currentUser's authoredBlogs
-    delete this.props.currentUser.authoredBlogs[this.props.blog.id];
+    let blogToDeleteId = this.props.blog.id;
+    let currentUser = this.props.currentUser;
+
+    // Delete blog from currentUser's authored, bookmarked and liked blogs
+    delete currentUser.authoredBlogs[blogToDeleteId];
+    delete currentUser.bookmarkedBlogs[blogToDeleteId];
+    delete currentUser.likedBlogs[blogToDeleteId];
+
     this.props.saveUsers(this.props.users);
   }
 
