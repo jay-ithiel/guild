@@ -6,6 +6,7 @@ import {
 
 const _defaultState = {
   index: {},
+  popularTags: {},
   errors: []
 };
 
@@ -16,6 +17,7 @@ const TagReducer = (oldState = _defaultState, action) => {
   switch(action.type) {
     case RECEIVE_TAGS:
       newState.index = action.tags;
+      newState.popularTags = action.tags['popularTags'];
       newState.errors = [];
       return newState;
 

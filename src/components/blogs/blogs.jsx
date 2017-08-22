@@ -47,6 +47,11 @@ class Blogs extends React.Component {
     else {
       this.setState({ blogs: nextProps.blogs });
     }
+
+    // requestPopularTags(), and then pass them down to Feed component
+    // Feed component will make a request for 4 blogs under the tag it's passed
+    // Feed compent will render blogs
+    // this.props.fetchPopularTags(nextProps.tags);
   }
 
   requestBlogs() {
@@ -76,7 +81,7 @@ class Blogs extends React.Component {
 
     let blogLinks = this.mapBlogLinks();
     let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
-    
+
     return blogLinks.length === 0 ? (
       <ul id='blogs' className='border-box-sizing'>
         {
@@ -109,7 +114,9 @@ const mapStateToProps = state => ({
   currentUser: state.users.currentUser,
   blogs: state.blogs.index,
   userBlogs: state.blogs.userBlogs,
-  users: state.users.index
+  users: state.users.index,
+  tags: state.tags.index,
+  popularTags: state.tags.popularTags
 });
 
 const mapDispatchToProps = dispatch => ({

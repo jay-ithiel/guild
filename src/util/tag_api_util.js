@@ -11,13 +11,15 @@ export const saveTags = ({ blogTags, existingTags, success, error }) => {
   let tagKeys = Object.keys(blogTags);
   let lastTagId = Object.keys(existingTags).length - 1;
   let tag, tagName, blogId;
+  let popularTags, currentTagPopularityCount, leastPopularTag;
 
   for (let i = 0; i < tagKeys.length; i++) {
     tagName = tagKeys[i];
     blogId = blogTags[tagName].blogId;
 
-    if (existingTags[tagName]) {
-      existingTags[tagName].blogs[blogId] = true;
+    tag = existingTags[tagName];
+    if (tag) {
+      tag.blogs[blogId] = true;
     } else {
       tag = new Tag({
         id: lastTagId + 1,
@@ -26,6 +28,26 @@ export const saveTags = ({ blogTags, existingTags, success, error }) => {
       });
 
       existingTags[tag.name] = tag;
+    }
+
+    popularTags = existingTags['popularTags'];
+    currentTagPopularityCount = Object.keys(tag.blogs).length;
+
+    if (popularTags) {
+      if (Object.keys(popularTags).length >= 5 && !popularTags[tagName]) {
+        leastPopularTag = _findLeastPopularTag(popularTags);
+
+        if (leastPopularTag.leastPopularTagCount < currentTagPopularityCount) {
+          delete popularTags[leastPopularTag.leastPopularTagName];
+          popularTags[tag.name] = currentTagPopularityCount;
+        }
+      }
+      else {
+        popularTags[tag.name] = currentTagPopularityCount;
+      }
+    } else {
+      popularTags = { [tag.name]: currentTagPopularityCount };
+      existingTags['popularTags'] = popularTags;
     }
   }
 
@@ -46,4 +68,26 @@ export const fetchTags = (success, error) => {
 
     success(tags);
   });
+};
+
+// const _updatePopularTags = ({ popularTags, currentTag }) => {
+//
+// };
+
+const _findLeastPopularTag = popularTags => {
+  let leastPopularTagName, leastPopularTagCount, currentTagPopularityCount;
+
+  Object.keys(popularTags).forEach(popularTagName => {
+    currentTagPopularityCount = popularTags[popularTagName];
+
+    if (!leastPopularTagCount || currentTagPopularityCount < leastPopularTagCount) {
+      leastPopularTagCount = currentTagPopularityCount;
+      leastPopularTagName = popularTagName;
+    }
+  });
+
+  return {
+    leastPopularTagName,
+    leastPopularTagCount
+  };
 };
