@@ -24,9 +24,6 @@ class Feed extends React.Component {
       <section id='feed'>
         <h4 id='feed-category'>
           <p id='feed-category-title'>{this.props.category}</p>
-          {/*
-            <span className='small skinny letter-space-1 margin-left--10'>POPULAR</span>
-          */}
           <span className='small skinny letter-space-1 margin-left--10'>LATEST</span>
         </h4>
 

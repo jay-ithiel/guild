@@ -12,12 +12,10 @@ import {
 
 import { createSessionOrUser } from './util/user_api_util';
 import {
-  createUser,
-  requestUsers,
   saveUsers,
 } from './actions/user_actions';
 import {
-  requestTags
+  saveTags,
 } from './actions/tag_actions';
 import { saveBlogs } from './actions/blog_actions';
 
@@ -52,8 +50,5 @@ document.addEventListener('DOMContentLoaded', event => {
   global.blockstack = blockstack;
   global.saveUsers = saveUsers;
   global.saveBlogs = saveBlogs;
-  global.requestUsers = requestUsers;
-  global.createUser = createUser;
-  global.createSessionOrUser = createSessionOrUser;
-  global.requestTags = requestTags;
+  global.saveTags = saveTags;
 });

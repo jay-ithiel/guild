@@ -4,14 +4,6 @@ import { parseDateTime } from '../../util/helper_methods';
 import AboutBlogAuthor from '../blogs/blog_link/about_blog_author';
 
 const FeedBlog = ({ blog }) => {
-  // blog = {
-  //   authorId: 'Author Name',
-  //   authorImageUrl: 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png',
-  //   updatedAt: `${new Date()}`
-  // };
-
-  // debugger;
-
   return !blog ? <div></div> : (
     <div id='feed-blog'>
       {

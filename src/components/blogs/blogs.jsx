@@ -51,11 +51,6 @@ class Blogs extends React.Component {
       this.setState({ blogs: nextProps.blogs });
     }
 
-    // requestPopularTags(), and then pass them down to Feed component
-    // Feed component will make a request for 4 blogs under the tag it's passed
-    // Feed component will render blogs
-    // this.props.fetchPopularTags(nextProps.tags);
-
     this.setState({ tags: nextProps.tags });
     this.setState({ popularTags: nextProps.popularTags });
   }
