@@ -19,6 +19,9 @@ class Blogs extends React.Component {
       blogs: null,
       isUserBlogs: props.history.location.pathname === '/' ? false : true,
       isProfileBlogs: props.isProfileBlogs,
+      tags: {},
+      popularTags: [],
+      feedBlogs: {}
     };
 
     this.mapBlogLinks = this.mapBlogLinks.bind(this);
@@ -50,8 +53,11 @@ class Blogs extends React.Component {
 
     // requestPopularTags(), and then pass them down to Feed component
     // Feed component will make a request for 4 blogs under the tag it's passed
-    // Feed compent will render blogs
+    // Feed component will render blogs
     // this.props.fetchPopularTags(nextProps.tags);
+
+    this.setState({ tags: nextProps.tags });
+    this.setState({ popularTags: nextProps.popularTags });
   }
 
   requestBlogs() {
@@ -72,6 +78,43 @@ class Blogs extends React.Component {
     ));
   }
 
+  mapFeedBlogs() {
+    if (this.state.popularTags.length === 0) return {};
+
+    let feedBlogs = {};
+    let popularTagBlogIds, blogId, blog;
+
+    this.state.popularTags.forEach(popularTag => {
+      popularTagBlogIds = Object.keys(this.state.tags[popularTag].blogs).slice(0,4);
+
+      for (let i = 0; i < 4; i++) {
+        blogId = popularTagBlogIds[i];
+        if (!blogId) break;
+        blog = this.state.blogs[blogId];
+
+        if (feedBlogs[popularTag]) {
+          feedBlogs[popularTag].push(blog);
+        } else {
+          feedBlogs[popularTag] = [blog];
+        }
+      }
+    });
+
+    return feedBlogs;
+  }
+
+  mapFeeds() {
+    let feedBlogs = this.mapFeedBlogs.bind(this)();
+
+    return Object.keys(feedBlogs).map((popularTag, index) => (
+      <Feed
+        key={index}
+        category={popularTag}
+        blogs={feedBlogs[popularTag]}
+      />
+    ));
+  }
+
   render() {
     // If user is not signed in or hasn't made a signIn request, we will render the signInPage since Blockstack Gaia storage isn't available unless signed in.
     if (!isUserSignedIn() && !isSignInPending()) { return <SignInPage/> }
@@ -81,6 +124,7 @@ class Blogs extends React.Component {
 
     let blogLinks = this.mapBlogLinks();
     let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
+    let feedComponents = this.mapFeeds.bind(this)();
 
     return blogLinks.length === 0 ? (
       <ul id='blogs' className='border-box-sizing'>
@@ -102,7 +146,8 @@ class Blogs extends React.Component {
       </ul>
     ) : (
       <ul id='blogs' className='border-box-sizing'>
-        { this.state.isUserBlogs || this.state.isProfileBlogs ? <div></div> : <Feed/> }
+        {/* this.state.isUserBlogs || this.state.isProfileBlogs ? <div></div> : <Feed/> */}
+        { this.state.isUserBlogs || this.state.isProfileBlogs ? <div></div> : feedComponents }
         <h4 className='blogs-section-head'>{ blogsHead }</h4>
         { blogLinks }
       </ul>

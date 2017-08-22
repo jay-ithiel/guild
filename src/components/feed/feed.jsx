@@ -8,22 +8,31 @@ class Feed extends React.Component {
     super(props);
   }
 
+  _mapFeedBlogLis() {
+    return this.props.blogs.map((blog, index) => (
+      <FeedBlog
+        key={index}
+        blog={blog}
+      />
+    ));
+  }
+
   render() {
+    let feedBlogLis = this._mapFeedBlogLis.bind(this)();
+
     return (
       <section id='feed'>
         <h4 id='feed-category'>
-          <p id='feed-category-title'>Feed Category</p>
+          <p id='feed-category-title'>{this.props.category}</p>
           {/*
             <span className='small skinny letter-space-1 margin-left--10'>POPULAR</span>
           */}
-          <span className='small skinny letter-space-1 margin-left--10'>THIS IS A STATIC FEED</span>
+          <span className='small skinny letter-space-1 margin-left--10'>LATEST</span>
         </h4>
-        <div id='feed-blogs'>
-          <FeedBlog/>
-          <FeedBlog/>
-          <FeedBlog/>
-          <FeedBlog/>
-        </div>
+
+        <ul id='feed-blogs'>
+          {feedBlogLis}
+        </ul>
       </section>
     );
   }

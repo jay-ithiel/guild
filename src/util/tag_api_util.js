@@ -33,6 +33,7 @@ export const saveTags = ({ blogTags, existingTags, success, error }) => {
     popularTags = existingTags['popularTags'];
     currentTagPopularityCount = Object.keys(tag.blogs).length;
 
+    // Move lines 37 ~ 52 into a separate helper method
     if (popularTags) {
       if (Object.keys(popularTags).length >= 5 && !popularTags[tagName]) {
         leastPopularTag = _findLeastPopularTag(popularTags);
