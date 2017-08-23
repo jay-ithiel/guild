@@ -13,13 +13,12 @@ class CommentLikesForm extends React.Component {
       id: null,
       userId: null,
       commentId:
-    }
-
+    };
   }
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser,
+  currentUser: state.users.currentUser,
   blogs: state.blogs.index
 });
 

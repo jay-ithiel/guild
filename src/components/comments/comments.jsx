@@ -13,7 +13,7 @@ class Comments extends React.Component {
     let commentLis = Object.keys(this.props.comments);
     if (commentLis.length === 0) {
       return (
-        <h4 className='text-align-center skinny letter-space-1 medium margin-top--10'>
+        <h4 className='text-align-center skinny letter-space-1 medium margin-top--15'>
           Be the first to make a comment!
         </h4>
       );

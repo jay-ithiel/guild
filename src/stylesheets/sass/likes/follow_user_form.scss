@@ -1,0 +1,30 @@
+#follow-btn {
+  width: 90px;
+  height: 40px;
+
+  border: 1px solid #43bd7e;
+  border-radius: 20px;
+
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 100;
+}
+
+.following--true {
+  background-color: #43bd7e;
+  color: #fff;
+}
+
+.following--false {
+  background-color: #fff;
+  color: #43bd7e;
+}
+
+#follow-info-box {
+  width: 100%;
+  margin: 15px 0;
+}
+
+#follow-info {
+  margin-right: 20px;
+}

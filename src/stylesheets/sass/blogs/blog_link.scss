@@ -1,5 +1,5 @@
-@import 'about_blog.scss';
-@import 'blog_delete_modal.scss';
+@import './about_blog_author.scss';
+@import './blog_delete_modal.scss';
 
 // Default small screen layout
 #blog-link {
@@ -11,6 +11,7 @@
   box-shadow: 0 0 4px #ccc;
 
   border-radius: 3px;
+  margin: 0 auto;
   margin-top: 30px;
   padding: 15px 20px;
   padding-bottom: 25px;
@@ -35,7 +36,7 @@
 }
 
 #blog-link-body-intro {
-  font-size: 25px;
+  font-size: 19px;
   font-weight: 100;
   color: #777;
   margin-bottom: 20px;
@@ -44,7 +45,10 @@
 #blog-link-actions {
   width: 75px;
   padding-right: 10px;
-  float: right;
+
+  position: absolute;
+  bottom: 25px;
+  right: 6px;
 
   display: flex;
   justify-content: space-between;

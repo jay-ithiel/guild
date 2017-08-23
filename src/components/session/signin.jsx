@@ -6,9 +6,7 @@ import { isUserSignedIn } from 'blockstack';
 
 class SignIn extends React.Component {
   componentDidMount() {
-    if (isUserSignedIn()) {
-      this.props.history.push('/');
-    }
+    if (isUserSignedIn()) this.props.history.push('/');
   }
 
   render() {

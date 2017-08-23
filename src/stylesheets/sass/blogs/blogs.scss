@@ -6,34 +6,35 @@ $primary-color: #43bd7e;
 @import '../loaders.css/src/animations/ball-scale-ripple.scss';
 
 #blogs {
-    width: 100vw;
-    min-height: 100vh;
-    height: auto;
+  width: 100vw;
+  min-height: 100vh;
+  height: auto;
 
-    margin-top: -70px;
-    padding-top: 70px;
-    padding-bottom: 70px;
-    background-color: #fff;
+  // margin-top: -70px;
+  // padding-top: 70px;
+  padding-bottom: 70px;
+  // background-color: #fff;
+  background-color: #fcfcfc;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .blogs-section-head {
-    max-width: 600px;
-    width: 100%;
+  max-width: 600px;
+  width: 100%;
 
-    margin: 0 auto;
-    margin-top: 50px;
+  margin: 0 auto;
+  margin-top: 50px;
 
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 #blogs-loader {
-    background-color: lightgreen;
-    height: 100px;
-    width: 100px;
+  background-color: lightgreen;
+  height: 100px;
+  width: 100px;
 }

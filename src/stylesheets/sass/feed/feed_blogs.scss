@@ -1,0 +1,41 @@
+#feed {
+  max-width: 1000px;
+  width: 95%;
+  
+  height: auto;
+
+  margin: 0 auto;
+  margin-top: 35px;
+}
+
+#feed-category {
+  width: 100%;
+  height: 45px;
+
+  font-size: 22px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 35px;
+}
+
+#feed-category-title {
+  height: 45px;
+  display: inline-block;
+  border-bottom: 1px solid #676767;
+}
+
+#feed-blogs {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+@media screen and (min-width: 992px) {
+  #feed {
+    width: 100%;
+  }
+
+  #feed-blogs {
+    height: 258px;
+  }
+}

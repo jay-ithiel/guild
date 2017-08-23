@@ -1,0 +1,59 @@
+#tag-form {
+  height: 55px;
+  width: 100%;
+
+  padding-top: 5px;
+  border-top: 1px solid #eee;
+  box-sizing: border-box;
+}
+
+#tags-ul {
+  display: flex;
+
+  height: 40px;
+  min-width: 1px;
+  width: auto;
+}
+
+#tag {
+  height: 40px;
+  min-width: 80px;
+  width: auto;
+
+  background-color: #fff;
+  box-sizing: border-box;
+
+  padding: 7px;
+  border: 1px solid #ddd;
+  margin-right: 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#tag-name {
+  color: #777;
+  font-size: 15px;
+  margin-right: 7px;
+}
+
+#add-tag-input {
+  height: 40px;
+
+  display: inline-block;
+
+  outline: none;
+  border: none;
+
+  font-size: 15px;
+  color: #777;
+}
+
+#delete-tag {
+  color: #777;
+}
+
+#delete-tag:hover {
+  color: #000;
+}

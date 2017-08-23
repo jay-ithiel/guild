@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AboutBlog = ({ authorId, authorImageUrl='', date, blog }) => (
+const AboutBlogAuthor = ({ authorId, authorImageUrl='', date, blog }) => (
   <section id='about-blog'>
     <div id='about-blog-img'
       style={{ backgroundImage: `url(${authorImageUrl})` }}>
@@ -13,4 +13,4 @@ const AboutBlog = ({ authorId, authorImageUrl='', date, blog }) => (
   </section>
 );
 
-export default AboutBlog;
+export default AboutBlogAuthor;

@@ -1,8 +1,12 @@
 #likes-form-container {
-  width: 20%;
+  width: auto;
+
+  display: inline-block;
+
   box-sizing: border-box;
   padding-top: 5px;
   margin-top: 15px;
+  margin-right: 10px;
 }
 
 #heart {

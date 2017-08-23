@@ -7,6 +7,7 @@
   min-height: 100vh;
   margin-top: -70px;
   padding: 70px 10vw;
+  background-color: #fff;
 }
 
 .position-relative {
@@ -42,6 +43,10 @@
   width: 100%;
 }
 
+.full-screen-width {
+  width: 100vw;
+}
+
 .border-box-sizing {
   box-sizing: border-box;
 }
@@ -64,12 +69,24 @@
   background: rgba(0,0,0,0.5);
 }
 
+.margin--10 {
+  margin: 10px;
+}
+
+.margin--20 {
+  margin: 20px;
+}
+
 .margin-top-3 {
   margin-top: 3px;
 }
 
 .margin-top-4 {
   margin-top: 4px;
+}
+
+.margin-top--5 {
+  margin-top: 5px;
 }
 
 .margin-top--10 {
@@ -96,6 +113,14 @@
   margin-bottom: 40px;
 }
 
+.margin-left--10 {
+  margin-left: 10px;
+}
+
+.border-bottom--2-solid-black {
+  border-botom: 2px solid black;
+}
+
 .transition-2s-ease-in {
   transition: all .2s ease-in;
 }
@@ -110,4 +135,8 @@
   transition: all .2s ease-in;
   cursor: default !important;
   box-shadow: none !important;
+}
+
+.list-style-type--none {
+  list-style-type: none;
 }

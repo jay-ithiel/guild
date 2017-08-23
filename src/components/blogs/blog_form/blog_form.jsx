@@ -1,12 +1,24 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { isUserSignedIn } from 'blockstack';
+import { isUserSignedIn, loadUserData } from 'blockstack';
+
+// Components
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import BlogBodyEditor from '../../editor/editor';
-import $ from 'jquery';
+import TagForm from '../../tags/tag_form';
+
 import Blog from '../../../models/blog.js';
+import $ from 'jquery';
+import {
+  EditorState,
+  convertToRaw,
+  convertFromRaw,
+} from 'draft-js';
+
+global.EditorState = EditorState;
+global.convertToRaw = convertToRaw;
+global.convertFromRaw = convertFromRaw;
 
 class BlogForm extends React.Component {
   constructor(props) {
@@ -18,52 +30,79 @@ class BlogForm extends React.Component {
       blogIntro: '',
       body: EditorState.createEmpty(),
       imageUrl: '',
-      authorId: '',
+      authorId: loadUserData().username,
       authorImageUrl: '',
       updatedAt: '',
+      tags: {},
       isSubmitButtonActive: true,
     };
 
     this.updateEditorState = editorState => this.setState({ body: editorState });
     this.actionType = props.history.location.pathname === '/blogs/new' ? 'Publish' : 'Update';
-    this.setBlogToEdit = this.setBlogToEdit.bind(this);
+    this.setStateToEdit = this.setStateToEdit.bind(this);
     this.hasErrors = this.hasErrors.bind(this);
     this.addImage = this.addImage.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleMissingUserInfo = this.handleMissingUserInfo.bind(this);
   }
 
   componentDidMount() {
     if (!isUserSignedIn()) { this.props.history.push('/signin'); }
-    if (this.props.currentUser) { this.handleMissingUserInfo(); }
-    if (Object.keys(this.props.blogs).length > 0) { this.setBlogToEdit(); }
+    if (Object.keys(this.props.blogs).length > 0) {
+      this.setStateToEdit();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setBlogToEdit(nextProps);
+    this.setStateToEdit(nextProps);
+    this.setState({ authorImageUrl: nextProps.currentUser.imageUrl });
+    if (this.actionType === 'Publish') {
+      let blogKeys = Object.keys(nextProps.blogs);
+      let lastBlogId = parseInt(blogKeys[blogKeys.length-1]);
+      if (!lastBlogId) lastBlogId = 0;
+      this.setState({ id: lastBlogId + 1 });
+    }
   }
 
-  setBlogToEdit(nextProps = this.props) {
+  setStateToEdit(nextProps = this.props) {
     if (this.state.id === null && this.actionType === 'Update') {
-      let blog = nextProps.blogs[
-        parseInt(this.props.history.location.pathname.substring(12), 10)
-      ];
+      let blogToEditId = parseInt(this.props.history.location.pathname.substring(12), 10);
+      let blogToEdit = nextProps.blogs[blogToEditId];
+      blogToEdit = this._parseBlogBodyToEditor(blogToEdit);
 
       this.setState({
-        id: blog.id,
-        title: blog.title,
-        blogIntro: blog.blogIntro,
-        body: blog.body,
-        imageUrl: blog.imageUrl,
-        authorId: blog.authorId,
-        authorImageUrl: blog.authorImageUrl,
-        updatedAt: blog.updatedAt
+        id: blogToEdit.id,
+        title: blogToEdit.title,
+        blogIntro: blogToEdit.blogIntro,
+        body: blogToEdit.body,
+        imageUrl: blogToEdit.imageUrl,
+        authorId: blogToEdit.authorId,
+        authorImageUrl: blogToEdit.authorImageUrl,
+        updatedAt: blogToEdit.updatedAt,
+        tags: blogToEdit.tags,
       });
     }
   }
 
+  _parseBlogBodyToEditor(blog) {
+    let blogBodyContentState;
+
+    if (blog.body instanceof EditorState) {
+      blogBodyContentState = blog.body.getCurrentContent();
+    } else {
+      blogBodyContentState = convertFromRaw(blog.body);
+    }
+
+    blog.body = EditorState.createWithContent(blogBodyContentState);
+
+    return blog;
+  }
+
   addImage(imageUrl) {
     this.setState({ imageUrl: imageUrl });
+  }
+
+  setTags(tags) {
+    this.setState({ tags: tags });
   }
 
   handleChange(field) {
@@ -74,20 +113,6 @@ class BlogForm extends React.Component {
     return e => {
       $('.hidden-label').fadeOut();
       $(`#hidden-label-${inputName}`).fadeIn();
-    }
-  }
-
-  handleMissingUserInfo() {
-    // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
-    let author = this.props.currentUser;
-    let avatarUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
-
-    this.setState({ authorId: author.username });
-
-    if (author.profile.image) {
-      this.setState({ authorImageUrl: author.profile.image[0].contentUrl });
-    } else {
-      this.setState({ authorImageUrl: avatarUrl });
     }
   }
 
@@ -104,7 +129,8 @@ class BlogForm extends React.Component {
       $('#blog-title-label').removeClass('outline-red');
     }
 
-    // if (this.state.body.length <= 0) {
+    if (!this.state.body.getCurrentContent) this.state.body = convertFromRaw(this.state.body);
+
     if (!this.state.body.getCurrentContent().hasText()) {
       hasErrors = true;
       $('#blog-body-error').fadeIn();
@@ -122,13 +148,25 @@ class BlogForm extends React.Component {
     this.setState({ isSubmitButtonActive: false });
 
     // If blog.body.getCurrentContent does not exist, blog.body is converted from raw state to EditorState
-    if (!blog.body.getCurrentContent) { blog.body = convertFromRaw(blog.body) }
-
+    if (!blog.body.getCurrentContent) blog.body = convertFromRaw(blog.body);
     blog.body = convertToRaw(blog.body.getCurrentContent());
-    if (this.actionType === 'Publish') { blog.id = this.props.blogIndex + 1; }
 
-    this.props.blogs[blog.id] = new Blog(blog);
+    // Should only make a new blog if this.actionType === 'publish'
+    blog = new Blog(blog);
+
+    // Add new Blog to blogs state and save Blogs
+    this.props.blogs[blog.id] = blog;
     this.props.saveBlogs(this.props.blogs);
+
+    // Add new Blog to currentUser's authoredBlogs and save Users
+    this.props.currentUser.authoredBlogs[blog.id] = blog;
+    this.props.saveUsers(this.props.users);
+
+    // Create Tags for blogTags if Tag doesn't exist else add blog to Tag.blogs
+    this.props.saveTags({
+      blogTags: blog.tags,
+      existingTags: this.props.tags
+    });
   }
 
   handleSubmit(e) {
@@ -187,22 +225,6 @@ class BlogForm extends React.Component {
             />
           </label>
 
-          <label id='blog-body-label'
-            className='blog-form-label position-relative'
-            onClick={ this.toggleActiveLabel('body') }>
-
-            <h7 className='hidden-label' id='hidden-label-body'>Body</h7>
-
-            <span id='blog-body-error' className='error-message'>
-              Blog body cannot be blank
-            </span>
-
-            <BlogBodyEditor
-              editorState={ this.state.body }
-              updateEditorState={ this.updateEditorState }
-            />
-          </label>
-
           <label id='blog-intro-label'
             className='blog-form-label position-relative'
             onClick={ this.toggleActiveLabel('intro') }>
@@ -221,6 +243,28 @@ class BlogForm extends React.Component {
           </label>
 
           <div className='add-img-btn-box'>{ imageSection }</div>
+
+          <label id='blog-body-label'
+            className='blog-form-label position-relative'
+            onClick={ this.toggleActiveLabel('body') }>
+
+            <h7 className='hidden-label' id='hidden-label-body'>Body</h7>
+
+            <span id='blog-body-error' className='error-message'>
+              Blog body cannot be blank
+            </span>
+
+            <BlogBodyEditor
+              editorState={ this.state.body }
+              updateEditorState={ this.updateEditorState }
+            />
+          </label>
+
+          <TagForm
+            blogId={ this.state.id }
+            blogTags={ this.state.tags }
+            setTags={ this.setTags.bind(this) }
+          />
 
           <SubmitBlogButton
             actionType={ this.actionType }

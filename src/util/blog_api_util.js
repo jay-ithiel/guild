@@ -33,8 +33,8 @@ export const fetchBlogs = dispatch => {
     blogItems = JSON.parse(blogItems || '[]');
 
     Object.keys(blogItems).forEach((id, index) => {
-      blogItems[id].id = index+1;
-      blogs[index+1] = blogItems[id];
+      // blogItems[id].id = index+1;
+      blogs[id] = blogItems[id];
       blogIndex = index+1;
     });
 
