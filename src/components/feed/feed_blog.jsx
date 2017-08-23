@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { parseDateTime } from '../../util/helper_methods';
 
 import AboutBlogAuthor from '../blogs/blog_link/about_blog_author';
 
 const FeedBlog = ({ blog }) => {
   return !blog ? <div></div> : (
-    <div id='feed-blog'>
+    <Link id='feed-blog' to={`/blogs/show/${blog.id}`}>
       {
         blog.imageUrl.length === 0 ? <div></div> : (
           <div id='feed-blog-img'
@@ -27,7 +28,7 @@ const FeedBlog = ({ blog }) => {
           />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
