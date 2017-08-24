@@ -34,9 +34,12 @@ document.addEventListener('DOMContentLoaded', event => {
 
   let store = configureStore();
 
+  debugger;
   if (isUserSignedIn()) {
+    debugger;
     createSessionOrUser(loadUserData(), store.dispatch);
   } else if (isSignInPending()) {
+    debugger;
     handlePendingSignIn().then(userData => {
       window.location = window.location.origin;
     });
@@ -51,4 +54,5 @@ document.addEventListener('DOMContentLoaded', event => {
   global.saveUsers = saveUsers;
   global.saveBlogs = saveBlogs;
   global.saveTags = saveTags;
+  
 });

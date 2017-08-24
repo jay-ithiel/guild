@@ -20,6 +20,8 @@ class Feed extends React.Component {
   render() {
     let feedBlogLis = this._mapFeedBlogLis.bind(this)();
 
+    debugger;
+
     return (
       <section id='feed'>
         <h4 id='feed-category'>

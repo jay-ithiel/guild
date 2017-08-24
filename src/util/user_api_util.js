@@ -24,12 +24,14 @@ export const createUser = ({ userData, users, dispatch }) => {
 
   users[user.username] = user;
 
+  debugger;
   putFile(STORAGE_FILE, JSON.stringify(users)).then(isSaveSuccessful => {
     fetchUsers(dispatch);
   });
 };
 
 export const saveUsers = (users, dispatch) => {
+  debugger;
   putFile(STORAGE_FILE, JSON.stringify(users)).then(isSaveSuccessful => {
     fetchUsers(dispatch);
   });
@@ -37,6 +39,7 @@ export const saveUsers = (users, dispatch) => {
 
 export const fetchUsers = dispatch => {
   var users = {};
+  debugger;
 
   getFile(STORAGE_FILE).then(userItems => {
     userItems = JSON.parse(userItems || '[]');
@@ -45,12 +48,14 @@ export const fetchUsers = dispatch => {
       users[username] = userItems[username];
     });
 
+    debugger;
     dispatch(receiveUsers(users));
   });
 }
 
 export const createSessionOrUser = (userData, dispatch) => {
   let doesUserExist = false;
+  debugger;
 
   getFile(STORAGE_FILE).then(users => {
     users = JSON.parse(users || '[]');
@@ -58,6 +63,8 @@ export const createSessionOrUser = (userData, dispatch) => {
     Object.keys(users).forEach(username => {
       if (username === userData.username) doesUserExist = true;
     });
+
+    debugger;
 
     if (doesUserExist) {
       fetchUsers(dispatch);
