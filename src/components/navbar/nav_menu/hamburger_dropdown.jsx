@@ -10,7 +10,33 @@ const close = e => {
 };
 
 const HamburgerDropdown = props => {
-  return !props.currentUser ? <div id='hamburger-dropdown-container'></div> : (
+  return !props.currentUser ? (
+    <div id='hamburger-dropdown-container'>
+      <span onClick={close} className='modal no-desktop close-modal menu-modal'>x</span>
+
+      <ul id='hamburger-dropdown'>
+        <li onClick={close}>
+          <div className='full flex align-center'>
+            My Blogs
+          </div>
+        </li>
+
+        <li onClick={ close }>
+          <div className='full flex align-center'>
+            Profile
+          </div>
+        </li>
+
+        <li onClick={close}>
+          <Link className='full flex align-center' to={`/users`}>
+            Community
+          </Link>
+        </li>
+
+        <li onClick={ props.signout }>Log Out</li>
+      </ul>
+    </div>
+  ) : (
     <div id='hamburger-dropdown-container'>
       <span onClick={close} className='modal no-desktop close-modal menu-modal'>x</span>
 

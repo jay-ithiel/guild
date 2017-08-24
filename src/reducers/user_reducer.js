@@ -13,6 +13,10 @@ const UserReducer = (oldState = _defaultState, action) => {
   Object.freeze(oldState);
   let newState = merge({}, oldState);
 
+  if (action.type === RECEIVE_USERS) {
+    debugger;
+  }
+
   switch(action.type) {
     case RECEIVE_USERS:
       newState.index = action.users;
