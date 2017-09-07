@@ -100,7 +100,7 @@ class Blogs extends React.Component {
 
   mapFeeds() {
     let feedBlogs = this.mapFeedBlogs.bind(this)();
-debugger;
+
     return Object.keys(feedBlogs).map((popularTag, index) => (
       <Feed
         key={index}
@@ -120,7 +120,10 @@ debugger;
     let blogLinks = this.mapBlogLinks();
     let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
     let feedComponents = this.mapFeeds.bind(this)();
-debugger;
+    
+    console.log(`feedComponents: ${feedComponents}`);
+    console.dir(feedComponents);
+
     return blogLinks.length === 0 ? (
       <ul id='blogs' className='border-box-sizing'>
         {
