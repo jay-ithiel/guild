@@ -6,6 +6,28 @@ import User from '../models/user.js';
 
 var STORAGE_FILE = 'users.json';
 
+const createUserToken = () => {
+  let token = '';
+  let characterPool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let i = 0; i < 5; i++) {
+    token += characterPool.charAt(Math.floor(Math.random() * characterPool.length));
+  }
+
+  return token;
+};
+
+// const hashCode = string => {
+//   var hash = 0, i, chr;
+//   if (string.length === 0) return hash;
+//   for (i = 0; i < string.length; i++) {
+//     chr = string.charCodeAt(i);
+//     hash = ((hash << 5) - hash) + chr;
+//     hash |= 0; // Convert to 32bit integer
+//   }
+//   return hash;
+// }
+
 export const createUser = ({ userData, users, dispatch }) => {
   let userImage;
   if (!userData.profile.image) {
@@ -15,23 +37,21 @@ export const createUser = ({ userData, users, dispatch }) => {
   }
 
   let user = new User({
-    username: userData.username,
-    firstName: userData.profile.givenName,
-    lastName: userData.profile.familyName,
+    username: userData.username || createUserToken(),
+    firstName: userData.profile.givenName || 'Anonymous',
+    lastName: userData.profile.familyName || 'User',
     imageUrl: userImage,
-    description: userData.profile.description,
+    description: userData.profile.description || '',
   });
 
   users[user.username] = user;
 
-  debugger;
   putFile(STORAGE_FILE, JSON.stringify(users)).then(isSaveSuccessful => {
     fetchUsers(dispatch);
   });
 };
 
 export const saveUsers = (users, dispatch) => {
-  debugger;
   putFile(STORAGE_FILE, JSON.stringify(users)).then(isSaveSuccessful => {
     fetchUsers(dispatch);
   });
@@ -39,7 +59,6 @@ export const saveUsers = (users, dispatch) => {
 
 export const fetchUsers = dispatch => {
   var users = {};
-  debugger;
 
   getFile(STORAGE_FILE).then(userItems => {
     userItems = JSON.parse(userItems || '[]');
@@ -48,23 +67,21 @@ export const fetchUsers = dispatch => {
       users[username] = userItems[username];
     });
 
-    debugger;
     dispatch(receiveUsers(users));
   });
 }
 
 export const createSessionOrUser = (userData, dispatch) => {
   let doesUserExist = false;
-  debugger;
+  var users = {};
 
-  getFile(STORAGE_FILE).then(users => {
-    users = JSON.parse(users || '[]');
+  getFile(STORAGE_FILE).then(userItems => {
+    userItems = JSON.parse(userItems || '[]');
 
-    Object.keys(users).forEach(username => {
+    Object.keys(userItems).forEach(username => {
+      users[username] = userItems[username];
       if (username === userData.username) doesUserExist = true;
     });
-
-    debugger;
 
     if (doesUserExist) {
       fetchUsers(dispatch);

@@ -13,7 +13,7 @@ import {
 const TagMiddleware = ({ getState, dispatch }) => next => action => {
   const tagsSaveSuccess = tags => dispatch(receiveTags(tags));
   const tagsSaveError = errors => dispatch(receiveTagErrors(errors));
-  
+
   switch(action.type) {
     case SAVE_TAGS:
       saveTags({

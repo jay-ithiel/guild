@@ -58,7 +58,7 @@ export const saveTags = ({ blogTags, existingTags, success, error }) => {
 };
 
 export const fetchTags = (success, error) => {
-  var tags = {};
+  var tags = { 'popularTags': [] };
 
   getFile(STORAGE_FILE).then(tagItems => { // eslint-disable-line
     tagItems = JSON.parse(tagItems || '[]');
@@ -66,7 +66,7 @@ export const fetchTags = (success, error) => {
     Object.keys(tagItems).forEach(tagId => {
       tags[tagId] = tagItems[tagId];
     });
-
+    
     success(tags);
   });
 };

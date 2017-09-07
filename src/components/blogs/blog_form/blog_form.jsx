@@ -163,10 +163,10 @@ class BlogForm extends React.Component {
     this.props.saveUsers(this.props.users);
 
     // Create Tags for blogTags if Tag doesn't exist else add blog to Tag.blogs
-    this.props.saveTags({
-      blogTags: blog.tags,
-      existingTags: this.props.tags
-    });
+    // this.props.saveTags({
+    //   blogTags: blog.tags,
+    //   existingTags: this.props.tags
+    // });
   }
 
   handleSubmit(e) {
