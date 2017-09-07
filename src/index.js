@@ -51,4 +51,5 @@ document.addEventListener('DOMContentLoaded', event => {
   global.saveUsers = saveUsers;
   global.saveBlogs = saveBlogs;
   global.saveTags = saveTags;
+
 });
