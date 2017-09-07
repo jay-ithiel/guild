@@ -120,7 +120,7 @@ class Blogs extends React.Component {
     let blogLinks = this.mapBlogLinks();
     let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
     let feedComponents = this.mapFeeds.bind(this)();
-    
+
     console.log(`feedComponents: ${feedComponents}`);
     console.dir(feedComponents);
 
