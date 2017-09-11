@@ -11,16 +11,6 @@ import {
 } from 'blockstack';
 
 import { createSessionOrUser } from './util/user_api_util';
-import {
-  saveUsers,
-} from './actions/user_actions';
-import {
-  saveTags,
-} from './actions/tag_actions';
-import { saveBlogs } from './actions/blog_actions';
-
-import * as blockstack from 'blockstack';
-global.blockstack = blockstack;
 require('./env.js');
 
 const cloudinary = window.cloudinary; // eslint-disable-line
@@ -45,10 +35,5 @@ document.addEventListener('DOMContentLoaded', event => {
   ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
   registerServiceWorker();
 
-  // DEVELOP ONLY!! REMOVE BEFORE PRODUCTION
   global.store = store;
-  global.blockstack = blockstack;
-  global.saveUsers = saveUsers;
-  global.saveBlogs = saveBlogs;
-  global.saveTags = saveTags;
 });
