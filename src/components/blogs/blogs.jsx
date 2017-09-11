@@ -20,7 +20,7 @@ class Blogs extends React.Component {
       isUserBlogs: props.history.location.pathname === '/' ? false : true,
       isProfileBlogs: props.isProfileBlogs,
       tags: {},
-      popularTags: {},
+      popularTags: [],
       feedBlogs: {}
     };
 
@@ -120,6 +120,9 @@ class Blogs extends React.Component {
     let blogLinks = this.mapBlogLinks();
     let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
     let feedComponents = this.mapFeeds.bind(this)();
+
+    console.log(`feedComponents: ${feedComponents}`);
+    console.dir(feedComponents);
 
     return blogLinks.length === 0 ? (
       <ul id='blogs' className='border-box-sizing'>
