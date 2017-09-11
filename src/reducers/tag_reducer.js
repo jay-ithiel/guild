@@ -14,6 +14,11 @@ const TagReducer = (oldState = _defaultState, action) => {
   Object.freeze(oldState);
   let newState = merge({}, oldState);
 
+  if (action.type === RECEIVE_TAGS) {
+    console.log('Tag Reducer receiving tags. action.tags:');
+    console.dir(action.tags);
+  }
+
   switch(action.type) {
     case RECEIVE_TAGS:
       newState.index = action.tags;
