@@ -27,8 +27,6 @@ const cloudinary = window.cloudinary; // eslint-disable-line
 global.cloudinary = cloudinary;
 
 document.addEventListener('DOMContentLoaded', event => {
-  console.log('Testing log: DOMContentLoaded');
-
   window.cloudinary_options = {
     cloud_name: 'ddgtwtbre',
     upload_preset: 'k7gkxhh0'

@@ -80,12 +80,12 @@ class Blogs extends React.Component {
     let popularTagBlogIds, blogId, blog;
 
     // this.state.popularTags.forEach(popularTag => {
-    console.log('this.state.popularTags:');
-    console.dir(this.state.popularTags);
+    // console.log('this.state.popularTags:');
+    // console.dir(this.state.popularTags);
+    //
+    // console.log('this.state.tags:');
+    // console.dir(this.state.tags);
 
-    console.log('this.state.tags:');
-    console.dir(this.state.tags);
-    
     Object.keys(this.state.popularTags).forEach(popularTag => {
       // console.log(`popularTag: ${popularTag}`);
       popularTagBlogIds = Object.keys(this.state.tags[popularTag].blogs).slice(0,4);
