@@ -79,7 +79,8 @@ class Blogs extends React.Component {
     let feedBlogs = {};
     let popularTagBlogIds, blogId, blog;
 
-    this.state.popularTags.forEach(popularTag => {
+    // this.state.popularTags.forEach(popularTag => {
+    Object.keys(this.state.popularTags).forEach(popularTag => {
       popularTagBlogIds = Object.keys(this.state.tags[popularTag].blogs).slice(0,4);
 
       for (let i = 0; i < 4; i++) {
