@@ -6,7 +6,7 @@ import {
 
 const _defaultState = {
   index: {},
-  popularTags: [],
+  popularTags: {} ,
   errors: []
 };
 

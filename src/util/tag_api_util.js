@@ -26,18 +26,17 @@ export const saveTags = ({ blogTags, existingTags, success, error }) => {
         name: tagName,
         blogs: { [blogId]: true }
       });
-
+      lastTagId++;
       existingTags[tag.name] = tag;
     }
-
     popularTags = existingTags['popularTags'];
     currentTagPopularityCount = Object.keys(tag.blogs).length;
 
+    // BUG : Popular tags not being set
     // Move lines 37 ~ 52 into a separate helper method
     if (popularTags) {
       if (Object.keys(popularTags).length >= 5 && !popularTags[tagName]) {
         leastPopularTag = _findLeastPopularTag(popularTags);
-
         if (leastPopularTag.leastPopularTagCount < currentTagPopularityCount) {
           delete popularTags[leastPopularTag.leastPopularTagName];
           popularTags[tag.name] = currentTagPopularityCount;
@@ -47,18 +46,20 @@ export const saveTags = ({ blogTags, existingTags, success, error }) => {
         popularTags[tag.name] = currentTagPopularityCount;
       }
     } else {
+      // TODO Does this block of code ever run? Do you even need this if-else
       popularTags = { [tag.name]: currentTagPopularityCount };
-      existingTags['popularTags'] = popularTags;
     }
+    existingTags['popularTags'] = popularTags;
   }
 
+  // Check value of existingTags['popularTags']. Make sure it's been updated
   putFile(STORAGE_FILE, JSON.stringify(existingTags)).then(isTagSaved => {
     isTagSaved ? success(existingTags) : error();
   });
 };
 
 export const fetchTags = (success, error) => {
-  var tags = { 'popularTags': [] };
+  var tags = { 'popularTags': {} };
 
   getFile(STORAGE_FILE).then(tagItems => { // eslint-disable-line
     tagItems = JSON.parse(tagItems || '[]');
@@ -66,7 +67,7 @@ export const fetchTags = (success, error) => {
     Object.keys(tagItems).forEach(tagId => {
       tags[tagId] = tagItems[tagId];
     });
-    
+
     success(tags);
   });
 };
