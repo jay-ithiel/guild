@@ -20,7 +20,7 @@ class Blogs extends React.Component {
       isUserBlogs: props.history.location.pathname === '/' ? false : true,
       isProfileBlogs: props.isProfileBlogs,
       tags: {},
-      popularTags: [],
+      popularTags: {},
       feedBlogs: {}
     };
 
