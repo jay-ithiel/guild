@@ -1,13 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import FeedBlog from './feed_blog';
 
 class Feed extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   _mapFeedBlogLis() {
     return this.props.blogs.map((blog, index) => (
       <FeedBlog

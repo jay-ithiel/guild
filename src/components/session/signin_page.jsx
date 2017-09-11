@@ -1,6 +1,6 @@
 import React from 'react';
 import SignIn from './signin';
-import Session from './session';
+// import Session from './session';
 
 const SignInPage = () => (
   <section className='signin-bg full-screen flex-center flex-column position-relative'>
