@@ -121,9 +121,6 @@ class Blogs extends React.Component {
     let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
     let feedComponents = this.mapFeeds.bind(this)();
 
-    console.log(`feedComponents: ${feedComponents}`);
-    console.dir(feedComponents);
-
     return blogLinks.length === 0 ? (
       <ul id='blogs' className='border-box-sizing'>
         {

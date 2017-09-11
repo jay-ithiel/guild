@@ -1,9 +1,7 @@
 import { getFile, putFile } from 'blockstack';
 import Tag from '../models/tag.js';
-import { receiveTags } from '../actions/tag_actions';
-import {
-  receiveBlogs
-} from '../actions/blog_actions';
+// import { receiveTags } from '../actions/tag_actions';
+// import { receiveBlogs } from '../actions/blog_actions';
 
 var STORAGE_FILE = 'tags.json';
 

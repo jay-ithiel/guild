@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
-import { parseDateTime, characterLimit } from '../../../util/helper_methods.js';
+import {
+  parseDateTime,
+  // characterLimit 
+} from '../../../util/helper_methods.js';
 
 import BlogLinkActions from './blog_link_actions';
 import AboutBlogAuthor from './about_blog_author';

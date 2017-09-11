@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import BlogLikes from '../../models/blogLikes.js';
+// import BlogLikes from '../../models/blogLikes.js';
 import Heart from 'react-icons/lib/fa/heart';
 import HeartO from 'react-icons/lib/fa/heart-o';
 

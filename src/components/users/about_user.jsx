@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import FollowUserForm from '../likes/follow_user_form';
 
-import { requestUsers } from '../../actions/user_actions';
-
 const AboutUser = props => {
   var { user, currentUser } = props;
   let isCurrentUserFollowing = currentUser.following[user.username] || false;
