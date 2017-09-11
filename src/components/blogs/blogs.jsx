@@ -9,8 +9,6 @@ import BlogLink from './blog_link/blog_link';
 import SignInPage from '../session/signin_page';
 import LoadingScreen from '../home/loading_screen';
 
-// var Loader = require('react-loaders').Loader;
-
 class Blogs extends React.Component {
   constructor(props) {
     super(props);
@@ -79,15 +77,7 @@ class Blogs extends React.Component {
     let feedBlogs = {};
     let popularTagBlogIds, blogId, blog;
 
-    // this.state.popularTags.forEach(popularTag => {
-    // console.log('this.state.popularTags:');
-    // console.dir(this.state.popularTags);
-    //
-    // console.log('this.state.tags:');
-    // console.dir(this.state.tags);
-
     Object.keys(this.state.popularTags).forEach(popularTag => {
-      // console.log(`popularTag: ${popularTag}`);
       popularTagBlogIds = Object.keys(this.state.tags[popularTag].blogs).slice(0,4);
 
       for (let i = 0; i < 4; i++) {
@@ -129,9 +119,6 @@ class Blogs extends React.Component {
     let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
     let feedComponents = this.mapFeeds.bind(this)();
 
-    console.log(`feedComponents: ${feedComponents}`);
-    console.dir(feedComponents);
-
     return blogLinks.length === 0 ? (
       <ul id='blogs' className='border-box-sizing'>
         {
@@ -152,7 +139,6 @@ class Blogs extends React.Component {
       </ul>
     ) : (
       <ul id='blogs' className='border-box-sizing'>
-        {/* this.state.isUserBlogs || this.state.isProfileBlogs ? <div></div> : <Feed/> */}
         { this.state.isUserBlogs || this.state.isProfileBlogs ? <div></div> : feedComponents }
         <h4 className='blogs-section-head'>{ blogsHead }</h4>
         { blogLinks }

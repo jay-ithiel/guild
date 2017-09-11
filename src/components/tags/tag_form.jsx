@@ -27,10 +27,6 @@ class TagForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    // this.props.requestTags();
-  }
-
   componentWillReceiveProps(nextProps) {
     this.setState({ blogTags: nextProps.blogTags });
   }
@@ -59,7 +55,6 @@ class TagForm extends React.Component {
     let blogTags = this.state.blogTags;
 
     // if newTagName exists in this.props.tags,
-
     blogTags[this.state.newTagName] = {
       blogId: this.props.blogId
     };
