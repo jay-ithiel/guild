@@ -18,6 +18,13 @@ import {
   convertFromRaw,
 } from 'draft-js';
 
+import {
+  Editor,
+  createEditorState
+} from 'medium-draft';
+
+import { createToken } from '../../../util/helper_methods';
+
 global.EditorState = EditorState;
 global.convertToRaw = convertToRaw;
 global.convertFromRaw = convertFromRaw;
@@ -27,11 +34,11 @@ class BlogForm extends React.Component {
     super(props);
 
     this.state = {
-      id: null,
+      id: createToken(),
       title: '',
       blogIntro: '',
       // body: EditorState.createEmpty(),
-      body: null,
+      body: createEditorState(),
       imageUrl: '',
       authorId: loadUserData().username,
       authorImageUrl: '',
@@ -40,7 +47,7 @@ class BlogForm extends React.Component {
       isSubmitButtonActive: true,
     };
 
-    this.updateEditorState = editorState => this.setState({ body: editorState });
+    this.updateEditorState = editorState => { this.setState({ body: editorState }); }
     this.actionType = props.history.location.pathname === '/blogs/new' ? 'Publish' : 'Update';
     this.setStateToEdit = this.setStateToEdit.bind(this);
     this.hasErrors = this.hasErrors.bind(this);
@@ -56,12 +63,12 @@ class BlogForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setStateToEdit(nextProps);
     this.setState({ authorImageUrl: nextProps.currentUser.imageUrl });
-    if (this.actionType === 'Publish') {
-      let blogKeys = Object.keys(nextProps.blogs);
-      let lastBlogId = parseInt(blogKeys[blogKeys.length-1]);
-      if (!lastBlogId) lastBlogId = 0;
-      this.setState({ id: lastBlogId + 1 });
-    }
+    // if (this.actionType === 'Publish') {
+    //   let blogKeys = Object.keys(nextProps.blogs);
+    //   let lastBlogId = parseInt(blogKeys[blogKeys.length-1]);
+    //   if (!lastBlogId) lastBlogId = 0;
+    //   this.setState({ id: lastBlogId + 1 });
+    // }
   }
 
   setStateToEdit(nextProps = this.props) {
@@ -121,25 +128,25 @@ class BlogForm extends React.Component {
     // Refactor this function to use react state
     let hasErrors = false;
 
-    if (this.state.title.length <= 0) {
-      hasErrors = true;
-      $('#blog-title-error').fadeIn();
-      $('#blog-title-label').addClass('outline-red');
-    } else {
-      $('#blog-title-error').fadeOut();
-      $('#blog-title-label').removeClass('outline-red');
-    }
-
-    if (!this.state.body.getCurrentContent) this.state.body = convertFromRaw(this.state.body);
-
-    if (!this.state.body.getCurrentContent().hasText()) {
-      hasErrors = true;
-      $('#blog-body-error').fadeIn();
-      $('#blog-body-label').addClass('outline-red');
-    } else {
-      $('#blog-body-error').fadeOut();
-      $('#blog-body-label').removeClass('outline-red');
-    }
+    // if (this.state.title.length <= 0) {
+    //   hasErrors = true;
+    //   $('#blog-title-error').fadeIn();
+    //   $('#blog-title-label').addClass('outline-red');
+    // } else {
+    //   $('#blog-title-error').fadeOut();
+    //   $('#blog-title-label').removeClass('outline-red');
+    // }
+    //
+    // if (!this.state.body.getCurrentContent) this.state.body = convertFromRaw(this.state.body);
+    //
+    // if (!this.state.body.getCurrentContent().hasText()) {
+    //   hasErrors = true;
+    //   $('#blog-body-error').fadeIn();
+    //   $('#blog-body-label').addClass('outline-red');
+    // } else {
+    //   $('#blog-body-error').fadeOut();
+    //   $('#blog-body-label').removeClass('outline-red');
+    // }
 
     return hasErrors;
   }
@@ -149,11 +156,15 @@ class BlogForm extends React.Component {
     this.setState({ isSubmitButtonActive: false });
 
     // If blog.body.getCurrentContent does not exist, blog.body is converted from raw state to EditorState
-    if (!blog.body.getCurrentContent) blog.body = convertFromRaw(blog.body);
-    blog.body = convertToRaw(blog.body.getCurrentContent());
+    // if (!blog.body.getCurrentContent) blog.body = convertFromRaw(blog.body);
+    // blog.body = convertToRaw(blog.body.getCurrentContent());
 
     // Should only make a new blog if this.actionType === 'publish'
     blog = new Blog(blog);
+
+    debugger;
+    let bodyContent = blog.body.getCurrentContent();
+    blog.body = convertToRaw(bodyContent);
 
     // Check value of this.state.imageUrl
     debugger;
@@ -261,7 +272,10 @@ class BlogForm extends React.Component {
               Blog body cannot be blank
             </span>
 
-            <MediumEditor/>
+            <MediumEditor
+              editorState={this.state.body}
+              updateEditorState={this.updateEditorState.bind(this)}
+            />
 
             {/*
               <BlogBodyEditor
@@ -279,13 +293,13 @@ class BlogForm extends React.Component {
             />
           */}
 
-          {/*
+
             <SubmitBlogButton
               handleSubmit={ this.handleSubmit.bind(this) }
               actionType={ this.actionType }
               isActive={ this.state.isSubmitButtonActive }
             />
-          */}
+
         </form>
       </div>
     );

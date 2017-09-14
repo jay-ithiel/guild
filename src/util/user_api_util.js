@@ -3,19 +3,9 @@ import {
   receiveUsers,
 } from '../actions/user_actions';
 import User from '../models/user.js';
+import { createToken } from './helper_methods';
 
 var STORAGE_FILE = 'users.json';
-
-const createUserToken = () => {
-  let token = '';
-  let characterPool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let i = 0; i < 5; i++) {
-    token += characterPool.charAt(Math.floor(Math.random() * characterPool.length));
-  }
-
-  return token;
-};
 
 export const createUser = ({ userData, users, dispatch }) => {
   let userImage;
@@ -26,7 +16,7 @@ export const createUser = ({ userData, users, dispatch }) => {
   }
 
   let user = new User({
-    username: userData.username || createUserToken(),
+    username: userData.username || createToken(),
     firstName: userData.profile.givenName || 'Anonymous',
     lastName: userData.profile.familyName || 'User',
     imageUrl: userImage,

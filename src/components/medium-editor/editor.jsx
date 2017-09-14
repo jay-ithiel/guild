@@ -3,6 +3,8 @@ import {
   ImageSideButton,
   Editor,
   createEditorState,
+  getCurrentContent,
+  convertToRaw,
 } from 'medium-draft';
 import 'medium-draft/lib/index.css';
 
@@ -40,9 +42,9 @@ export default class MediumEditor extends React.Component {
     return (
       <Editor
         ref="editor"
-        editorState={editorState}
+        editorState={this.props.editorState}
         sideButtons={sideButtons}
-        onChange={this.onChange}
+        onChange={this.props.updateEditorState}
       />
     );
   }
