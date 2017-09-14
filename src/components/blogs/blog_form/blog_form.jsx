@@ -5,6 +5,7 @@ import { isUserSignedIn, loadUserData } from 'blockstack';
 // Components
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
+// import ImageUploadButton from './image_upload_new';
 import BlogBodyEditor from '../../editor/editor';
 import TagForm from '../../tags/tag_form';
 
@@ -46,10 +47,8 @@ class BlogForm extends React.Component {
   }
 
   componentDidMount() {
-    if (!isUserSignedIn()) { this.props.history.push('/signin'); }
-    if (Object.keys(this.props.blogs).length > 0) {
-      this.setStateToEdit();
-    }
+    if (!isUserSignedIn()) this.props.history.push('/signin');
+    if (Object.keys(this.props.blogs).length > 0) this.setStateToEdit();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -154,6 +153,9 @@ class BlogForm extends React.Component {
     // Should only make a new blog if this.actionType === 'publish'
     blog = new Blog(blog);
 
+    // Check value of this.state.imageUrl
+    debugger;
+
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
     this.props.saveBlogs(this.props.blogs);
@@ -203,7 +205,8 @@ class BlogForm extends React.Component {
 
     return (
       <div id='blog-form-container'>
-        <form id='blog-form' onSubmit={ this.handleSubmit.bind(this) }>
+        {/*<form id='blog-form' onSubmit={ this.handleSubmit.bind(this) }>*/}
+        <form id='blog-form'>
 
           <label id='blog-title-label'
             className='blog-form-label position-relative'
@@ -267,6 +270,7 @@ class BlogForm extends React.Component {
           />
 
           <SubmitBlogButton
+            handleSubmit={ this.handleSubmit.bind(this) }
             actionType={ this.actionType }
             isActive={ this.state.isSubmitButtonActive }
           />

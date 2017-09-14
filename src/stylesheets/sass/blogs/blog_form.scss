@@ -60,6 +60,21 @@
   position: relative;
 }
 
+// .imgPreview {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 220px;
+//   width: 100%;
+// }
+
+.submitButton {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  z-index: 1000;
+}
+
 #add-img-btn {
   color: #aaa;
   height: 100%;

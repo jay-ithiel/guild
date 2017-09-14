@@ -28,7 +28,7 @@ class Blogs extends React.Component {
 
   componentDidMount() {
     // If there is no currentUser, user hasn't logged in yet so don't fetch blogs
-    if (!this.props.currentUser) { return; }
+    if (!this.props.currentUser) return;
     this.requestBlogs();
 
     if (this.state.isProfileBlogs) {

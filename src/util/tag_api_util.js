@@ -29,8 +29,8 @@ export const saveTags = ({ blogTags, existingTags, success, error }) => {
     currentTagPopularityCount = Object.keys(tag.blogs).length;
 
     // BUG : Popular tags not being set
-    // Move lines 37 ~ 52 into a separate helper method
-    if (popularTags) {
+    // Move lines 33 ~ 48 into a separate helper method
+    // if (popularTags) {
       if (Object.keys(popularTags).length >= 5 && !popularTags[tagName]) {
         leastPopularTag = _findLeastPopularTag(popularTags);
         if (leastPopularTag.leastPopularTagCount < currentTagPopularityCount) {
@@ -41,10 +41,10 @@ export const saveTags = ({ blogTags, existingTags, success, error }) => {
       else {
         popularTags[tag.name] = currentTagPopularityCount;
       }
-    } else {
-      // TODO Does this block of code ever run? Do you even need this if-else
-      popularTags = { [tag.name]: currentTagPopularityCount };
-    }
+    // } else {
+    //   // TODO Does this block of code ever run? Do you even need this if-else
+    //   popularTags = { [tag.name]: currentTagPopularityCount };
+    // }
     existingTags['popularTags'] = popularTags;
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/Root';
-import registerServiceWorker from './util/registerServiceWorker';
+// import registerServiceWorker from './util/registerServiceWorker';
 import configureStore from './store/store';
 import {
   isSignInPending,
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', event => {
   }
 
   ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
-  registerServiceWorker();
+  // registerServiceWorker();
 
   global.store = store;
 });
