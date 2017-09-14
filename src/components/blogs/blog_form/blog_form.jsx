@@ -6,7 +6,8 @@ import { isUserSignedIn, loadUserData } from 'blockstack';
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
 // import ImageUploadButton from './image_upload_new';
-import BlogBodyEditor from '../../editor/editor';
+// import BlogBodyEditor from '../../editor/editor';
+import MediumEditor from '../../medium-editor/editor';
 import TagForm from '../../tags/tag_form';
 
 import Blog from '../../../models/blog.js';
@@ -29,7 +30,8 @@ class BlogForm extends React.Component {
       id: null,
       title: '',
       blogIntro: '',
-      body: EditorState.createEmpty(),
+      // body: EditorState.createEmpty(),
+      body: null,
       imageUrl: '',
       authorId: loadUserData().username,
       authorImageUrl: '',
@@ -259,10 +261,14 @@ class BlogForm extends React.Component {
               Blog body cannot be blank
             </span>
 
-            <BlogBodyEditor
-              editorState={ this.state.body }
-              updateEditorState={ this.updateEditorState }
-            />
+            <MediumEditor/>
+
+            {/*
+              <BlogBodyEditor
+                editorState={ this.state.body }
+                updateEditorState={ this.updateEditorState }
+              />
+            */}
           </label>
 
           {/*
