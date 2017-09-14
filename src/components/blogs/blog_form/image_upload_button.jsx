@@ -47,6 +47,7 @@ export default class ImageUploadButton extends React.Component {
       <div>
         <div className='FileUpload'>
           <Dropzone
+            id='add-img-btn'
             multiple={false}
             accept="image/*"
             onDrop={this.onImageDrop.bind(this)}>
