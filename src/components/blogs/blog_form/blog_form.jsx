@@ -228,24 +228,26 @@ class BlogForm extends React.Component {
             />
           </label>
 
-          <label id='blog-intro-label'
-            className='blog-form-label position-relative'
-            onClick={ this.toggleActiveLabel('intro') }>
+          {/*
+            <label id='blog-intro-label'
+              className='blog-form-label position-relative'
+              onClick={ this.toggleActiveLabel('intro') }>
 
-            <h7 className='hidden-label' id='hidden-label-intro'>Intro</h7>
+              <h7 className='hidden-label' id='hidden-label-intro'>Intro</h7>
 
-            <input
-              type='text'
-              id='blog-intro-input'
-              className='blog-input black'
-              onChange={ this.handleChange('blogIntro') }
-              value={ this.state.blogIntro }
-              placeholder='Introduction (Summarize your blog in 1 or 2  sentences)'
-              maxLength='50'
-            />
-          </label>
+              <input
+                type='text'
+                id='blog-intro-input'
+                className='blog-input black'
+                onChange={ this.handleChange('blogIntro') }
+                value={ this.state.blogIntro }
+                placeholder='Introduction (Summarize your blog in 1 or 2  sentences)'
+                maxLength='50'
+              />
+            </label>
+          */}
 
-          <div className='add-img-btn-box'>{ imageSection }</div>
+          {/*<div className='add-img-btn-box'>{ imageSection }</div>*/}
 
           <label id='blog-body-label'
             className='blog-form-label position-relative'
@@ -263,17 +265,21 @@ class BlogForm extends React.Component {
             />
           </label>
 
-          <TagForm
-            blogId={ this.state.id }
-            blogTags={ this.state.tags }
-            setTags={ this.setTags.bind(this) }
-          />
+          {/*
+            <TagForm
+              blogId={ this.state.id }
+              blogTags={ this.state.tags }
+              setTags={ this.setTags.bind(this) }
+            />
+          */}
 
-          <SubmitBlogButton
-            handleSubmit={ this.handleSubmit.bind(this) }
-            actionType={ this.actionType }
-            isActive={ this.state.isSubmitButtonActive }
-          />
+          {/*
+            <SubmitBlogButton
+              handleSubmit={ this.handleSubmit.bind(this) }
+              actionType={ this.actionType }
+              isActive={ this.state.isSubmitButtonActive }
+            />
+          */}
         </form>
       </div>
     );

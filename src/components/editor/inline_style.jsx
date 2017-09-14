@@ -3,10 +3,13 @@ import React from 'react';
 import StyleButton from './style_button';
 
 var INLINE_STYLES = [
+  {label: 'Large-Text', style: 'header-one'},
+  {label: 'Normal-Text', style: 'header-two'},
+  {label: 'Small-Text', style: 'header-three'},
   {label: 'Bold', style: 'BOLD'},
   {label: 'Italic', style: 'ITALIC'},
   {label: 'Underline', style: 'UNDERLINE'},
-  {label: 'Monospace', style: 'CODE'},
+  // {label: 'Monospace', style: 'CODE'},
 ];
 
 const InlineStyleControls = (props) => {

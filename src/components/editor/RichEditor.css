@@ -3,7 +3,7 @@
   border-top: 1px solid #eee;
   font-family: 'Georgia', serif;
   font-size: 14px;
-  padding: 15px;
+  /*padding: 15px;*/
 }
 
 .RichEditor-root--readOnly {
@@ -58,8 +58,9 @@
 .RichEditor-controls {
   font-family: 'Helvetica', sans-serif;
   font-size: 14px;
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
   user-select: none;
+  height: 20px;
 }
 
 .RichEditor-styleButton {
