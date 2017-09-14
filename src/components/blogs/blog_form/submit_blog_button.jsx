@@ -1,9 +1,9 @@
 import React from 'react';
 var Loader = require('react-loaders').Loader;
 
-const SubmitBlogButton = ({ actionType, isActive }) => {
+const SubmitBlogButton = ({ handleSubmit, actionType, isActive }) => {
   return isActive ? (
-    <button id='blog-submit' className='btn skinny'>
+    <button id='blog-submit' className='btn skinny' onClick={handleSubmit}>
       <p className='center'>{actionType} Blog</p>
     </button>
   ) : (
