@@ -1,0 +1,39 @@
+#blogForm-toolbar {
+  height: 25px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+#custom-side-button {
+  height: 30px;
+  width: 30px;
+  min-height: 30px;
+  min-width: 30px;
+  max-height: 30px;
+  max-width: 30px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: -20px;
+  margin-left: 10px;
+}
+
+.md-sb-button {
+  height: 35px !important;
+  width: 35px !important;
+  min-height: 35px !important;
+  min-width: 35px !important;
+  max-height: 35px !important;
+  max-width: 35px !important;
+  border-radius: 50% !important;
+}
+
+.md-side-toolbar {
+  height: 35px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  left: -40px !important;
+}

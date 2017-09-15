@@ -6,7 +6,8 @@ import { isUserSignedIn, loadUserData } from 'blockstack';
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
 // import ImageUploadButton from './image_upload_new';
-import BlogBodyEditor from '../../editor/editor';
+// import BlogBodyEditor from '../../editor/editor';
+import MediumEditor from '../../medium-editor/editor';
 import TagForm from '../../tags/tag_form';
 
 import Blog from '../../../models/blog.js';
@@ -17,6 +18,17 @@ import {
   convertFromRaw,
 } from 'draft-js';
 
+import {
+  Editor,
+  createEditorState
+} from 'medium-draft';
+
+import { createToken } from '../../../util/helper_methods';
+import mediumDraftImporter from 'medium-draft/lib/importer';
+
+// const html = /* your previously exported html */;
+// const editorState = createEditorState(convertToRaw(mediumDraftImporter(html)));
+
 global.EditorState = EditorState;
 global.convertToRaw = convertToRaw;
 global.convertFromRaw = convertFromRaw;
@@ -26,10 +38,11 @@ class BlogForm extends React.Component {
     super(props);
 
     this.state = {
-      id: null,
+      id: createToken(),
       title: '',
       blogIntro: '',
-      body: EditorState.createEmpty(),
+      // body: EditorState.createEmpty(),
+      body: createEditorState(),
       imageUrl: '',
       authorId: loadUserData().username,
       authorImageUrl: '',
@@ -38,7 +51,7 @@ class BlogForm extends React.Component {
       isSubmitButtonActive: true,
     };
 
-    this.updateEditorState = editorState => this.setState({ body: editorState });
+    this.updateEditorState = editorState => { this.setState({ body: editorState }); }
     this.actionType = props.history.location.pathname === '/blogs/new' ? 'Publish' : 'Update';
     this.setStateToEdit = this.setStateToEdit.bind(this);
     this.hasErrors = this.hasErrors.bind(this);
@@ -54,20 +67,15 @@ class BlogForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setStateToEdit(nextProps);
     this.setState({ authorImageUrl: nextProps.currentUser.imageUrl });
-    if (this.actionType === 'Publish') {
-      let blogKeys = Object.keys(nextProps.blogs);
-      let lastBlogId = parseInt(blogKeys[blogKeys.length-1]);
-      if (!lastBlogId) lastBlogId = 0;
-      this.setState({ id: lastBlogId + 1 });
-    }
   }
 
   setStateToEdit(nextProps = this.props) {
-    if (this.state.id === null && this.actionType === 'Update') {
-      let blogToEditId = parseInt(this.props.history.location.pathname.substring(12), 10);
+    // if (this.state.id === null && this.actionType === 'Update') {
+    if (this.actionType === 'Update') {
+      // let blogToEditId = parseInt(this.props.history.location.pathname.substring(12), 10);
+      let blogToEditId = this.props.history.location.pathname.substring(12);
       let blogToEdit = nextProps.blogs[blogToEditId];
       blogToEdit = this._parseBlogBodyToEditor(blogToEdit);
-
       this.setState({
         id: blogToEdit.id,
         title: blogToEdit.title,
@@ -83,16 +91,18 @@ class BlogForm extends React.Component {
   }
 
   _parseBlogBodyToEditor(blog) {
-    let blogBodyContentState;
+    // let blogBodyContentState;
 
-    if (blog.body instanceof EditorState) {
-      blogBodyContentState = blog.body.getCurrentContent();
-    } else {
-      blogBodyContentState = convertFromRaw(blog.body);
-    }
+    // if (blog.body instanceof EditorState) {
+    //   blogBodyContentState = blog.body.getCurrentContent();
+    // } else {
+    //   blogBodyContentState = convertFromRaw(blog.body);
+    // }
 
-    blog.body = EditorState.createWithContent(blogBodyContentState);
+    // blog.body = EditorState.createWithContent(blogBodyContentState);
 
+
+    blog.body = createEditorState(blog.body);
     return blog;
   }
 
@@ -147,14 +157,14 @@ class BlogForm extends React.Component {
     this.setState({ isSubmitButtonActive: false });
 
     // If blog.body.getCurrentContent does not exist, blog.body is converted from raw state to EditorState
-    if (!blog.body.getCurrentContent) blog.body = convertFromRaw(blog.body);
-    blog.body = convertToRaw(blog.body.getCurrentContent());
+    // if (!blog.body.getCurrentContent) blog.body = convertFromRaw(blog.body);
+    // blog.body = convertToRaw(blog.body.getCurrentContent());
 
     // Should only make a new blog if this.actionType === 'publish'
     blog = new Blog(blog);
 
-    // Check value of this.state.imageUrl
-    debugger;
+    let bodyContent = blog.body.getCurrentContent();
+    blog.body = convertToRaw(bodyContent);
 
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
@@ -228,24 +238,26 @@ class BlogForm extends React.Component {
             />
           </label>
 
-          <label id='blog-intro-label'
-            className='blog-form-label position-relative'
-            onClick={ this.toggleActiveLabel('intro') }>
+          {/*
+            <label id='blog-intro-label'
+              className='blog-form-label position-relative'
+              onClick={ this.toggleActiveLabel('intro') }>
 
-            <h7 className='hidden-label' id='hidden-label-intro'>Intro</h7>
+              <h7 className='hidden-label' id='hidden-label-intro'>Intro</h7>
 
-            <input
-              type='text'
-              id='blog-intro-input'
-              className='blog-input black'
-              onChange={ this.handleChange('blogIntro') }
-              value={ this.state.blogIntro }
-              placeholder='Introduction (Summarize your blog in 1 or 2  sentences)'
-              maxLength='50'
-            />
-          </label>
+              <input
+                type='text'
+                id='blog-intro-input'
+                className='blog-input black'
+                onChange={ this.handleChange('blogIntro') }
+                value={ this.state.blogIntro }
+                placeholder='Introduction (Summarize your blog in 1 or 2  sentences)'
+                maxLength='50'
+              />
+            </label>
+          */}
 
-          <div className='add-img-btn-box'>{ imageSection }</div>
+          {/*<div className='add-img-btn-box'>{ imageSection }</div>*/}
 
           <label id='blog-body-label'
             className='blog-form-label position-relative'
@@ -257,23 +269,31 @@ class BlogForm extends React.Component {
               Blog body cannot be blank
             </span>
 
-            <BlogBodyEditor
-              editorState={ this.state.body }
-              updateEditorState={ this.updateEditorState }
+            <MediumEditor
+              editorState={this.state.body}
+              updateEditorState={this.updateEditorState.bind(this)}
             />
+
+            {/*
+              <BlogBodyEditor
+                editorState={ this.state.body }
+                updateEditorState={ this.updateEditorState }
+              />
+            */}
           </label>
 
-          <TagForm
-            blogId={ this.state.id }
-            blogTags={ this.state.tags }
-            setTags={ this.setTags.bind(this) }
-          />
+            <TagForm
+              blogId={ this.state.id }
+              blogTags={ this.state.tags }
+              setTags={ this.setTags.bind(this) }
+            />
 
-          <SubmitBlogButton
-            handleSubmit={ this.handleSubmit.bind(this) }
-            actionType={ this.actionType }
-            isActive={ this.state.isSubmitButtonActive }
-          />
+            <SubmitBlogButton
+              handleSubmit={ this.handleSubmit.bind(this) }
+              actionType={ this.actionType }
+              isActive={ this.state.isSubmitButtonActive }
+            />
+
         </form>
       </div>
     );

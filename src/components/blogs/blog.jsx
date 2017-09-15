@@ -3,13 +3,63 @@ import { connect } from 'react-redux';
 
 import AboutUser from '../users/about_user';
 import BodyDisplay from '../editor/editor';
-import { convertFromRaw, EditorState } from 'draft-js';
+// import { convertFromRaw, EditorState } from 'draft-js';
 import BlogLikesForm from '../likes/blog_likes_form';
 import BlogBookmarkForm from './bookmarks/blog_bookmark_form';
 import CommentForm from '../comments/comment_form';
 import Comments from '../comments/comments';
 
+import MediumDraftExporter from 'medium-draft/lib/exporter';
+import {
+  setRenderOptions,
+  blockToHTML,
+  entityToHTML,
+  styleToHTML,
+} from 'medium-draft/lib/exporter';
+
+import {
+  Editor,
+  createEditorState,
+  convertFromRaw,
+  Block,
+} from 'medium-draft';
+
 import { requestUsers } from '../../actions/user_actions';
+
+global.createEditorState = createEditorState;
+
+
+const newBlockToHTML = (block) => {
+  const blockType = block.type;
+  if (block.type === Block.ATOMIC) {
+    if (block.text === 'E') {
+      return {
+        start: '<figure class="md-block-atomic md-block-atomic-embed">',
+        end: '</figure>',
+      };
+    } else if (block.text === '-') {
+      return <div className="md-block-atomic md-block-atomic-break"><hr/></div>;
+    }
+  }
+  return blockToHTML(block);
+};
+
+const newEntityToHTML = (entity, originalText) => {
+  if (entity.type === 'embed') {
+    return (
+      <div>
+        <a
+          className="embedly-card"
+          href={entity.data.url}
+          data-card-controls="0"
+          data-card-theme="dark"
+        >Embedded ― {entity.data.url}
+        </a>
+      </div>
+    );
+  }
+  return entityToHTML(entity, originalText);
+};
 
 class Blog extends React.Component {
   constructor(props) {
@@ -19,6 +69,13 @@ class Blog extends React.Component {
       blog: {},
       users: {}
     };
+
+    this.exporter = setRenderOptions({
+      styleToHTML,
+      blockToHTML: newBlockToHTML,
+      entityToHTML: newEntityToHTML,
+    });
+
     this.setBlog = this.setBlog.bind(this);
   }
 
@@ -33,7 +90,8 @@ class Blog extends React.Component {
   }
 
   setBlog(nextProps = this.props) {
-    let id = nextProps.history.location.pathname.substring(12)[0];
+    // let id = nextProps.history.location.pathname.substring(12)[0];
+    let id = nextProps.history.location.pathname.substring(12);
     let blog = nextProps.blogs[id];
     if (blog) { this.setState({ blog: blog }); }
   }
@@ -41,6 +99,13 @@ class Blog extends React.Component {
   render() {
     let blog = this.state.blog;
     let author = this.state.users[blog.authorId];
+
+    if (!blog.body) return <div></div>;
+    // var mediumDraftExporter = MediumDraftExporter.default;
+    const editorState = createEditorState(blog.body);
+    var currentContent = editorState.getCurrentContent();
+    const renderedHTML = this.exporter(currentContent);
+
     return !blog.body || !author ? <div></div> : (
       <section id='layout'>
         <div id='blog' className=''>
@@ -57,11 +122,15 @@ class Blog extends React.Component {
           }
 
           <div id='blog-body' className='blog-show-section'>
-            <BodyDisplay
-              readOnly={true}
-              editorState={ EditorState.createWithContent(convertFromRaw(blog.body)) }
-              updateEditorState={ () => null }
-            />
+            {/*
+              <BodyDisplay
+                readOnly={true}
+                editorState={ EditorState.createWithContent(convertFromRaw(blog.body)) }
+                updateEditorState={ () => null }
+              />
+            */}
+
+            <div dangerouslySetInnerHTML={{ __html: renderedHTML }}></div>
 
             {
               !blog.likes ? <div></div> : (
