@@ -108,7 +108,6 @@ class BlogForm extends React.Component {
   }
 
   addImage(imageUrl) {
-    debugger;
     this.setState({ imageUrl: imageUrl });
   }
 
@@ -181,7 +180,7 @@ class BlogForm extends React.Component {
 
   toggleBlogFormModal(e) {
     e.preventDefault();
-    debugger;
+    // debugger;
     this.setState({ showBlogFormModal: !this.state.showBlogFormModal });
   }
 
@@ -296,7 +295,7 @@ class BlogForm extends React.Component {
             state={ this.state }
             addImage={ this.addImage }
             handleChange={ this.handleChange }
-            setTag={ this.setTags.bind(this) }
+            setTags={ this.setTags.bind(this) }
             handleSubmit={ this.handleSubmit.bind(this) }
             actionType={ this.actionType }
             toggleBlogFormModal={ this.toggleBlogFormModal.bind(this) }

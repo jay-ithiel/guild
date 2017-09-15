@@ -11,7 +11,6 @@ export default class BlogFormModal extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     this.setState({ showBlogFormModal: nextProps.state.showBlogFormModal });
   }
 
@@ -24,7 +23,6 @@ export default class BlogFormModal extends React.Component {
   }
 
   render() {
-    debugger;
     return !this.state.showBlogFormModal ? <div></div> : (
       <div id='blog-form-modal' className='modal' onClick={this.closeModal.bind(this)}>
         <div className='blog-form-modal-content' onClick={this.stopPropagation.bind(this)}>
@@ -41,7 +39,7 @@ export default class BlogFormModal extends React.Component {
               id='blog-intro-input'
               className='blog-input black'
               onChange={ this.props.handleChange('blogIntro') }
-              value={ this.state.blogIntro }
+              value={ this.props.state.blogIntro }
               placeholder='Introduction (Summarize your blog in 1 or 2 sentences)'
               maxLength='50'
             />
@@ -58,7 +56,7 @@ export default class BlogFormModal extends React.Component {
           <SubmitBlogButton
             handleSubmit={ this.props.handleSubmit }
             actionType={ this.props.actionType }
-            isActive={ this.state.isSubmitButtonActive }
+            isActive={ this.props.state.isSubmitButtonActive }
           />
         </div>
       </div>
