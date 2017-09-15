@@ -8,7 +8,10 @@ import ImageUploadButton from './image_upload_button';
 // import ImageUploadButton from './image_upload_new';
 // import BlogBodyEditor from '../../editor/editor';
 import MediumEditor from '../../medium-editor/editor';
+// import ExampleMediumEditor from '../../medium-editor/example';
+
 import TagForm from '../../tags/tag_form';
+import BlogFormModal from './blog_form_modal';
 
 import Blog from '../../../models/blog.js';
 import $ from 'jquery';
@@ -25,9 +28,6 @@ import {
 
 import { createToken } from '../../../util/helper_methods';
 import mediumDraftImporter from 'medium-draft/lib/importer';
-
-// const html = /* your previously exported html */;
-// const editorState = createEditorState(convertToRaw(mediumDraftImporter(html)));
 
 global.EditorState = EditorState;
 global.convertToRaw = convertToRaw;
@@ -49,6 +49,7 @@ class BlogForm extends React.Component {
       updatedAt: '',
       tags: {},
       isSubmitButtonActive: true,
+      showBlogFormModal: false,
     };
 
     this.updateEditorState = editorState => { this.setState({ body: editorState }); }
@@ -107,6 +108,7 @@ class BlogForm extends React.Component {
   }
 
   addImage(imageUrl) {
+    debugger;
     this.setState({ imageUrl: imageUrl });
   }
 
@@ -117,13 +119,6 @@ class BlogForm extends React.Component {
   handleChange(field) {
     return e => this.setState({ [field]: e.target.value });
   }
-
-  // toggleActiveLabel(inputName) {
-  //   return e => {
-  //     $('.hidden-label').fadeOut();
-  //     $(`#hidden-label-${inputName}`).fadeIn();
-  //   }
-  // }
 
   hasErrors() {
     // Refactor this function to use react state
@@ -166,6 +161,9 @@ class BlogForm extends React.Component {
     let bodyContent = blog.body.getCurrentContent();
     blog.body = convertToRaw(bodyContent);
 
+    // check value of blog
+    debugger;
+
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
     this.props.saveBlogs(this.props.blogs);
@@ -179,6 +177,12 @@ class BlogForm extends React.Component {
       blogTags: blog.tags,
       existingTags: this.props.tags
     });
+  }
+
+  toggleBlogFormModal(e) {
+    e.preventDefault();
+    debugger;
+    this.setState({ showBlogFormModal: !this.state.showBlogFormModal });
   }
 
   handleSubmit(e) {
@@ -262,9 +266,11 @@ class BlogForm extends React.Component {
             <MediumEditor
               editorState={this.state.body}
               updateEditorState={this.updateEditorState.bind(this)}
-            />
+              />
 
             {/*
+              <ExampleMediumEditor/>
+
               <BlogBodyEditor
                 editorState={ this.state.body }
                 updateEditorState={ this.updateEditorState }
@@ -278,15 +284,31 @@ class BlogForm extends React.Component {
               blogTags={ this.state.tags }
               setTags={ this.setTags.bind(this) }
             />
-          */}
-
 
             <SubmitBlogButton
               handleSubmit={ this.handleSubmit.bind(this) }
               actionType={ this.actionType }
               isActive={ this.state.isSubmitButtonActive }
             />
+          */}
 
+          <BlogFormModal
+            state={ this.state }
+            addImage={ this.addImage }
+            handleChange={ this.handleChange }
+            setTag={ this.setTags.bind(this) }
+            handleSubmit={ this.handleSubmit.bind(this) }
+            actionType={ this.actionType }
+            toggleBlogFormModal={ this.toggleBlogFormModal.bind(this) }
+          />
+
+          <button
+            title='Publish'
+            className='publish-beta btn'
+            onClick={ this.toggleBlogFormModal.bind(this) }
+          >
+            Publish
+          </button>
         </form>
       </div>
     );

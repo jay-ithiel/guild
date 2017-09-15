@@ -39,20 +39,21 @@ export default class MediumEditor extends React.Component {
 
   render() {
     const { editorState, sideButtons } = this.state;
-    // return (
-    //   <Editor
-    //     ref="editor"
-    //     editorState={this.props.editorState}
-    //     sideButtons={sideButtons}
-    //     onChange={this.props.updateEditorState}
-    //   />
-    // );
     return (
       <Editor
         ref="editor"
-        editorState={this.state.editorState}
-        onChange={this.onChange}
+        editorState={this.props.editorState}
+        sideButtons={sideButtons}
+        onChange={this.props.updateEditorState}
       />
     );
+    
+    // return (
+    //   <Editor
+    //     ref="editor"
+    //     editorState={this.state.editorState}
+    //     onChange={this.onChange}
+    //   />
+    // );
   }
 };

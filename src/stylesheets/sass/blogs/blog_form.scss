@@ -65,30 +65,6 @@
   z-index: 1000;
 }
 
-#add-img-btn {
-  color: #aaa;
-  height: 100% !important;
-  width: 100% !important;
-
-  transition: all .15s ease-in;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px dashed grey !important;
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
-
-#add-img-btn:hover {
-  color: #000;
-  border: 1px dashed black !important;
-}
-
 #add-img-icon {
   height: 50px;
   margin-bottom: 5px;
