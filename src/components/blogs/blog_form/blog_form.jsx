@@ -91,7 +91,7 @@ class BlogForm extends React.Component {
   }
 
   _parseBlogBodyToEditor(blog) {
-    // let blogBodyContentState;
+    let blogBodyContentState;
 
     // if (blog.body instanceof EditorState) {
     //   blogBodyContentState = blog.body.getCurrentContent();
@@ -118,12 +118,12 @@ class BlogForm extends React.Component {
     return e => this.setState({ [field]: e.target.value });
   }
 
-  toggleActiveLabel(inputName) {
-    return e => {
-      $('.hidden-label').fadeOut();
-      $(`#hidden-label-${inputName}`).fadeIn();
-    }
-  }
+  // toggleActiveLabel(inputName) {
+  //   return e => {
+  //     $('.hidden-label').fadeOut();
+  //     $(`#hidden-label-${inputName}`).fadeIn();
+  //   }
+  // }
 
   hasErrors() {
     // Refactor this function to use react state
@@ -215,15 +215,9 @@ class BlogForm extends React.Component {
 
     return (
       <div id='blog-form-container'>
-        {/*<form id='blog-form' onSubmit={ this.handleSubmit.bind(this) }>*/}
         <form id='blog-form'>
 
-          <label id='blog-title-label'
-            className='blog-form-label position-relative'
-            onClick={ this.toggleActiveLabel('title') }>
-
-            <h7 className='hidden-label' id='hidden-label-title'>Title</h7>
-
+          <label id='blog-title-label' className='blog-form-label position-relative'>
             <span id='blog-title-error' className='error-message'>
               Title cannot be blank
             </span>
@@ -259,11 +253,7 @@ class BlogForm extends React.Component {
 
           {/*<div className='add-img-btn-box'>{ imageSection }</div>*/}
 
-          <label id='blog-body-label'
-            className='blog-form-label position-relative'
-            onClick={ this.toggleActiveLabel('body') }>
-
-            <h7 className='hidden-label' id='hidden-label-body'>Body</h7>
+          <label id='blog-body-label' className='blog-form-label position-relative'>
 
             <span id='blog-body-error' className='error-message'>
               Blog body cannot be blank
@@ -282,11 +272,14 @@ class BlogForm extends React.Component {
             */}
           </label>
 
+          {/*
             <TagForm
               blogId={ this.state.id }
               blogTags={ this.state.tags }
               setTags={ this.setTags.bind(this) }
             />
+          */}
+
 
             <SubmitBlogButton
               handleSubmit={ this.handleSubmit.bind(this) }
