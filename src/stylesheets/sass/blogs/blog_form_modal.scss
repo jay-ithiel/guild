@@ -1,0 +1,60 @@
+#blog-form-modal {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-form-modal-content {
+  background-color: #fff;
+
+  width: 60vw;
+  height: 80vh;
+  min-width: 300px;
+  min-height: 400px;
+
+  border-radius: 10px;
+  padding: 60px 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#image-upload-button-container {
+  height: 300px;
+  width: 100%;
+  position: relative;
+}
+
+#add-img-btn {
+  color: #aaa;
+  height: 100% !important;
+  width: 100% !important;
+
+  transition: all .15s ease-in;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px dashed grey !important;
+  // background-color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+#add-img-btn:hover {
+  color: #000;
+  border: 1px dashed black !important;
+}

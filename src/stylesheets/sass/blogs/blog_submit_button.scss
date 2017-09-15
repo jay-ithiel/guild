@@ -31,3 +31,16 @@ $primary-color: #fff;
   color: $primary-color !important;
   background-color: #ccc !important;
 }
+
+.publish-beta {
+  border: none;
+  background-color: yellow;
+  transition: all .15s ease-in;
+
+  font-size: 18px;
+  color: #999;
+}
+
+.publish-beta:hover {
+  color: #43bd7e;
+}

@@ -58,9 +58,14 @@ export default class ImageUploadButton extends React.Component {
         <div>
           {
             this.state.uploadedFileCloudinaryUrl === '' ? null : (
-              <div>
-                <p>{this.state.uploadedFile.name}</p>
-                <img src={this.state.uploadedFileCloudinaryUrl} />
+              <div id='blog-uploaded-img'
+                style={{ backgroundImage: `url(${this.state.uploadedFileCloudinaryUrl})` }}>
+                {/*
+                  <div>
+                  <p>{this.state.uploadedFile.name}</p>
+                  <img src={this.state.uploadedFileCloudinaryUrl} />
+                  </div>
+                  */}
               </div>
             )
           }
