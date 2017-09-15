@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import AboutUser from '../users/about_user';
 import BodyDisplay from '../editor/editor';
-// import { convertFromRaw, EditorState } from 'draft-js';
 import BlogLikesForm from '../likes/blog_likes_form';
 import BlogBookmarkForm from './bookmarks/blog_bookmark_form';
 import CommentForm from '../comments/comment_form';
@@ -90,7 +89,6 @@ class Blog extends React.Component {
   }
 
   setBlog(nextProps = this.props) {
-    // let id = nextProps.history.location.pathname.substring(12)[0];
     let id = nextProps.history.location.pathname.substring(12);
     let blog = nextProps.blogs[id];
     if (blog) { this.setState({ blog: blog }); }
@@ -101,7 +99,6 @@ class Blog extends React.Component {
     let author = this.state.users[blog.authorId];
 
     if (!blog.body) return <div></div>;
-    // var mediumDraftExporter = MediumDraftExporter.default;
     const editorState = createEditorState(blog.body);
     var currentContent = editorState.getCurrentContent();
     const renderedHTML = this.exporter(currentContent);
@@ -122,14 +119,6 @@ class Blog extends React.Component {
           }
 
           <div id='blog-body' className='blog-show-section'>
-            {/*
-              <BodyDisplay
-                readOnly={true}
-                editorState={ EditorState.createWithContent(convertFromRaw(blog.body)) }
-                updateEditorState={ () => null }
-              />
-            */}
-
             <div dangerouslySetInnerHTML={{ __html: renderedHTML }}></div>
 
             {
@@ -148,13 +137,6 @@ class Blog extends React.Component {
 
             <AboutUser user={author}/>
 
-            {/*
-            <AboutUser
-              isAboutCurrentUser={false}
-              authorName={blog.authorId}
-              authorImageUrl={blog.authorImageUrl}
-            />
-            */}
           </div>
         </div>
 

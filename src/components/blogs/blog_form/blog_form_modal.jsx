@@ -6,7 +6,6 @@ import SubmitBlogButton from './submit_blog_button';
 export default class BlogFormModal extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = props.state;
   }
 
