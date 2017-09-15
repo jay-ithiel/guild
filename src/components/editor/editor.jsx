@@ -9,7 +9,7 @@ import {
 } from 'draft-js';
 require('./RichEditor.css');
 
-class RichEditorExample extends React.Component {
+class RichEditor extends React.Component {
   constructor(props) {
     super(props);
     this.readOnly = this.props.readOnly;
@@ -125,4 +125,4 @@ function getBlockStyle(block) {
   }
 }
 
-export default RichEditorExample;
+export default RichEditor;
