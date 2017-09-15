@@ -24,6 +24,10 @@ import {
 } from 'medium-draft';
 
 import { createToken } from '../../../util/helper_methods';
+import mediumDraftImporter from 'medium-draft/lib/importer';
+
+// const html = /* your previously exported html */;
+// const editorState = createEditorState(convertToRaw(mediumDraftImporter(html)));
 
 global.EditorState = EditorState;
 global.convertToRaw = convertToRaw;
@@ -63,20 +67,15 @@ class BlogForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setStateToEdit(nextProps);
     this.setState({ authorImageUrl: nextProps.currentUser.imageUrl });
-    // if (this.actionType === 'Publish') {
-    //   let blogKeys = Object.keys(nextProps.blogs);
-    //   let lastBlogId = parseInt(blogKeys[blogKeys.length-1]);
-    //   if (!lastBlogId) lastBlogId = 0;
-    //   this.setState({ id: lastBlogId + 1 });
-    // }
   }
 
   setStateToEdit(nextProps = this.props) {
-    if (this.state.id === null && this.actionType === 'Update') {
-      let blogToEditId = parseInt(this.props.history.location.pathname.substring(12), 10);
+    // if (this.state.id === null && this.actionType === 'Update') {
+    if (this.actionType === 'Update') {
+      // let blogToEditId = parseInt(this.props.history.location.pathname.substring(12), 10);
+      let blogToEditId = this.props.history.location.pathname.substring(12);
       let blogToEdit = nextProps.blogs[blogToEditId];
       blogToEdit = this._parseBlogBodyToEditor(blogToEdit);
-
       this.setState({
         id: blogToEdit.id,
         title: blogToEdit.title,
@@ -92,16 +91,18 @@ class BlogForm extends React.Component {
   }
 
   _parseBlogBodyToEditor(blog) {
-    let blogBodyContentState;
+    // let blogBodyContentState;
 
-    if (blog.body instanceof EditorState) {
-      blogBodyContentState = blog.body.getCurrentContent();
-    } else {
-      blogBodyContentState = convertFromRaw(blog.body);
-    }
+    // if (blog.body instanceof EditorState) {
+    //   blogBodyContentState = blog.body.getCurrentContent();
+    // } else {
+    //   blogBodyContentState = convertFromRaw(blog.body);
+    // }
 
-    blog.body = EditorState.createWithContent(blogBodyContentState);
+    // blog.body = EditorState.createWithContent(blogBodyContentState);
 
+
+    blog.body = createEditorState(blog.body);
     return blog;
   }
 
@@ -128,25 +129,25 @@ class BlogForm extends React.Component {
     // Refactor this function to use react state
     let hasErrors = false;
 
-    // if (this.state.title.length <= 0) {
-    //   hasErrors = true;
-    //   $('#blog-title-error').fadeIn();
-    //   $('#blog-title-label').addClass('outline-red');
-    // } else {
-    //   $('#blog-title-error').fadeOut();
-    //   $('#blog-title-label').removeClass('outline-red');
-    // }
-    //
-    // if (!this.state.body.getCurrentContent) this.state.body = convertFromRaw(this.state.body);
-    //
-    // if (!this.state.body.getCurrentContent().hasText()) {
-    //   hasErrors = true;
-    //   $('#blog-body-error').fadeIn();
-    //   $('#blog-body-label').addClass('outline-red');
-    // } else {
-    //   $('#blog-body-error').fadeOut();
-    //   $('#blog-body-label').removeClass('outline-red');
-    // }
+    if (this.state.title.length <= 0) {
+      hasErrors = true;
+      $('#blog-title-error').fadeIn();
+      $('#blog-title-label').addClass('outline-red');
+    } else {
+      $('#blog-title-error').fadeOut();
+      $('#blog-title-label').removeClass('outline-red');
+    }
+
+    if (!this.state.body.getCurrentContent) this.state.body = convertFromRaw(this.state.body);
+
+    if (!this.state.body.getCurrentContent().hasText()) {
+      hasErrors = true;
+      $('#blog-body-error').fadeIn();
+      $('#blog-body-label').addClass('outline-red');
+    } else {
+      $('#blog-body-error').fadeOut();
+      $('#blog-body-label').removeClass('outline-red');
+    }
 
     return hasErrors;
   }
@@ -162,12 +163,8 @@ class BlogForm extends React.Component {
     // Should only make a new blog if this.actionType === 'publish'
     blog = new Blog(blog);
 
-    debugger;
     let bodyContent = blog.body.getCurrentContent();
     blog.body = convertToRaw(bodyContent);
-
-    // Check value of this.state.imageUrl
-    debugger;
 
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
@@ -285,14 +282,11 @@ class BlogForm extends React.Component {
             */}
           </label>
 
-          {/*
             <TagForm
               blogId={ this.state.id }
               blogTags={ this.state.tags }
               setTags={ this.setTags.bind(this) }
             />
-          */}
-
 
             <SubmitBlogButton
               handleSubmit={ this.handleSubmit.bind(this) }

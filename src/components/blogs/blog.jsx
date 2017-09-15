@@ -100,19 +100,11 @@ class Blog extends React.Component {
     let blog = this.state.blog;
     let author = this.state.users[blog.authorId];
 
-
-    if (!blog.body) {
-      return <div></div>;
-    }
-
-    var mediumDraftExporter = MediumDraftExporter.default;
+    if (!blog.body) return <div></div>;
+    // var mediumDraftExporter = MediumDraftExporter.default;
     const editorState = createEditorState(blog.body);
     var currentContent = editorState.getCurrentContent();
     const renderedHTML = this.exporter(currentContent);
-
-    // const renderedHTML = mediumDraftExporter(editorState.getCurrentContent());
-    // const renderedHTML = MediumDraftExporter.default(editorState.getCurrentContent());
-    debugger;
 
     return !blog.body || !author ? <div></div> : (
       <section id='layout'>
