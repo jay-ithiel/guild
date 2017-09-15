@@ -22,12 +22,6 @@ export default class MediumEditor extends React.Component {
       ],
     };
 
-    /*
-    this.state = {
-      editorState: createEditorState(data), // with content
-    };
-    */
-
     this.onChange = (editorState) => {
       this.setState({ editorState });
     };
@@ -47,13 +41,5 @@ export default class MediumEditor extends React.Component {
         onChange={this.props.updateEditorState}
       />
     );
-    
-    // return (
-    //   <Editor
-    //     ref="editor"
-    //     editorState={this.state.editorState}
-    //     onChange={this.onChange}
-    //   />
-    // );
   }
 };

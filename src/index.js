@@ -17,11 +17,6 @@ const cloudinary = window.cloudinary; // eslint-disable-line
 global.cloudinary = cloudinary;
 
 document.addEventListener('DOMContentLoaded', event => {
-  window.cloudinary_options = {
-    cloud_name: 'ddgtwtbre',
-    upload_preset: 'k7gkxhh0'
-  };
-
   let store = configureStore();
 
   if (isUserSignedIn()) {

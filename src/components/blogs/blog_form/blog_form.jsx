@@ -5,10 +5,7 @@ import { isUserSignedIn, loadUserData } from 'blockstack';
 // Components
 import SubmitBlogButton from './submit_blog_button';
 import ImageUploadButton from './image_upload_button';
-// import ImageUploadButton from './image_upload_new';
-// import BlogBodyEditor from '../../editor/editor';
 import MediumEditor from '../../medium-editor/editor';
-// import ExampleMediumEditor from '../../medium-editor/example';
 
 import TagForm from '../../tags/tag_form';
 import BlogFormModal from './blog_form_modal';
@@ -29,10 +26,6 @@ import {
 import { createToken } from '../../../util/helper_methods';
 import mediumDraftImporter from 'medium-draft/lib/importer';
 
-global.EditorState = EditorState;
-global.convertToRaw = convertToRaw;
-global.convertFromRaw = convertFromRaw;
-
 class BlogForm extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +34,6 @@ class BlogForm extends React.Component {
       id: createToken(),
       title: '',
       blogIntro: '',
-      // body: EditorState.createEmpty(),
       body: createEditorState(),
       imageUrl: '',
       authorId: loadUserData().username,
@@ -71,12 +63,10 @@ class BlogForm extends React.Component {
   }
 
   setStateToEdit(nextProps = this.props) {
-    // if (this.state.id === null && this.actionType === 'Update') {
     if (this.actionType === 'Update') {
-      // let blogToEditId = parseInt(this.props.history.location.pathname.substring(12), 10);
       let blogToEditId = this.props.history.location.pathname.substring(12);
-      let blogToEdit = nextProps.blogs[blogToEditId];
-      blogToEdit = this._parseBlogBodyToEditor(blogToEdit);
+      let blogToEdit = this._parseBlogBodyToEditor(nextProps.blogs[blogToEditId]);
+
       this.setState({
         id: blogToEdit.id,
         title: blogToEdit.title,
@@ -93,16 +83,6 @@ class BlogForm extends React.Component {
 
   _parseBlogBodyToEditor(blog) {
     let blogBodyContentState;
-
-    // if (blog.body instanceof EditorState) {
-    //   blogBodyContentState = blog.body.getCurrentContent();
-    // } else {
-    //   blogBodyContentState = convertFromRaw(blog.body);
-    // }
-
-    // blog.body = EditorState.createWithContent(blogBodyContentState);
-
-
     blog.body = createEditorState(blog.body);
     return blog;
   }
@@ -150,18 +130,11 @@ class BlogForm extends React.Component {
     let blog = this.state;
     this.setState({ isSubmitButtonActive: false });
 
-    // If blog.body.getCurrentContent does not exist, blog.body is converted from raw state to EditorState
-    // if (!blog.body.getCurrentContent) blog.body = convertFromRaw(blog.body);
-    // blog.body = convertToRaw(blog.body.getCurrentContent());
-
     // Should only make a new blog if this.actionType === 'publish'
     blog = new Blog(blog);
 
     let bodyContent = blog.body.getCurrentContent();
     blog.body = convertToRaw(bodyContent);
-
-    // check value of blog
-    debugger;
 
     // Add new Blog to blogs state and save Blogs
     this.props.blogs[blog.id] = blog;
@@ -180,42 +153,17 @@ class BlogForm extends React.Component {
 
   toggleBlogFormModal(e) {
     e.preventDefault();
-    // debugger;
-    this.setState({ showBlogFormModal: !this.state.showBlogFormModal });
+    if (!this.hasErrors()) {
+      this.setState({ showBlogFormModal: !this.state.showBlogFormModal });
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // Check form for errors. If hasErrors returns false, there are no errors so we can process the form
-    if (!this.hasErrors()) { this.processForm() }
+    this.processForm()
   }
 
   render() {
-    let imageSection = [];
-
-    if (this.state.imageUrl.length === 0) {
-      imageSection.push(
-        <ImageUploadButton
-          key={ Math.random() }
-          addImage={ this.addImage }
-        />
-      );
-    } else {
-      imageSection.push(
-        <div>
-          <div id='blog-uploaded-img' key={ Math.random() }
-            style={{ backgroundImage: `url(${this.state.imageUrl})` }}>
-          </div>
-
-          <ImageUploadButton
-            color={'white-important'}
-            key={Math.random()}
-            addImage={this.addImage}
-          />
-        </div>
-      );
-    }
-
     return (
       <div id='blog-form-container'>
         <form id='blog-form'>
@@ -235,29 +183,7 @@ class BlogForm extends React.Component {
             />
           </label>
 
-          {/*
-            <label id='blog-intro-label'
-              className='blog-form-label position-relative'
-              onClick={ this.toggleActiveLabel('intro') }>
-
-              <h7 className='hidden-label' id='hidden-label-intro'>Intro</h7>
-
-              <input
-                type='text'
-                id='blog-intro-input'
-                className='blog-input black'
-                onChange={ this.handleChange('blogIntro') }
-                value={ this.state.blogIntro }
-                placeholder='Introduction (Summarize your blog in 1 or 2  sentences)'
-                maxLength='50'
-              />
-            </label>
-          */}
-
-          {/*<div className='add-img-btn-box'>{ imageSection }</div>*/}
-
           <label id='blog-body-label' className='blog-form-label position-relative'>
-
             <span id='blog-body-error' className='error-message'>
               Blog body cannot be blank
             </span>
@@ -265,31 +191,8 @@ class BlogForm extends React.Component {
             <MediumEditor
               editorState={this.state.body}
               updateEditorState={this.updateEditorState.bind(this)}
-              />
-
-            {/*
-              <ExampleMediumEditor/>
-
-              <BlogBodyEditor
-                editorState={ this.state.body }
-                updateEditorState={ this.updateEditorState }
-              />
-            */}
+            />
           </label>
-
-          {/*
-            <TagForm
-              blogId={ this.state.id }
-              blogTags={ this.state.tags }
-              setTags={ this.setTags.bind(this) }
-            />
-
-            <SubmitBlogButton
-              handleSubmit={ this.handleSubmit.bind(this) }
-              actionType={ this.actionType }
-              isActive={ this.state.isSubmitButtonActive }
-            />
-          */}
 
           <BlogFormModal
             state={ this.state }
